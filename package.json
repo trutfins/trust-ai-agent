@@ -1,0 +1,16 @@
+{
+  "name": "node-starter",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@cloudflare/computer": "^0.10.0",
+    "@earendil-works/pi-ai": "^1.5.0",
+    "@earendil-works/pi-durable": "^1.5.0",
+    "@earendil-works/pi-schema": "^1.5.0",
+    "@supabase/supabase-js": "^2.119.0",
+    "agents": "^0.33.0"
+  }
+}
