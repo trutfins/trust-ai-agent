@@ -1,14 +1,13 @@
-name = "trust-financial-agent"
+name = "trust-ai-agent"
 main = "index.ts"
 compatibility_date = "2026-11-08"
 
 [ai]
 binding = "AI"
 
-[[durable_objects.bindings]]
-name = "ASSISTANT"
-class_name = "Assistant"
+[durable_objects]
+bindings = [{ name = "ASSISTANT", class_name = "Assistant" }]
 
 [[migrations]]
 tag = "v1"
-new_classes = ["Assistant"]
+new_sqlite_classes = ["Assistant"]
