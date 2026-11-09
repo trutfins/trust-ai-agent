@@ -1,4 +1,4 @@
-import { DurableObject } from "cloudflare:workers";
+export default { fetch() };
 import { Workspace } from "@cloudflare/computer";
 import { createPiTools } from "@cloudflare/computer/tools/pi-ai";
 import { createModels } from "@earendil-works/pi-ai/models";
