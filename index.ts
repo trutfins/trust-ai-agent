@@ -9,7 +9,14 @@ import { createAI } from "agents/models/pi-ai";
 import { routeAgentRequest } from "agents/routing";
 import { WebSockets } from "agents/websockets";
 
-export class Assistant extends DurableObject {
+interface Env {
+	AI: Ai;
+	Assistant: DurableObjectNamespace;
+	SUPABASE_URL: string;
+	SUPABASE_ANON_KEY: string;
+}
+
+export class Assistant extends DurableObject<Env> {
 	ai = createAI({ binding: this.env.AI });
 	registry = createRegistry();
 	workspace = new Workspace({ storage: this.ctx.storage });
@@ -37,15 +44,20 @@ export class Assistant extends DurableObject {
 		},
 		defaults: {
 			model: this.ai("@cf/zai-org/glm-5.3-flash"),
-			systemPrompt: "أنت مساعد ذكي متخصص في الخدمات المالية والمحاسبية لمنصة ترست."
+			systemPrompt: "أنت مساعد ذكي متخصص في الخدمات المالية والمحاسبية لمنصة ترست.",
 		},
 	});
 
 	webSockets = new WebSockets({
 		handlers: {
 			onMessage: async (connection, message) => {
-				const { text } = await this.harness.prompt(String(message));
-				connection.send(text ?? "");
+				try {
+					const { text } = await this.harness.prompt(String(message));
+					connection.send(text ?? "");
+				} catch (e) {
+					console.error("prompt error:", e);
+					connection.send("حدث خطأ أثناء المعالجة، حاول مرة أخرى.");
+				}
 			},
 		},
 	});
@@ -80,14 +92,13 @@ function renderHtml(supabaseUrl: string, supabaseKey: string): string {
   --text-muted: #6b7280;
   --border: #e5e7eb;
   --error: #dc2626;
-  --success: #16a34a;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
 body {
   font-family: 'Segoe UI', 'Tahoma', system-ui, -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -123,11 +134,7 @@ body {
   transition: background 0.2s;
 }
 .logout-btn:hover { background: rgba(255,255,255,0.25); }
-.app-layout {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-}
+.app-layout { flex: 1; display: flex; overflow: hidden; min-height: 0; }
 .sidebar {
   width: 260px;
   background: var(--surface);
@@ -155,11 +162,7 @@ body {
   transition: background 0.2s;
 }
 .new-chat-btn:hover { background: var(--primary-dark); }
-.conv-list {
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px;
-}
+.conv-list { flex: 1; overflow-y: auto; padding: 8px; }
 .conv-item {
   padding: 10px 12px;
   border-radius: 10px;
@@ -188,12 +191,7 @@ body {
 }
 .conv-item:hover .conv-delete { opacity: 0.6; }
 .conv-delete:hover { opacity: 1; background: rgba(220,38,38,0.1); }
-.main-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+.main-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
 .chat-container {
   flex: 1;
   max-width: 800px;
@@ -204,6 +202,7 @@ body {
   padding: 20px;
   gap: 16px;
   overflow: hidden;
+  min-height: 0;
 }
 .messages {
   flex: 1;
@@ -213,11 +212,7 @@ body {
   gap: 12px;
   padding: 8px 4px;
 }
-.welcome {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--text-muted);
-}
+.welcome { text-align: center; padding: 48px 24px; color: var(--text-muted); }
 .welcome-icon {
   width: 64px; height: 64px;
   margin: 0 auto 16px;
@@ -228,9 +223,7 @@ body {
 }
 .welcome h2 { color: var(--text); font-size: 22px; margin-bottom: 8px; }
 .welcome p { font-size: 15px; line-height: 1.6; max-width: 400px; margin: 0 auto; }
-.welcome-suggestions {
-  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;
-}
+.welcome-suggestions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
 .suggestion {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -242,14 +235,9 @@ body {
   transition: all 0.2s;
 }
 .suggestion:hover { background: var(--primary-light); border-color: var(--primary); }
-.message {
-  display: flex;
-  gap: 10px;
-  max-width: 85%;
-  animation: fadeIn 0.3s ease;
-}
+.message { display: flex; gap: 10px; max-width: 85%; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.message.user { align-self: flex-start; flex-direction: row-reverse; }
+.message.user { align-self: flex-start; }
 .message.assistant { align-self: flex-start; }
 .avatar {
   width: 36px; height: 36px;
@@ -270,11 +258,10 @@ body {
   line-height: 1.6;
   white-space: pre-wrap;
   word-wrap: break-word;
+  min-width: 0;
 }
 .message.user .bubble { background: var(--primary-light); border-color: transparent; }
-.typing {
-  display: inline-flex; gap: 4px; padding: 4px 0;
-}
+.typing { display: inline-flex; gap: 4px; padding: 4px 0; }
 .typing span {
   width: 8px; height: 8px;
   background: var(--text-muted);
@@ -321,12 +308,7 @@ body {
 }
 .send-btn:hover { background: var(--primary-dark); }
 .send-btn:disabled { background: var(--border); cursor: not-allowed; }
-.status-bar {
-  text-align: center;
-  font-size: 12px;
-  color: var(--text-muted);
-  padding: 4px;
-}
+.status-bar { text-align: center; font-size: 12px; color: var(--text-muted); padding: 4px; }
 .status-bar.error { color: var(--error); }
 .auth-overlay {
   position: fixed; inset: 0;
@@ -355,14 +337,7 @@ body {
 }
 .auth-title { text-align: center; font-size: 24px; font-weight: 600; margin-bottom: 6px; }
 .auth-sub { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
-.auth-tabs {
-  display: flex;
-  gap: 4px;
-  background: var(--bg);
-  border-radius: 10px;
-  padding: 4px;
-  margin-bottom: 24px;
-}
+.auth-tabs { display: flex; gap: 4px; background: var(--bg); border-radius: 10px; padding: 4px; margin-bottom: 24px; }
 .auth-tab {
   flex: 1;
   padding: 10px;
@@ -446,9 +421,20 @@ body {
   </div>
 </div>
 
+<div class="header">
+  <div class="header-logo">T</div>
+  <div>
+    <div class="header-title">ترست</div>
+    <div class="header-sub">المساعد المالي الذكي</div>
+  </div>
+  <div class="header-right app-hidden" id="headerRight">
+    <span class="user-email" id="userEmail"></span>
+    <button class="logout-btn" onclick="handleLogout()">خروج</button>
+  </div>
+</div>
+
 <div class="app-layout app-hidden" id="appLayout">
   <div class="sidebar">
-  </div>
     <div class="sidebar-header">
       <button class="new-chat-btn" onclick="newConversation()">+ محادثة جديدة</button>
     </div>
@@ -456,37 +442,38 @@ body {
   </div>
   <div class="main-area">
     <div class="chat-container">
-      <div class="messages" id="messages">
-        <div class="welcome" id="welcome">
-          <div class="welcome-icon">&#128181;</div>
-          <h2>مرحباً بك في مساعد ترست</h2>
-          <p>أنا مساعدك الذكي المتخصص في الخدمات المالية والمحاسبية. اسألني عن أي استفسار مالي أو محاسبي.</p>
-          <div class="welcome-suggestions">
-            <div class="suggestion" onclick="sendSuggestion('كيف أحسب ضريبة القيمة المضافة؟')">كيف أحسب ضريبة القيمة المضافة؟</div>
-            <div class="suggestion" onclick="sendSuggestion('ما الفرق بين الأصول والخصوم؟')">ما الفرق بين الأصول والخصوم؟</div>
-            <div class="suggestion" onclick="sendSuggestion('كيف أعد قائمة الدخل؟')">كيف أعد قائمة الدخل؟</div>
-          </div>
-        </div>
-      </div>
+      <div class="messages" id="messages"></div>
       <div class="input-bar">
         <textarea id="input" rows="1" placeholder="اكتب رسالتك هنا..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-        <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>&#9654;</button>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">&#9654;</button>
       </div>
-      <div class="status-bar" id="status">جاري الاتصال...</div>
+      <div class="status-bar" id="status">اكتب رسالتك للبدء</div>
     </div>
   </div>
 </div>
+
+<template id="welcomeTpl">
+  <div class="welcome" id="welcome">
+    <div class="welcome-icon">&#128181;</div>
+    <h2>مرحباً بك في مساعد ترست</h2>
+    <p>أنا مساعدك الذكي المتخصص في الخدمات المالية والمحاسبية. اسألني عن أي استفسار مالي أو محاسبي.</p>
+    <div class="welcome-suggestions">
+      <div class="suggestion" data-text="كيف أحسب ضريبة القيمة المضافة؟">كيف أحسب ضريبة القيمة المضافة؟</div>
+      <div class="suggestion" data-text="ما الفرق بين الأصول والخصوم؟">ما الفرق بين الأصول والخصوم؟</div>
+      <div class="suggestion" data-text="كيف أعد قائمة الدخل؟">كيف أعد قائمة الدخل؟</div>
+    </div>
+  </div>
+</template>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = ${JSON.stringify(supabaseUrl)};
 const SUPABASE_KEY = ${JSON.stringify(supabaseKey)};
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let currentUser = null;
 let currentConvId = null;
 let ws = null;
-let connected = false;
 let authMode = 'login';
 
 const authOverlay = document.getElementById('authOverlay');
@@ -500,13 +487,14 @@ const inputEl = document.getElementById('input');
 const sendBtn = document.getElementById('sendBtn');
 const statusEl = document.getElementById('status');
 const convListEl = document.getElementById('convList');
-let welcomeEl = document.getElementById('welcome');
+
+function authLabel() { return authMode === 'login' ? 'دخول' : 'إنشاء حساب'; }
 
 function switchTab(mode) {
   authMode = mode;
   document.getElementById('tabLogin').classList.toggle('active', mode === 'login');
   document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
-  authSubmit.textContent = mode === 'login' ? 'دخول' : 'إنشاء حساب';
+  authSubmit.textContent = authLabel();
   authError.classList.remove('show');
 }
 
@@ -522,64 +510,65 @@ async function handleAuth() {
   authSubmit.disabled = true;
   authSubmit.textContent = '...';
   try {
-    let result;
-    if (authMode === 'login') {
-      result = await supabase.auth.signInWithPassword({ email, password });
-    } else {
-      result = await supabase.auth.signUp({ email, password });
-    }
+    const result = authMode === 'login'
+      ? await sb.auth.signInWithPassword({ email, password })
+      : await sb.auth.signUp({ email, password });
     if (result.error) {
-      const msg = result.error.message.includes('Invalid login') ? 'البريد أو كلمة المرور غير صحيحة' :
-                   result.error.message.includes('already registered') ? 'هذا البريد مسجل بالفعل' :
-                   result.error.message;
-      showAuthError(msg);
+      const m = result.error.message;
+      showAuthError(
+        m.includes('Invalid login') ? 'البريد أو كلمة المرور غير صحيحة' :
+        m.includes('already registered') ? 'هذا البريد مسجل بالفعل' : m
+      );
       authSubmit.disabled = false;
-      authSubmit.textContent = authMode === 'login' ? 'دخول' : 'إنشاء حساب';
+      authSubmit.textContent = authLabel();
       return;
     }
     if (authMode === 'signup' && result.data.user && !result.data.session) {
-      showAuthError('تم إنشاء الحساب. يرجى تسجيل الدخول.');
       switchTab('login');
+      showAuthError('تم إنشاء الحساب. يرجى تأكيد البريد (إن لزم) ثم تسجيل الدخول.');
       authPassword.value = '';
-      authSubmit.disabled = false;
-      authSubmit.textContent = 'دخول';
-      return;
     }
+    authSubmit.disabled = false;
+    authSubmit.textContent = authLabel();
   } catch (e) {
     showAuthError('حدث خطأ. يرجى المحاولة مرة أخرى.');
     authSubmit.disabled = false;
-    authSubmit.textContent = authMode === 'login' ? 'دخول' : 'إنشاء حساب';
+    authSubmit.textContent = authLabel();
   }
 }
 
 async function handleLogout() {
-  await supabase.auth.signOut();
+  await sb.auth.signOut();
 }
 
 function showApp(user) {
+  const isNewUser = !currentUser || currentUser.id !== user.id;
   currentUser = user;
   authOverlay.classList.add('app-hidden');
   appLayout.classList.remove('app-hidden');
-  const emailEl = document.getElementById('userEmail');
-  if (emailEl) emailEl.textContent = user.email;
-  const headerRight = document.getElementById('headerRight');
-  if (headerRight) headerRight.classList.remove('app-hidden');
-  loadConversations();
+  document.getElementById('userEmail').textContent = user.email || '';
+  document.getElementById('headerRight').classList.remove('app-hidden');
+  if (isNewUser) {
+    currentConvId = null;
+    showWelcome();
+    loadConversations();
+  }
 }
 
 function showAuth() {
   currentUser = null;
+  currentConvId = null;
   authOverlay.classList.remove('app-hidden');
   appLayout.classList.add('app-hidden');
-  const headerRight = document.getElementById('headerRight');
-  if (headerRight) headerRight.classList.add('app-hidden');
+  document.getElementById('headerRight').classList.add('app-hidden');
   authSubmit.disabled = false;
-  authSubmit.textContent = authMode === 'login' ? 'دخول' : 'إنشاء حساب';
+  authSubmit.textContent = authLabel();
   authPassword.value = '';
+  convListEl.innerHTML = '';
 }
 
 async function loadConversations() {
-  const { data, error } = await supabase
+  const { data, error } = await sb
     .from('conversations')
     .select('id, title, updated_at')
     .order('updated_at', { ascending: false });
@@ -607,102 +596,146 @@ function renderConvList(convs) {
 }
 
 async function newConversation() {
-  const { data, error } = await supabase
+  const { data, error } = await sb
     .from('conversations')
-    .insert({ title: 'محادثة جديدة' })
+    .insert({ title: 'محادثة جديدة', user_id: currentUser.id })
     .select()
     .single();
-  if (error) { console.error(error); return; }
+  if (error) { console.error(error); return false; }
   currentConvId = data.id;
-  clearMessages();
   showWelcome();
   loadConversations();
   connectWS();
+  return true;
 }
 
 async function openConversation(convId) {
   currentConvId = convId;
-  clearMessages();
-  const { data: msgs, error } = await supabase
+  messagesEl.innerHTML = '';
+  const { data: msgs, error } = await sb
     .from('messages')
     .select('role, content')
     .eq('conversation_id', convId)
     .order('created_at', { ascending: true });
   if (error) { console.error(error); return; }
+  if (currentConvId !== convId) return;
   if (!msgs || msgs.length === 0) {
     showWelcome();
   } else {
-    hideWelcome();
-    for (const m of msgs) { addMessage(m.role, m.content); }
+    for (const m of msgs) addMessage(m.role, m.content);
   }
   loadConversations();
   connectWS();
 }
 
 async function deleteConversation(convId) {
-  const { error } = await supabase.from('conversations').delete().eq('id', convId);
+  const { error } = await sb.from('conversations').delete().eq('id', convId);
   if (error) { console.error(error); return; }
   if (currentConvId === convId) {
     currentConvId = null;
-    clearMessages();
     showWelcome();
     disconnectWS();
+    statusEl.textContent = 'اكتب رسالتك للبدء';
+    statusEl.classList.remove('error');
   }
   loadConversations();
 }
 
-async function saveMessage(role, content) {
-  if (!currentConvId) return;
-  const { error } = await supabase.from('messages').insert({
-    conversation_id: currentConvId,
-    role,
-    content
+async function saveMessage(convId, role, content) {
+  if (!convId) return;
+  const { error } = await sb.from('messages').insert({
+    conversation_id: convId,
+    role: role,
+    content: content
   });
   if (error) console.error('saveMessage error:', error);
+  const now = new Date().toISOString();
   if (role === 'user') {
-    const { data } = await supabase.from('conversations').select('title').eq('id', currentConvId).maybeSingle();
+    const { data } = await sb.from('conversations').select('title').eq('id', convId).maybeSingle();
     if (data && data.title === 'محادثة جديدة') {
       const title = content.substring(0, 30) + (content.length > 30 ? '...' : '');
-      await supabase.from('conversations').update({ title, updated_at: new Date().toISOString() }).eq('id', currentConvId);
+      await sb.from('conversations').update({ title: title, updated_at: now }).eq('id', convId);
+      return;
     }
-  } else {
-    await supabase.from('conversations').update({ updated_at: new Date().toISOString() }).eq('id', currentConvId);
   }
+  await sb.from('conversations').update({ updated_at: now }).eq('id', convId);
 }
 
-function connectWS() {
+async function connectWS() {
   disconnectWS();
-  if (!currentUser) return;
+  if (!currentUser || !currentConvId) return;
+  const convId = currentConvId;
+  const { data } = await sb.auth.getSession();
+  const token = data && data.session ? data.session.access_token : null;
+  if (!token || convId !== currentConvId) return;
+
   const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const base = location.pathname.replace(/\\/$/, '');
-  const agentPath = base + '/agents/assistant/' + encodeURIComponent(currentUser.id);
-  const wsUrl = proto + '//' + location.host + agentPath;
-  ws = new WebSocket(wsUrl);
-  ws.onopen = () => { connected = true; statusEl.textContent = 'متصل'; statusEl.classList.remove('error'); sendBtn.disabled = false; };
-  ws.onclose = () => { connected = false; statusEl.textContent = 'انقطع الاتصال - إعادة المحاولة...'; statusEl.classList.add('error'); sendBtn.disabled = true; if (currentUser && currentConvId) setTimeout(connectWS, 2000); };
-  ws.onerror = () => { statusEl.textContent = 'خطأ في الاتصال'; statusEl.classList.add('error'); };
-  ws.onmessage = async (event) => {
-    removeTyping();
-    const text = event.data;
-    addMessage('assistant', text);
-    await saveMessage('assistant', text);
+  const name = encodeURIComponent(currentUser.id + ':' + convId);
+  const wsUrl = proto + '//' + location.host + '/agents/assistant/' + name + '?token=' + encodeURIComponent(token);
+  const socket = new WebSocket(wsUrl);
+  ws = socket;
+  statusEl.textContent = 'جاري الاتصال...';
+  statusEl.classList.remove('error');
+
+  socket.onopen = () => {
+    if (ws !== socket) return;
+    statusEl.textContent = 'متصل';
+    statusEl.classList.remove('error');
+  };
+  socket.onclose = () => {
+    if (ws !== socket) return;
+    ws = null;
+    statusEl.textContent = 'انقطع الاتصال - إعادة المحاولة...';
+    statusEl.classList.add('error');
+    setTimeout(() => {
+      if (currentUser && currentConvId === convId && !ws) connectWS();
+    }, 2000);
+  };
+  socket.onerror = () => {
+    if (ws !== socket) return;
+    statusEl.textContent = 'خطأ في الاتصال';
+    statusEl.classList.add('error');
+  };
+  socket.onmessage = async (event) => {
+    const text = String(event.data);
+    if (convId === currentConvId) {
+      removeTyping();
+      addMessage('assistant', text);
+    }
+    await saveMessage(convId, 'assistant', text);
     loadConversations();
   };
 }
 
 function disconnectWS() {
-  if (ws) { ws.onclose = null; ws.close(); ws = null; }
-  connected = false;
-  sendBtn.disabled = true;
+  if (ws) {
+    const old = ws;
+    ws = null;
+    old.onopen = old.onclose = old.onerror = old.onmessage = null;
+    old.close();
+  }
 }
 
-function clearMessages() { messagesEl.innerHTML = ''; welcomeEl = null; }
-function showWelcome() {
-  clearMessages();
-  messagesEl.innerHTML = '<div class="welcome" id="welcome"><div class="welcome-icon">&#128181;</div><h2>مرحباً بك في مساعد ترست</h2><p>أنا مساعدك الذكي المتخصص في الخدمات المالية والمحاسبية. اسألني عن أي استفسار مالي أو محاسبي.</p><div class="welcome-suggestions"><div class="suggestion" onclick="sendSuggestion(\\'كيف أحسب ضريبة القيمة المضافة؟\\')">كيف أحسب ضريبة القيمة المضافة؟</div><div class="suggestion" onclick="sendSuggestion(\\'ما الفرق بين الأصول والخصوم؟\\')">ما الفرق بين الأصول والخصوم؟</div><div class="suggestion" onclick="sendSuggestion(\\'كيف أعد قائمة الدخل؟\\')">كيف أعد قائمة الدخل؟</div></div></div>';
-  welcomeEl = document.getElementById('welcome');
+function waitForOpen() {
+  return new Promise((resolve, reject) => {
+    const started = Date.now();
+    const timer = setInterval(() => {
+      if (ws && ws.readyState === 1) { clearInterval(timer); resolve(); }
+      else if (Date.now() - started > 8000) { clearInterval(timer); reject(new Error('timeout')); }
+    }, 100);
+  });
 }
-function hideWelcome() { if (welcomeEl) { welcomeEl.remove(); welcomeEl = null; } }
+
+function showWelcome() {
+  messagesEl.innerHTML = '';
+  const tpl = document.getElementById('welcomeTpl');
+  messagesEl.appendChild(tpl.content.cloneNode(true));
+}
+
+function hideWelcome() {
+  const w = document.getElementById('welcome');
+  if (w) w.remove();
+}
 
 function addMessage(role, text) {
   hideWelcome();
@@ -717,6 +750,7 @@ function addMessage(role, text) {
 
 function showTyping() {
   hideWelcome();
+  removeTyping();
   const msg = document.createElement('div');
   msg.className = 'message assistant';
   msg.id = 'typing-msg';
@@ -725,22 +759,40 @@ function showTyping() {
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
-function removeTyping() { const t = document.getElementById('typing-msg'); if (t) t.remove(); }
+function removeTyping() {
+  const t = document.getElementById('typing-msg');
+  if (t) t.remove();
+}
 
 async function sendMessage() {
   const text = inputEl.value.trim();
-  if (!text || !connected) return;
-  if (!currentConvId) { await newConversation(); }
-  addMessage('user', text);
-  await saveMessage('user', text);
-  ws.send(text);
-  inputEl.value = '';
-  autoResize(inputEl);
-  showTyping();
-  loadConversations();
+  if (!text || !currentUser) return;
+  sendBtn.disabled = true;
+  try {
+    if (!currentConvId) {
+      const ok = await newConversation();
+      if (!ok) return;
+    }
+    if (!ws || ws.readyState !== 1) {
+      await waitForOpen();
+    }
+    const convId = currentConvId;
+    inputEl.value = '';
+    autoResize(inputEl);
+    addMessage('user', text);
+    showTyping();
+    ws.send(text);
+    await saveMessage(convId, 'user', text);
+    loadConversations();
+  } catch (e) {
+    console.error(e);
+    removeTyping();
+    statusEl.textContent = 'تعذر الإرسال، حاول مرة أخرى';
+    statusEl.classList.add('error');
+  } finally {
+    sendBtn.disabled = false;
+  }
 }
-
-function sendSuggestion(text) { inputEl.value = text; sendMessage(); }
 
 function handleKey(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
@@ -751,31 +803,68 @@ function autoResize(el) {
   el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
 
-supabase.auth.onAuthStateChange((event, session) => {
-  (async () => {
-    if (session && session.user) {
-      showApp(session.user);
-    } else {
-      disconnectWS();
-      showAuth();
-    }
-  })();
-})();
+messagesEl.addEventListener('click', (e) => {
+  const s = e.target.closest('.suggestion');
+  if (s) {
+    inputEl.value = s.dataset.text;
+    sendMessage();
+  }
+});
+
+sb.auth.onAuthStateChange((event, session) => {
+  if (session && session.user) {
+    showApp(session.user);
+  } else {
+    disconnectWS();
+    showAuth();
+  }
+});
+
+sb.auth.getSession().then(({ data }) => {
+  if (!data.session) showAuth();
+});
 </script>
 </body>
 </html>`;
 }
 
+async function verifyUser(token: string, env: Env): Promise<{ id: string } | null> {
+	const res = await fetch(`${env.SUPABASE_URL}/auth/v1/user`, {
+		headers: {
+			apikey: env.SUPABASE_ANON_KEY,
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	if (!res.ok) return null;
+	const user = (await res.json()) as { id?: string };
+	return user.id ? { id: user.id } : null;
+}
+
 export default {
-	async fetch(request: Request, env: any) {
+	async fetch(request: Request, env: Env) {
 		const url = new URL(request.url);
+
 		if (url.pathname === "/" || url.pathname === "/index.html") {
-			const supabaseUrl = env.SUPABASE_URL || (globalThis as any).SUPABASE_URL || "";
-			const supabaseKey = env.SUPABASE_ANON_KEY || (globalThis as any).SUPABASE_ANON_KEY || "";
-			return new Response(renderHtml(supabaseUrl, supabaseKey), {
-				headers: { "Content-Type": "text/html; charset=utf-8" },
-			});
+			return new Response(
+				renderHtml(env.SUPABASE_URL || "", env.SUPABASE_ANON_KEY || ""),
+				{ headers: { "Content-Type": "text/html; charset=utf-8" } },
+			);
 		}
+
+		if (url.pathname.startsWith("/agents/")) {
+			const token = url.searchParams.get("token");
+			if (!token) return new Response("Unauthorized", { status: 401 });
+
+			const user = await verifyUser(token, env);
+			if (!user) return new Response("Unauthorized", { status: 401 });
+
+			// المسار: /agents/assistant/<userId>:<conversationId>
+			const name = decodeURIComponent(url.pathname.split("/")[3] ?? "");
+			if (!name.startsWith(user.id + ":")) {
+				return new Response("Forbidden", { status: 403 });
+			}
+		}
+
 		return (
 			(await routeAgentRequest(request, env)) ??
 			new Response("Not found", { status: 404 })
