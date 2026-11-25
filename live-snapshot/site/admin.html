@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E2238">
+<title>إدارة العملاء | TRUST</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+<script src="/assets/js/trust-config.js"></script>
+</head>
+<body class="app">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<header class="site-header">
+<div class="wrap hdr">
+<a class="brand" href="/" aria-label="TRUST — الصفحة الرئيسية"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small>للخدمات المحاسبية والمالية</small></span></a>
+<nav class="nav" id="site-nav" aria-label="القائمة الرئيسية">
+<a href="/services">الخدمات</a>
+<a href="/about">عن TRUST</a>
+<a href="/#faq">الأسئلة الشائعة</a>
+<a href="/financial-hub">المنصة المالية</a><a href="/digital-services">الخدمات الرقمية</a>
+<a href="/contact">تواصل معنا</a>
+<a class="btn btn-primary nav-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+</nav>
+<div class="hdr-actions">
+<a class="lang" href="/login" data-account>دخول العملاء</a>
+<a class="lang" href="/en" lang="en" hreflang="en">English</a>
+<a class="btn btn-primary btn-sm hdr-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="فتح القائمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+</div>
+</header>
+<section class="page-head"><div class="wrap">
+<div class="crumbs"><a href="/">الرئيسية</a> / لوحة الفريق</div>
+<div class="row" style="justify-content:space-between"><h1>إدارة علاقات العملاء</h1><button class="btn btn-ghost btn-sm" id="logout" type="button">تسجيل الخروج</button></div>
+<p>كل الطلبات من نماذج الموقع والحسابات الجديدة في مكان واحد — للفريق فقط.</p>
+</div></section>
+<main id="main" class="app-main"><div class="wrap">
+<p id="gate" class="empty">جارٍ التحقق من الصلاحية…</p>
+<div id="app" class="hidden">
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="leads">العملاء المحتملون</button>
+    <button role="tab" aria-selected="false" data-tab="reqs">طلبات البوابة</button>
+    <button role="tab" aria-selected="false" data-tab="orgs">الشركات</button>
+  </div>
+  <section id="tab-leads">
+    <div class="akpis">
+      <div class="akpi"><b id="kNew">0</b><span>جديدة لم يُتواصل معها</span></div>
+      <div class="akpi"><b id="kWeek">0</b><span>وصلت خلال 7 أيام</span></div>
+      <div class="akpi"><b id="kDue">0</b><span>متابعات مستحقة أو متأخرة</span></div>
+      <div class="akpi"><b id="kWon">0</b><span>تحوّلوا إلى عملاء</span></div>
+      <div class="akpi"><b id="kConv">0%</b><span>نسبة التحويل</span></div>
+    </div>
+    <div class="filters">
+      <input id="fText" type="search" placeholder="بحث بالاسم أو الهاتف أو المشروع…" aria-label="بحث">
+      <select id="fStatus" aria-label="المرحلة"><option value="">كل المراحل</option></select>
+      <select id="fSource" aria-label="المصدر"><option value="">كل المصادر</option></select>
+    </div>
+    <div class="row" style="margin-bottom:12px"><button class="btn btn-sm btn-primary" id="addToggle" type="button">+ إضافة عميل يدوياً</button><button class="btn btn-sm btn-outline" id="exportCsv" type="button">تصدير Excel (CSV)</button><button class="btn btn-sm btn-outline" id="reload" type="button">تحديث</button><span class="muted" id="count"></span></div>
+    <form id="addForm" class="panel hidden" style="margin-bottom:14px" novalidate>
+      <div class="form-grid">
+        <div><label for="aName">الاسم *</label><input id="aName" maxlength="120"></div>
+        <div><label for="aPhone">الهاتف</label><input id="aPhone" dir="ltr" maxlength="40"></div>
+        <div><label for="aEmail">البريد</label><input id="aEmail" dir="ltr" maxlength="200"></div>
+        <div><label for="aBiz">المشروع</label><input id="aBiz" maxlength="160"></div>
+        <div><label for="aSvc">الخدمة</label><input id="aSvc" maxlength="120"></div>
+        <div class="full"><label for="aMsg">ملاحظات أولية</label><textarea id="aMsg" rows="2" maxlength="3000"></textarea></div>
+      </div>
+      <p class="err" id="aErr"></p><div class="acts"><button class="btn btn-primary" type="submit">حفظ</button></div>
+    </form>
+    <div id="leads"></div>
+  </section>
+  <section id="tab-reqs" class="hidden"><div id="reqs"></div></section>
+  <section id="tab-orgs" class="hidden"><div class="panel"><div id="orgs"></div></div></section>
+</div>
+</div></main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="ft-grid">
+<div class="ft-brand">
+<a class="brand" href="/" aria-label="TRUST"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small style="color:#9FB0C3">للخدمات المحاسبية والمالية</small></span></a>
+<p style="margin-top:14px">وضوح في الأرقام، ثقة في القرارات.<br>خدمات محاسبية ومالية واستشارية للمشاريع الصغيرة والمتوسطة في فلسطين.</p>
+</div>
+<div><h2>خدماتنا</h2><ul>
+<li><a href="/accounting-systems">تأسيس الأنظمة المحاسبية والإدارية</a></li><li><a href="/financial-management">الإدارة المالية والمتابعة الدورية</a></li><li><a href="/feasibility-growth">دراسات الجدوى والنمو والتمويل</a></li><li><a href="/pricing">الباقات والأسعار</a></li><li><a href="/samples">نماذج من مخرجاتنا</a></li></ul></div>
+<div><h2>المنصة المالية</h2><ul>
+<li><a href="/health-check">فحص الصحة المالية</a></li><li><a href="/financial-assessment">الحاسبة المالية</a></li><li><a href="/consultation-request">طلب استشارة</a></li><li><a href="/reports-upload">رفع الملفات المالية</a></li><li><a href="/login" data-account>دخول العملاء</a></li></ul></div>
+<div><h2>التواصل</h2><ul>
+<li><a href="https://wa.me/970599371188" target="_blank" rel="noopener">واتساب: <span class="ltr">0599371188</span></a></li>
+<li><a href="tel:+970599371188">هاتف: <span class="ltr">0599371188</span></a></li>
+<li><a href="/cdn-cgi/l/email-protection#d2bbbcb4bd92a6a0a7a1a6b4bbbca1fcbda0b5"><span class="ltr"><span class="__cf_email__" data-cfemail="6b02050d042b1f191e181f0d0205184504190c">[email&#160;protected]</span></span></a></li>
+<li>نابلس — دير شرف، شارع طولكرم–نابلس</li>
+<li>نستقبل طلباتك إلكترونياً على مدار الساعة، ونرد خلال يوم عمل</li>
+<li>نخدم المشاريع في جميع أنحاء فلسطين</li></ul></div>
+<div><h2>معلومات</h2><ul>
+<li><a href="/about">عن TRUST</a></li><li><a href="/insights">مقالات مالية</a></li><li><a href="/#faq">الأسئلة الشائعة</a></li><li><a href="/privacy">سياسة الخصوصية</a></li><li><a href="/en" lang="en">English</a></li></ul></div>
+</div>
+<div class="ft-bottom"><span>© <span id="year">2026</span> TRUST — Accounting, Financial &amp; Business Advisory Services</span><span class="ltr">Clarity in Numbers. Confidence in Decisions.</span><a class="tp-adm" href="https://ai.trustfins.org/admin" rel="nofollow noopener" style="font-size:12px;color:#7F92A6;text-decoration:none;margin-inline-start:14px;border-inline-start:1px solid rgba(159,176,195,.35);padding-inline-start:14px">دخول الإدارة</a></div>
+</div>
+</footer>
+<a class="wa-float" href="https://wa.me/970599371188" target="_blank" rel="noopener" aria-label="تواصل معنا على واتساب"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c.3 2 1.8 3.8 4 4.6l1.2-1.1 1.8.7"/></svg></a>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/main.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/assets/js/services-data.js"></script>
+<script src="/assets/js/trust-auth.js"></script>
+<script>
+(function(){
+'use strict';
+var sb = TRUSTAUTH.sb();
+var $ = function(id){ return document.getElementById(id); };
+var ST = {new:'جديد',contacted:'تم التواصل',proposal:'عرض سعر',won:'أصبح عميلاً',lost:'مغلق / لم يتم'};
+var SRC = {consultation:'طلب استشارة',health_check:'فحص الصحة المالية',contact:'تواصل معنا',report_upload:'رفع ملف مالي',portal:'تسجيل حساب جديد',manual:'إضافة يدوية'};
+var RST = {new:'جديد',reviewing:'قيد المراجعة',need_info:'نحتاج معلومات',approved:'تمت الموافقة',contacted:'تم التواصل',in_progress:'قيد التنفيذ',completed:'مكتمل',rejected:'مرفوض',cancelled:'ملغي'};
+var DK = {file_path:'مسار الملف',industry:'النشاط',via:'سجّل من صفحة',score:'الدرجة',band:'التصنيف',weak_areas:'المحاور الضعيفة',activity:'النشاط',contact_method:'طريقة التواصل المفضلة',period:'الفترة',file_name:'اسم الملف',file_size_kb:'الحجم (KB)',main_service:'الخدمة الرئيسية',plan:'الباقة',sub_service:'الخدمة الفرعية',sector:'نوع النشاط',marketing_ok:'يقبل رسائل تسويقية',src:'مصدر الزيارة',env:'البيئة'};
+function dval(k,v){var S=window.TRUST_SERVICES||{mains:[],subs:[],sectors:{}};
+  if(k==='main_service'){var m=S.mains.filter(function(x){return x.id===v;})[0];return m?m.name:({session:'جلسة استشارية أولية',unsure:'غير متأكد، يحتاج توجيهاً'}[v]||v);}
+  if(k==='sub_service'){var u=S.subs.filter(function(x){return x.id===v;})[0];return u?u.name:v;}
+  if(k==='sector') return S.sectors[v]||v;
+  if(k==='plan') return ({start:'الأساسية ($200)',growth:'المتقدمة ($450)',enterprise:'الشاملة (مخصص)'}[v]||v);
+  if(k==='marketing_ok') return v?'نعم':'لا';
+  if(v&&typeof v==='object') return Object.keys(v).map(function(x){return x+': '+v[x];}).join(' · ');
+  return String(v);}
+var leads = [];
+
+function el(tag, attrs, text){ var e=document.createElement(tag); if(attrs) for(var k in attrs) e.setAttribute(k, attrs[k]); if(text!=null) e.textContent=text; return e; }
+function d(s){ return s ? new Date(s).toLocaleDateString('ar-PS',{year:'numeric',month:'short',day:'numeric'}) : ''; }
+function today(){ var t=new Date(); return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0'); }
+function wa(p){ var x=(p||'').replace(/\D/g,''); if(x.indexOf('00')===0) x=x.slice(2); if(x.charAt(0)==='0') x='970'+x.slice(1); else if(x.length===9) x='970'+x; return x.length>=11 ? 'https://wa.me/'+x : null; }
+function isDue(l){ return l.next_follow_up && l.next_follow_up <= today() && l.status!=='won' && l.status!=='lost'; }
+function fill(sel, map){ for(var k in map) sel.append(el('option',{value:k},map[k])); }
+
+$('logout').addEventListener('click', async function(e){ e.preventDefault(); await sb.auth.signOut(); location.replace('/login.html'); });
+
+(async function gate(){
+  var s=(await sb.auth.getSession()).data.session;
+  if(!s){ location.replace('/login.html?next=/admin.html'); return; }
+  var r=await sb.from('staff_roles').select('role').eq('user_id', s.user.id).maybeSingle();
+  if(!r.data){ location.replace('/portal.html'); return; }
+  $('gate').remove(); $('app').classList.remove('hidden');
+  fill($('fStatus'), ST); fill($('fSource'), SRC);
+  loadLeads();
+})();
+
+document.querySelectorAll('[data-tab]').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('[data-tab]').forEach(function(x){ x.setAttribute('aria-selected', x===b); $('tab-'+x.dataset.tab).classList.toggle('hidden', x!==b); });
+    if(b.dataset.tab==='reqs') loadReqs(); if(b.dataset.tab==='orgs') loadOrgs();
+  });
+});
+
+async function loadLeads(){
+  $('leads').replaceChildren(el('p',{class:'empty'},'جارٍ التحميل…'));
+  var r=await sb.from('leads').select('*').order('created_at',{ascending:false}).limit(1000);
+  if(r.error){ $('leads').replaceChildren(el('p',{class:'err'},'تعذّر تحميل البيانات: '+r.error.message)); return; }
+  leads=r.data; kpis(); render();
+}
+
+function kpis(){
+  var week=Date.now()-7*864e5, won=leads.filter(function(l){return l.status==='won';}).length;
+  $('kNew').textContent=leads.filter(function(l){return l.status==='new';}).length;
+  $('kWeek').textContent=leads.filter(function(l){return new Date(l.created_at)>=week;}).length;
+  $('kDue').textContent=leads.filter(isDue).length;
+  $('kWon').textContent=won;
+  $('kConv').textContent=(leads.length ? Math.round(won*100/leads.length) : 0)+'%';
+}
+
+function filtered(){
+  var q=$('fText').value.trim().toLowerCase(), st=$('fStatus').value, so=$('fSource').value;
+  return leads.filter(function(l){
+    if(st && l.status!==st) return false; if(so && l.source!==so) return false;
+    if(q) return [l.full_name,l.phone,l.email,l.business,l.service].join(' ').toLowerCase().indexOf(q)>=0;
+    return true;
+  });
+}
+
+function render(){
+  var box=$('leads'), list=filtered(); box.replaceChildren();
+  $('count').textContent=list.length+' من '+leads.length;
+  if(!list.length){ box.append(el('p',{class:'empty'}, leads.length ? 'لا توجد نتائج لهذا البحث.' : 'لا توجد طلبات بعد. ستظهر هنا تلقائياً عند تعبئة أي نموذج في الموقع.')); return; }
+  list.forEach(function(l){ box.append(card(l)); });
+}
+
+function card(l){
+  var det=el('details',{class:'lcard'+(isDue(l)?' due':'')}), sm=el('summary');
+  var left=el('div'); left.append(el('strong',null,l.full_name+(l.business?' — '+l.business:'')));
+  left.append(el('div',{class:'meta'}, [SRC[l.source]||l.source, l.service, d(l.created_at), isDue(l)?'⏰ متابعة مستحقة':''].filter(Boolean).join(' · ')));
+  sm.append(left, el('span',{class:'st '+l.status}, ST[l.status]||l.status)); det.append(sm);
+
+  var info=el('dl',{class:'kv',style:'margin-top:12px'});
+  function add(k,v,node){ if(!v && !node) return; info.append(el('dt',null,k)); var dd=el('dd'); if(node) dd.append(node); else dd.textContent=v; info.append(dd); }
+  if(l.phone){ var ph=el('span'); var t=el('a',{href:'tel:'+l.phone.replace(/[^\d+]/g,''),dir:'ltr'},l.phone); ph.append(t); var w=wa(l.phone); if(w){ ph.append(' · '); ph.append(el('a',{href:w,target:'_blank',rel:'noopener'},'واتساب')); } add('الهاتف',null,ph); }
+  if(l.email) add('البريد',null,el('a',{href:'mailto:'+l.email,dir:'ltr'},l.email));
+  add('الرسالة', l.message);
+  var dt=l.details||{}; Object.keys(dt).forEach(function(k){ if(dt[k]!=='' && dt[k]!=null) add(DK[k]||k, dval(k,dt[k])); });
+  if(dt.file_path){
+    var fb=el('button',{class:'btn btn-sm btn-outline',type:'button'},'تنزيل الملف'), fm=el('span',{class:'muted'});
+    var wrapF=el('span'); wrapF.append(fb,' ',fm);
+    fb.addEventListener('click', async function(){
+      fb.disabled=true; fm.textContent='';
+      var r=await sb.storage.from('client-reports').createSignedUrl(dt.file_path, 300, { download: dt.file_name || true });
+      fb.disabled=false;
+      if(r.error || !r.data){ fm.textContent='تعذّر إنشاء رابط التنزيل.'; return; }
+      var a=document.createElement('a'); a.href=r.data.signedUrl; a.rel='noopener'; a.target='_blank'; document.body.append(a); a.click(); a.remove();
+      fm.textContent='الرابط صالح 5 دقائق.';
+    });
+    add('الملف',null,wrapF);
+  } else if(l.source==='report_upload') add('الملف',null,el('span',{class:'muted'},'ملف قديم: تجده في بريد Netlify أو تبويب Forms ← report-upload'));
+  det.append(info);
+
+  var ed=el('div',{class:'edit'});
+  var s1=el('div'); s1.append(el('label',null,'المرحلة')); var sel=el('select'); fill(sel,ST); sel.value=l.status; s1.append(sel);
+  var s2=el('div'); s2.append(el('label',null,'موعد المتابعة القادم')); var fu=el('input',{type:'date'}); fu.value=l.next_follow_up||''; s2.append(fu);
+  ed.append(s1,s2); det.append(ed);
+  det.append(el('label',null,'ملاحظات الفريق')); var nt=el('textarea',{rows:'3',maxlength:'5000'}); nt.value=l.notes||''; det.append(nt);
+  var row=el('div',{class:'row',style:'margin-top:10px'}), save=el('button',{class:'btn btn-sm btn-primary',type:'button'},'حفظ'), del=el('button',{class:'btn btn-sm btn-danger',type:'button'},'حذف'), msg=el('span',{class:'muted'});
+  row.append(save,del,msg); det.append(row);
+
+  save.addEventListener('click', async function(){
+    save.disabled=true; msg.textContent='';
+    var r=await sb.from('leads').update({status:sel.value, next_follow_up:fu.value||null, notes:nt.value.trim()||null}).eq('id',l.id).select().single();
+    save.disabled=false;
+    if(r.error){ msg.textContent='تعذّر الحفظ'; msg.className='err'; return; }
+    Object.assign(l, r.data); kpis(); var n=card(l); n.open=true; det.replaceWith(n);
+  });
+  del.addEventListener('click', async function(){
+    if(!confirm('حذف '+l.full_name+' نهائياً؟ استخدم الحذف للرسائل المزعجة فقط.')) return;
+    var r=await sb.from('leads').delete().eq('id',l.id);
+    if(r.error){ msg.textContent='تعذّر الحذف'; msg.className='err'; return; }
+    leads=leads.filter(function(x){return x.id!==l.id;}); kpis(); render();
+  });
+  return det;
+}
+
+['fText','fStatus','fSource'].forEach(function(id){ $(id).addEventListener('input', render); });
+$('reload').addEventListener('click', loadLeads);
+$('addToggle').addEventListener('click', function(){ $('addForm').classList.toggle('hidden'); });
+$('addForm').addEventListener('submit', async function(e){
+  e.preventDefault(); $('aErr').textContent='';
+  var nm=$('aName').value.trim(); if(nm.length<2){ $('aErr').textContent='الاسم مطلوب.'; return; }
+  var r=await sb.from('leads').insert({source:'manual', full_name:nm, phone:$('aPhone').value.trim()||null, email:$('aEmail').value.trim()||null, business:$('aBiz').value.trim()||null, service:$('aSvc').value.trim()||null, message:$('aMsg').value.trim()||null}).select().single();
+  if(r.error){ $('aErr').textContent='تعذّر الحفظ: '+r.error.message; return; }
+  e.target.reset(); e.target.classList.add('hidden'); leads.unshift(r.data); kpis(); render();
+});
+
+$('exportCsv').addEventListener('click', function(){
+  var cols=[['created_at','التاريخ'],['full_name','الاسم'],['phone','الهاتف'],['email','البريد'],['business','المشروع'],['service','الخدمة'],['source','المصدر'],['status','المرحلة'],['next_follow_up','المتابعة القادمة'],['message','الرسالة'],['notes','ملاحظات']];
+  var esc=function(v){ v=(v==null?'':String(v)); return '"'+v.replace(/"/g,'""')+'"'; };
+  var lines=[cols.map(function(c){return esc(c[1]);}).join(',')];
+  filtered().forEach(function(l){ lines.push(cols.map(function(c){ var v=l[c[0]]; if(c[0]==='source') v=SRC[v]||v; if(c[0]==='status') v=ST[v]||v; if(c[0]==='created_at') v=d(v); return esc(v); }).join(',')); });
+  var a=el('a',{href:URL.createObjectURL(new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'})),download:'trust-leads-'+today()+'.csv'}); document.body.append(a); a.click(); a.remove();
+});
+
+async function loadReqs(){
+  var box=$('reqs'); box.replaceChildren(el('p',{class:'empty'},'جارٍ التحميل…'));
+  var r=await sb.from('consultation_requests').select('id,service_type,subject,description,status,created_at,organizations(name)').order('created_at',{ascending:false}).limit(500);
+  box.replaceChildren();
+  if(r.error){ box.append(el('p',{class:'err'},'تعذّر التحميل: '+r.error.message)); return; }
+  if(!r.data.length){ box.append(el('p',{class:'empty'},'لا توجد طلبات من عملاء البوابة بعد.')); return; }
+  r.data.forEach(function(q){
+    var det=el('details',{class:'lcard'}), sm=el('summary'), left=el('div');
+    left.append(el('strong',null,(q.organizations?q.organizations.name+' — ':'')+q.subject));
+    left.append(el('div',{class:'meta'}, q.service_type+' · '+d(q.created_at)));
+    sm.append(left, el('span',{class:'st'}, RST[q.status]||q.status)); det.append(sm);
+    if(q.description) det.append(el('p',null,q.description));
+    var row=el('div',{class:'row'}), sel=el('select',{style:'max-width:220px'}); fill(sel,RST); sel.value=q.status;
+    var b=el('button',{class:'btn btn-sm btn-primary',type:'button'},'حفظ الحالة'), m=el('span',{class:'muted'});
+    row.append(sel,b,m); det.append(row);
+    b.addEventListener('click', async function(){ b.disabled=true; var u=await sb.from('consultation_requests').update({status:sel.value}).eq('id',q.id); b.disabled=false; if(u.error){ m.textContent='تعذّر الحفظ'; return; } q.status=sel.value; sm.lastChild.textContent=RST[q.status]; m.textContent='تم الحفظ ✓'; });
+    box.append(det);
+  });
+}
+
+async function loadOrgs(){
+  var box=$('orgs'); box.replaceChildren(el('p',{class:'empty'},'جارٍ التحميل…'));
+  var r=await sb.from('organizations').select('name,industry,currency,created_at,memberships(count)').order('created_at',{ascending:false});
+  box.replaceChildren();
+  if(r.error){ box.append(el('p',{class:'err'},'تعذّر التحميل: '+r.error.message)); return; }
+  if(!r.data.length){ box.append(el('p',{class:'empty'},'لا توجد شركات بعد.')); return; }
+  var t=el('table'), h=el('tr'); ['الشركة','النشاط','العملة','المستخدمون','تاريخ الإضافة'].forEach(function(x){ h.append(el('th',null,x)); }); t.append(h);
+  r.data.forEach(function(o){ var tr=el('tr'); tr.append(el('td',null,o.name), el('td',null,o.industry||'—'), el('td',null,o.currency), el('td',null,String((o.memberships&&o.memberships[0]&&o.memberships[0].count)||0)), el('td',null,d(o.created_at))); t.append(tr); });
+  box.append(t);
+}
+})();
+</script>
+</body>
+</html>
