@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>وكيل Trust المالي | Trust Financial AI Agent</title>
+<meta name="description" content="وكيل مالي ذكي من Trust للخدمات المحاسبية والمالية: تحليل القوائم المالية، الائتمان، التدفقات النقدية، والتقارير.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E2238; --navy-2:#0A1A2B; --navy-3:#2A4A6B; --ink:#14212C; --muted:#5B6878; --line:#DCE3EA;
+  --bg:#F1F4F7; --card:#fff; --gold:#C9A15A; --gold-2:#D9B46E; --gold-ink:#7A5716; --gold-soft:#F6EBD3; --good:#23863A; --good-bg:#E3F3E6; --bad:#B4372A; --bad-bg:#F9E5E2;
+  --warn:#B8650F; --warn-bg:#FBEEDD; --r:14px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.75}
+button,input,textarea,select{font:inherit}
+a{color:var(--navy-3)}
+.hidden{display:none!important}
+/* ---------- layout ---------- */
+.app{display:grid;grid-template-columns:290px 1fr;height:100vh}
+.side{background:var(--navy);color:#C9DAE7;display:flex;flex-direction:column;min-height:0}
+.brand{display:flex;align-items:center;gap:10px;padding:18px 18px 12px}
+.brand .mark{width:38px;height:38px;flex:none;display:block}.brand .mark svg{display:block}
+.brand .t1{font-weight:700;color:#fff;font-size:17px;line-height:1.2}
+.brand .t2{font-size:11.5px;color:#7F9AB0}
+.newbtn{margin:6px 14px 10px;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;text-align:start;font-weight:600}
+.newbtn:hover{background:rgba(255,255,255,.12)}
+.convs{flex:1;overflow:auto;padding:4px 8px}
+.convs .lbl{font-size:11.5px;color:#7F9AB0;padding:8px 10px 4px}
+.conv{display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:9px;cursor:pointer;color:#C9DAE7;font-size:13.5px}
+.conv:hover,.conv.on{background:rgba(255,255,255,.1)}
+.conv .tt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conv .del{opacity:0;border:0;background:none;color:#7F9AB0;cursor:pointer;font-size:15px}
+.conv:hover .del{opacity:1}
+.sidefoot{border-top:1px solid rgba(255,255,255,.12);padding:12px 14px;font-size:12.5px}
+.sidefoot a{color:#C9DAE7;text-decoration:none;display:block;padding:3px 0}
+.sidefoot a:hover{color:#fff}
+.main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.top{display:flex;align-items:center;gap:12px;padding:10px 18px;background:#fff;border-bottom:1px solid var(--line)}
+.menu{display:none;border:0;background:none;font-size:22px;cursor:pointer;color:var(--navy)}
+.top .title{font-weight:600;color:var(--navy);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plan{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)}
+.plan .badge{background:var(--navy);color:#fff;border-radius:20px;padding:2px 10px;font-weight:600}
+.meter{width:110px;height:7px;background:#EBF0F4;border-radius:6px;overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-2),var(--gold))}
+.meter.hot i{background:linear-gradient(90deg,#d99a2b,var(--bad))}
+.iconbtn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 10px;cursor:pointer;color:var(--navy);font-size:13px}
+.iconbtn:hover{border-color:var(--navy-3)}
+.scroll{flex:1;overflow:auto}
+.thread{max-width:920px;margin:0 auto;padding:22px 18px 30px}
+/* ---------- welcome ---------- */
+.hero{padding:26px 4px 8px}
+.hero h1{font-size:26px;margin:0 0 6px;color:var(--navy)}
+.hero p{margin:0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;transition:.15s;text-align:start}
+.svc:hover{border-color:var(--navy-3);box-shadow:0 6px 18px rgba(14,34,56,.08);transform:translateY(-1px)}
+.svc.locked{opacity:.55}
+.svc .ic{width:34px;height:34px;border-radius:9px;background:#EBF0F4;display:grid;place-items:center;color:var(--navy);font-weight:700;margin-bottom:8px}
+.svc b{display:block;color:var(--navy)}
+.svc span{font-size:13px;color:var(--muted)}
+.svc .lk{font-size:11.5px;color:var(--warn);display:block;margin-top:4px}
+.examples{display:flex;flex-wrap:wrap;gap:8px}
+.ex{border:1px dashed #DCE3EA;background:#fff;border-radius:20px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--navy-2)}
+.ex:hover{border-style:solid}
+/* ---------- messages ---------- */
+.msg{margin:16px 0;display:flex;gap:10px}
+.msg .av{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700}
+.msg.user{flex-direction:row-reverse}
+.msg.user .av{background:#DCE3EA;color:var(--navy)}
+.msg.assistant .av{background:var(--navy);color:#fff}
+.bubble{max-width:calc(100% - 46px);min-width:0}
+.msg.user .bubble{background:var(--navy-2);color:#fff;border-radius:14px 4px 14px 14px;padding:10px 14px;white-space:pre-wrap}
+[dir=ltr] .msg.user .bubble{border-radius:4px 14px 14px 14px}
+.msg.assistant .bubble{background:#fff;border:1px solid var(--line);border-radius:4px 14px 14px 14px;padding:14px 16px;flex:1}
+.att{font-size:12px;opacity:.85;margin-top:4px}
+.md h2,.md h3,.md h4{color:var(--navy);margin:12px 0 4px;font-size:16px}
+.md p{margin:6px 0}
+.md ul,.md ol{margin:6px 0;padding-inline-start:22px}
+.md table{border-collapse:collapse;margin:8px 0;font-size:13.5px;width:100%}
+.md td,.md th{border:1px solid var(--line);padding:5px 8px;text-align:start}
+.md th{background:#F7F9FB}
+.md code{background:#F7F9FB;padding:1px 5px;border-radius:5px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.steps span{font-size:11.5px;background:#EBF0F4;color:var(--navy-2);border-radius:20px;padding:2px 9px}
+.blk{margin:14px 0 4px;border-top:1px solid var(--line);padding-top:12px}
+.blk h4{margin:0 0 8px;color:var(--navy);font-size:15px;display:flex;align-items:center;gap:8px}
+.blk h4 small{font-weight:400;color:var(--muted);font-size:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.kpi{border:1px solid var(--line);border-radius:11px;padding:9px 11px;background:#F7F9FB;position:relative}
+.kpi .n{font-size:12.5px;color:var(--muted)}
+.kpi .v{font-size:19px;font-weight:700;color:var(--navy);direction:ltr;text-align:start;unicode-bidi:plaintext}
+.kpi .f{font-size:11px;color:#73879A;margin-top:2px}
+.kpi.na .v{color:#73879A;font-size:13px;font-weight:500}
+.kpi .miss{font-size:11px;color:var(--warn)}
+.check{background:var(--warn-bg);color:var(--warn);border-radius:9px;padding:7px 10px;font-size:13px;margin:6px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:start;white-space:nowrap}
+.tbl th{color:var(--muted);font-weight:500;background:#F7F9FB}
+.tbl td.num{direction:ltr;text-align:end;unicode-bidi:plaintext}
+.tblwrap{overflow-x:auto}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.pill{font-size:11px;border-radius:12px;padding:1px 8px}
+.pill.good{background:var(--good-bg);color:var(--good)} .pill.bad{background:var(--bad-bg);color:var(--bad)}
+.chart{margin:8px 0}
+.disc{font-size:12px;color:var(--muted);margin-top:10px}
+.actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.actions button{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:3px 10px;cursor:pointer;color:var(--navy-2)}
+.actions button:disabled{opacity:.5;cursor:not-allowed}
+.thinking{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13.5px}
+.dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--navy-3);animation:b 1.2s infinite}
+.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,80%,100%{opacity:.25}40%{opacity:1}}
+/* ---------- composer ---------- */
+.composer{border-top:1px solid var(--line);background:#fff;padding:10px 18px 14px}
+.composer .in{max-width:920px;margin:0 auto}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.mode{border:1px solid var(--line);background:#fff;border-radius:20px;padding:3px 11px;font-size:12.5px;cursor:pointer;color:var(--navy-2)}
+.mode.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.mode.locked{opacity:.45}
+.box{display:flex;align-items:flex-end;gap:8px;border:1px solid #DCE3EA;border-radius:14px;padding:6px 8px;background:#fff}
+.box:focus-within{border-color:var(--navy-3);box-shadow:0 0 0 3px rgba(14,34,56,.12)}
+.box textarea{flex:1;border:0;outline:0;resize:none;max-height:180px;min-height:40px;padding:8px 6px;background:transparent}
+.attach,.send{border:0;border-radius:10px;width:40px;height:40px;cursor:pointer;display:grid;place-items:center;font-size:18px}
+.attach{background:#EBF0F4;color:var(--navy)}
+.send{background:var(--navy);color:#fff}
+.send:disabled{opacity:.5;cursor:not-allowed}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.chip{font-size:12px;background:#EBF0F4;border-radius:8px;padding:2px 8px;display:flex;align-items:center;gap:6px}
+.chip button{border:0;background:none;cursor:pointer;color:var(--muted)}
+.hint{font-size:11.5px;color:var(--muted);margin-top:6px;text-align:center}
+/* ---------- auth / modal ---------- */
+.overlay{position:fixed;inset:0;background:linear-gradient(140deg,var(--navy-2) 0%,var(--navy) 60%,var(--navy-3) 100%);display:grid;place-items:center;z-index:50;padding:16px}
+.authcard{background:#fff;border-radius:18px;width:min(420px,100%);padding:26px 26px 20px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.authcard .brand{padding:0 0 14px}
+.authcard .brand .mark{background:none}
+.authcard .brand .t1{color:var(--navy)} .authcard .brand .t2{color:var(--muted)}
+.authcard h2{margin:0 0 4px;font-size:19px;color:var(--navy)}
+.authcard p{margin:0 0 14px;color:var(--muted);font-size:13.5px}
+.fld{display:block;margin:10px 0}
+.fld span{display:block;font-size:12.5px;color:var(--muted);margin-bottom:3px}
+.fld input,.fld select{width:100%;border:1px solid #DCE3EA;border-radius:10px;padding:9px 11px;outline:0;background:#fff}
+.fld input:focus{border-color:var(--navy-3)}
+.btn{width:100%;border:0;border-radius:10px;padding:10px;background:var(--navy);color:#fff;font-weight:600;cursor:pointer;margin-top:8px}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.btn:disabled{opacity:.6}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:9px;padding:7px 10px;font-size:13px;margin-top:8px}
+.ok{background:var(--good-bg);color:var(--good);border-radius:9px;padding:7px 10px;font-size:13px;margin-top:8px}
+.switch{text-align:center;margin-top:12px;font-size:13px}
+.switch a{cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(10,25,45,.55);display:grid;place-items:center;z-index:40;padding:14px}
+.modal .pane{background:#fff;border-radius:16px;width:min(980px,100%);max-height:90vh;overflow:auto;padding:20px}
+.modal .pane h3{margin:0 0 10px;color:var(--navy)}
+.modal .close{float:inline-end;border:0;background:none;font-size:22px;cursor:pointer;color:var(--muted)}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.planc{border:1px solid var(--line);border-radius:14px;padding:14px}
+.planc.cur{border-color:var(--navy);box-shadow:0 0 0 2px rgba(14,34,56,.12)}
+.planc h4{margin:0;color:var(--navy)}
+.planc .pr{font-size:24px;font-weight:700;color:var(--navy)}
+.planc .pr small{font-size:12px;color:var(--muted);font-weight:400}
+.planc ul{padding-inline-start:18px;margin:8px 0;font-size:13px}
+.planc .aud{font-size:12px;color:var(--muted)}
+.wa{display:inline-block;margin-top:12px;background:#1f9d55;color:#fff;border-radius:10px;padding:8px 14px;text-decoration:none;font-weight:600}
+.admgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.admbox{border:1px solid var(--line);border-radius:12px;padding:12px}
+.admbox h4{margin:0 0 6px;color:var(--navy)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row .fld{flex:1;min-width:130px}
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;inset:0 auto 0 0;width:280px;z-index:30;transform:translateX(-100%);transition:.2s}
+  [dir=rtl] .side{inset:0 0 0 auto;transform:translateX(100%)}
+  .side.open{transform:none}
+  .menu{display:block}
+  .cards{grid-template-columns:1fr 1fr}
+  .plans{grid-template-columns:1fr 1fr}
+  .admgrid{grid-template-columns:1fr}
+  .plan .meter{width:60px}
+  .plan .ptext{display:none}
+}
+@media (max-width:520px){.cards{grid-template-columns:1fr}.plans{grid-template-columns:1fr}.hero h1{font-size:21px}}
+/* ---------- print (PDF export) ---------- */
+@media print{
+  body{background:#fff}
+  .side,.top,.composer,.actions,.hero,.cards,.examples,.msg.user{display:none!important}
+  .app{display:block;height:auto}.scroll{overflow:visible}
+  .msg{display:none}.msg.printme{display:flex}
+  .msg.assistant .bubble{border:0}
+  .printhead{display:block!important}
+}
+.printhead{display:none;border-bottom:2px solid var(--navy);margin-bottom:12px;padding-bottom:6px;color:var(--navy)}
+</style>
+<style id="tl-agent">
+/* TRUST agent login – v2026-11-19 */
+#auth.overlay{background:#0E2238!important}
+.authcard{background:#fff;max-width:440px;margin:auto;border-radius:16px;padding:28px 26px;box-shadow:0 18px 40px rgba(0,0,0,.25);font-family:"IBM Plex Sans Arabic","IBM Plex Sans",Tahoma,sans-serif;color:#14212C;box-sizing:border-box}
+.brand .t1{font-size:20px;font-weight:700;letter-spacing:2px;color:#0E2238;line-height:1.2}
+.brand .t2{color:#7A5716;font-weight:600;font-size:14px}
+.btn{width:100%;background:#0E2238;color:#fff;border:1px solid #0E2238;border-radius:6px;padding:11px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.switch a{color:#24679E;text-decoration:underline}
+.tl-foot{margin:18px 0 0;font-size:11.5px;color:#73879A;line-height:1.6;text-align:center}
+.tl-foot a{color:#24679E}
+#auth .tp-home{position:fixed;top:14px;right:14px;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;background:#fff;color:#0E2238!important;text-decoration:none!important;font:600 14px/1.2 "IBM Plex Sans Arabic",Tahoma,sans-serif;padding:9px 16px;border-radius:999px;border:1px solid rgba(217,180,110,.55);box-shadow:0 6px 18px rgba(14,34,56,.18);direction:rtl}
+#auth .tp-home:hover{background:#F6EBD3}</style>
+</head>
+<body>
+
+<!-- ============ AUTH ============ -->
+<div class="overlay" id="auth">
+  <a class="tp-home" href="https://trustfins.org/" rel="noopener">← العودة إلى الموقع الرئيسي</a>
+  <div class="authcard">
+    <div class="brand"><div class="mark"><svg width="38" height="38" viewBox="0 0 40 40" role="img" aria-label="TRUST"><rect x="0.5" y="0.5" width="39" height="39" rx="10" fill="#0E2238" stroke="rgba(255,255,255,.15)"/><rect x="9.5" y="9" width="5" height="22" rx="1" fill="#fff"/><rect x="17.5" y="16" width="5" height="15" rx="1" fill="#D9B46E"/><rect x="25.5" y="22" width="5" height="9" rx="1" fill="#D9B46E"/></svg></div><div><div class="t1">TRUST</div><div class="t2">الوكيل المالي الذكي</div></div></div>
+    <div id="authLogin">
+      <h2 data-i18n="login_h">تسجيل الدخول</h2>
+      <p data-i18n="login_p">سجّل الدخول بحساب TRUST نفسه الذي تستخدمه في كل خدمات TRUST.</p>
+      <label class="fld"><span data-i18n="email">البريد الإلكتروني</span><input id="aEmail" type="email" autocomplete="email" dir="ltr"></label>
+      <label class="fld"><span data-i18n="password">كلمة المرور</span><input id="aPass" type="password" autocomplete="current-password" dir="ltr"></label>
+      <button class="btn" id="aLoginBtn" data-i18n="login_btn">دخول</button>
+      <div class="switch"><a id="toSignup" data-i18n="no_account">ليس لديك حساب؟ أنشئ حساباً</a> · <a id="toReset" data-i18n="forgot">نسيت كلمة المرور؟</a></div>
+    </div>
+    <div id="authSignup" class="hidden">
+      <h2 data-i18n="signup_h">إنشاء حساب</h2>
+      <p data-i18n="signup_p">الحساب يمنحك الباقة المجانية للتجربة: تحليل واحد و10 أسئلة شهرياً.</p>
+      <label class="fld"><span data-i18n="fullname">الاسم الكامل</span><input id="sName" type="text" autocomplete="name"></label>
+      <label class="fld"><span data-i18n="email">البريد الإلكتروني</span><input id="sEmail" type="email" autocomplete="email" dir="ltr"></label>
+      <label class="fld"><span data-i18n="password">كلمة المرور (8 أحرف على الأقل)</span><input id="sPass" type="password" autocomplete="new-password" dir="ltr"></label>
+      <button class="btn" id="aSignupBtn" data-i18n="signup_btn">إنشاء الحساب</button>
+      <div class="switch"><a id="toLogin1" data-i18n="have_account">لديك حساب؟ سجّل الدخول</a></div>
+    </div>
+    <div id="authReset" class="hidden">
+      <h2 data-i18n="reset_h">استعادة كلمة المرور</h2>
+      <p data-i18n="reset_p">سنرسل رابط إعادة التعيين إلى بريدك.</p>
+      <label class="fld"><span data-i18n="email">البريد الإلكتروني</span><input id="rEmail" type="email" dir="ltr"></label>
+      <button class="btn" id="aResetBtn" data-i18n="reset_btn">إرسال الرابط</button>
+      <div class="switch"><a id="toLogin2" data-i18n="back_login">العودة لتسجيل الدخول</a></div>
+    </div>
+    <div id="authNewPass" class="hidden">
+      <h2 data-i18n="newpass_h">كلمة مرور جديدة</h2>
+      <label class="fld"><span data-i18n="password">كلمة المرور</span><input id="nPass" type="password" autocomplete="new-password" dir="ltr"></label>
+      <button class="btn" id="aNewPassBtn" data-i18n="save">حفظ</button>
+    </div>
+    <div id="authMsg"></div>
+    <p class="tl-foot">خدمة رقمية من TRUST.<br><a href="https://trustfins.org/">⌂ الموقع الرئيسي</a></p>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div class="app hidden" id="app">
+  <aside class="side" id="side">
+    <div class="brand"><div class="mark"><svg width="38" height="38" viewBox="0 0 40 40" role="img" aria-label="TRUST"><rect x="0.5" y="0.5" width="39" height="39" rx="10" fill="#0E2238" stroke="rgba(255,255,255,.15)"/><rect x="9.5" y="9" width="5" height="22" rx="1" fill="#fff"/><rect x="17.5" y="16" width="5" height="15" rx="1" fill="#D9B46E"/><rect x="25.5" y="22" width="5" height="9" rx="1" fill="#D9B46E"/></svg></div><div><div class="t1">وكيل Trust المالي</div><div class="t2">Trust Financial AI Agent</div></div></div>
+    <button class="newbtn" id="newBtn">＋ <span data-i18n="new_analysis">تحليل جديد</span></button>
+    <div class="convs"><div class="lbl" data-i18n="history">المحادثات السابقة</div><div id="convList"></div></div>
+    <div class="sidefoot">
+      <a href="https://cashflow.trustfins.org" target="_blank" rel="noopener">↗ <span data-i18n="tool_cfo">المدير المالي الذكي</span></a>
+      <a href="https://analysis.trustfins.org" target="_blank" rel="noopener">↗ <span data-i18n="tool_credit">التحليل المالي والائتماني</span></a>
+      <a href="https://invoices.trustfins.org" target="_blank" rel="noopener">↗ <span data-i18n="tool_inv">محول الفواتير إلى قيود</span></a>
+      <a href="https://trustfins.org" target="_blank" rel="noopener">↗ trustfins.org</a>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+        <button class="iconbtn" id="plansBtn" data-i18n="plans">الباقات</button>
+        <button class="iconbtn hidden" id="adminBtn" data-i18n="admin">الإدارة</button>
+        <button class="iconbtn" id="langBtn">EN</button>
+        <button class="iconbtn" id="logoutBtn" data-i18n="logout">خروج</button>
+      </div>
+      <div style="margin-top:8px;color:#7F9AB0;font-size:11.5px" id="whoami"></div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <button class="menu" id="menuBtn" aria-label="menu">☰</button>
+      <div class="title" id="convTitle" data-i18n="new_analysis">تحليل جديد</div>
+      <div class="plan" id="planBox" title="">
+        <span class="badge" id="planName">—</span>
+        <span class="ptext" id="planText"></span>
+        <div class="meter" id="meter"><i style="width:0%"></i></div>
+      </div>
+    </div>
+    <div class="scroll" id="scroll">
+      <div class="thread" id="thread"></div>
+    </div>
+    <div class="composer">
+      <div class="in">
+        <div class="modes" id="modes"></div>
+        <div class="box">
+          <button class="attach" id="attachBtn" title="إرفاق ملف" aria-label="attach">📎</button>
+          <input type="file" id="fileIn" class="hidden" multiple accept=".pdf,.xlsx,.xls,.csv,image/png,image/jpeg,image/webp">
+          <textarea id="input" rows="1" data-i18n-ph="placeholder" placeholder="اكتب طلبك المالي… مثال: حلّل الميزانية وقائمة الدخل المرفقة لسنة 2025"></textarea>
+          <button class="send" id="sendBtn" aria-label="send">➤</button>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="hint" data-i18n="hint">التحليلات مساعدة ولا تغني عن المراجعة المهنية أو الاعتماد الرسمي. لا يرحّل الوكيل أي قيد ولا ينفّذ أي عملية مالية.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal hidden" id="modal"><div class="pane" id="pane"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+"use strict";
+const SUPABASE_URL = "https://jbeiipdxcyzdqarxzbyo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_1-BaxouaNpq6UhJuWoSMBw_6UF-FWQI";
+const API = SUPABASE_URL + "/functions/v1/trust-agent";
+const WHATSAPP = "970599371188";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ---------- i18n ---------- */
+let LANG = localStorageGet("trust_agent_lang") || "ar";
+const EN = {
+  login_h:"Sign in", login_p:"Use the same TRUST account you use for other TRUST tools.", email:"Email", password:"Password", login_btn:"Sign in",
+  no_account:"No account? Create one", forgot:"Forgot password?", signup_h:"Create account", signup_p:"Your account starts on the Free plan: one analysis and 10 questions a month.",
+  fullname:"Full name", signup_btn:"Create account", have_account:"Have an account? Sign in", reset_h:"Reset password", reset_p:"We will email you a reset link.",
+  reset_btn:"Send link", back_login:"Back to sign in", newpass_h:"New password", save:"Save", new_analysis:"New analysis", history:"Previous conversations",
+  tool_cfo:"Smart CFO", tool_credit:"Financial & credit analysis", tool_inv:"Invoice-to-journal", plans:"Plans", admin:"Admin", logout:"Sign out",
+  placeholder:"Type your financial request… e.g. analyse the attached 2025 balance sheet and income statement",
+  hint:"Analyses are assistive and do not replace professional review or official approval. The agent never posts entries or executes financial transactions."
+};
+const MODES = [
+  { k:"analysis", ar:"التحليل المالي", en:"Financial analysis", ic:"Σ", d_ar:"القوائم المالية، النسب، التحليل الأفقي والرأسي", d_en:"Statements, ratios, horizontal & vertical analysis" },
+  { k:"credit", ar:"التحليل الائتماني", en:"Credit analysis", ic:"✓", d_ar:"القدرة على السداد، DSCR، الدين إلى الدخل، توصية مبدئية", d_en:"Repayment capacity, DSCR, DTI, preliminary view" },
+  { k:"cashflow", ar:"التدفقات النقدية", en:"Cash flow", ic:"⇄", d_ar:"FCF وFCFF وFCFE، توقعات السيولة وفجوات التمويل", d_en:"FCF, FCFF, FCFE, liquidity forecast & gaps" },
+  { k:"business", ar:"تحليل الأعمال", en:"Business analysis", ic:"◎", d_ar:"نقطة التعادل، هامش المساهمة، العائد على الاستثمار", d_en:"Break-even, contribution margin, ROI" },
+  { k:"accounting", ar:"المحاسبة", en:"Accounting", ic:"⊟", d_ar:"قيود يومية مقترحة، تصنيف، اكتشاف الأخطاء", d_en:"Proposed entries, classification, error checks" },
+  { k:"reporting", ar:"التقارير المالية", en:"Reporting", ic:"▤", d_ar:"الفعلي مقابل الموازنة، الانحرافات، ملخص تنفيذي", d_en:"Budget vs actual, variances, executive summary" },
+];
+const EXAMPLES_AR = ["احسب القسط الشهري لتمويل 50,000 شيكل بفائدة 9% لمدة 48 شهراً", "ما نقطة التعادل لمنتج سعره 40 وتكلفته المتغيرة 25 والتكاليف الثابتة 30,000 شهرياً؟", "اشرح لي الفرق بين الربح والتدفق النقدي بمثال", "حلّل قوائمي المالية المرفقة واعطني ملخصاً تنفيذياً"];
+const EXAMPLES_EN = ["Monthly payment for a 50,000 ILS loan at 9% over 48 months", "Break-even for a product priced 40, variable cost 25, fixed costs 30,000/month", "Explain the difference between profit and cash flow", "Analyse my attached financial statements and give an executive summary"];
+function t(k, fallback){ return LANG === "en" ? (EN[k] || fallback) : fallback; }
+function applyLang(){
+  document.documentElement.lang = LANG; document.documentElement.dir = LANG === "en" ? "ltr" : "rtl";
+  document.querySelectorAll("[data-i18n]").forEach(el => { if (!el.dataset.ar) el.dataset.ar = el.textContent; el.textContent = LANG === "en" ? (EN[el.dataset.i18n] || el.dataset.ar) : el.dataset.ar; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => { if (!el.dataset.arph) el.dataset.arph = el.placeholder; el.placeholder = LANG === "en" ? (EN[el.dataset.i18nPh] || el.dataset.arph) : el.dataset.arph; });
+  $("langBtn").textContent = LANG === "en" ? "عربي" : "EN";
+  renderModes(); if (!state.convId) renderWelcome(); renderPlan();
+}
+
+/* ---------- helpers ---------- */
+function $(id){ return document.getElementById(id); }
+function localStorageGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function localStorageSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function fmtNum(v, dp){ if (v === null || v === undefined || !isFinite(v)) return "—"; return Number(v).toLocaleString("en-US", { maximumFractionDigits: dp ?? 2, minimumFractionDigits: 0 }); }
+function fmtUnit(v, unit, cur){
+  if (v === null || v === undefined) return null;
+  switch (unit) {
+    case "percent": return fmtNum(v * 100, 1) + "%";
+    case "days": return fmtNum(v, 1) + (LANG === "en" ? " days" : " يوم");
+    case "times": return fmtNum(v, 2) + "×";
+    case "units": return fmtNum(v, 0) + (LANG === "en" ? " units" : " وحدة");
+    case "amount": return fmtNum(v, 2) + (cur ? " " + cur : "");
+    default: return fmtNum(v, 4);
+  }
+}
+const MISSING_AR = { revenue:"الإيرادات", cogs:"تكلفة المبيعات", gross_profit:"مجمل الربح", operating_expenses:"المصاريف التشغيلية", ebit:"الربح التشغيلي", ebitda:"EBITDA", depreciation:"الاستهلاك",
+  interest_expense:"مصروف الفوائد", net_income:"صافي الربح", cash:"النقد", receivables:"الذمم المدينة", inventory:"المخزون", current_assets:"الأصول المتداولة", total_assets:"إجمالي الأصول",
+  payables:"الذمم الدائنة", current_liabilities:"الخصوم المتداولة", total_liabilities:"إجمالي الخصوم", equity:"حقوق الملكية", debt:"الديون", cfo:"التدفق من العمليات", capex:"النفقات الرأسمالية",
+  debt_service:"خدمة الدين", monthly_income:"الدخل الشهري", monthly_debt_payments:"الأقساط الشهرية", loan_amount:"مبلغ التمويل", collateral_value:"قيمة الضمان", fixed_costs:"التكاليف الثابتة",
+  price_per_unit:"سعر الوحدة", variable_cost_per_unit:"التكلفة المتغيرة للوحدة", cm_ratio:"نسبة هامش المساهمة", cm_per_unit:"هامش المساهمة", expected_units:"الوحدات المتوقعة",
+  breakeven_units:"وحدات التعادل", investment:"الاستثمار", total_return:"إجمالي العائد", years:"عدد السنوات", tax_rate:"معدل الضريبة", change_in_nwc:"التغير في رأس المال العامل",
+  net_borrowing:"صافي الاقتراض", fcff:"FCFF", dso:"فترة التحصيل", dio:"فترة المخزون", dpo:"فترة السداد" };
+
+/* very small, safe markdown (escape first) */
+function md(src){
+  const lines = esc(src).split(/\r?\n/); let html = "", list = null, table = [];
+  const inline = s => s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>");
+  const flushList = () => { if (list) { html += `</${list}>`; list = null; } };
+  const flushTable = () => {
+    if (!table.length) return;
+    const rows = table.filter(r => !/^\s*\|?\s*:?-{2,}/.test(r));
+    html += "<div class='tblwrap'><table>" + rows.map((r, i) => "<tr>" + r.replace(/^\s*\||\|\s*$/g, "").split("|").map(c => i === 0 ? `<th>${inline(c.trim())}</th>` : `<td>${inline(c.trim())}</td>`).join("") + "</tr>").join("") + "</table></div>";
+    table = [];
+  };
+  for (const raw of lines) {
+    const l = raw.trimEnd();
+    if (/^\s*\|.*\|\s*$/.test(l)) { flushList(); table.push(l); continue; } else flushTable();
+    let m;
+    if ((m = l.match(/^#{1,4}\s+(.*)$/))) { flushList(); html += `<h3>${inline(m[1])}</h3>`; continue; }
+    if ((m = l.match(/^\s*[-•*]\s+(.*)$/))) { if (list !== "ul") { flushList(); html += "<ul>"; list = "ul"; } html += `<li>${inline(m[1])}</li>`; continue; }
+    if ((m = l.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== "ol") { flushList(); html += "<ol>"; list = "ol"; } html += `<li>${inline(m[1])}</li>`; continue; }
+    flushList();
+    if (l.trim() === "" ) continue;
+    if (/^-{3,}$/.test(l.trim())) { html += "<hr>"; continue; }
+    html += `<p>${inline(l)}</p>`;
+  }
+  flushList(); flushTable(); return html;
+}
+
+/* ---------- state ---------- */
+const state = { user:null, quota:null, convId:null, mode:null, files:[], busy:false, isAdmin:false, plans:[] };
+
+/* ---------- auth ---------- */
+function showAuth(which){ ["authLogin","authSignup","authReset","authNewPass"].forEach(id => $(id).classList.toggle("hidden", id !== which)); $("authMsg").innerHTML = ""; }
+function authMsg(text, ok){ $("authMsg").innerHTML = `<div class="${ok ? "ok" : "err"}">${esc(text)}</div>`; }
+$("toSignup").onclick = () => showAuth("authSignup");
+$("toReset").onclick = () => showAuth("authReset");
+$("toLogin1").onclick = $("toLogin2").onclick = () => showAuth("authLogin");
+$("aLoginBtn").onclick = async () => {
+  const b = $("aLoginBtn"); b.disabled = true;
+  const { error } = await sb.auth.signInWithPassword({ email: $("aEmail").value.trim(), password: $("aPass").value });
+  b.disabled = false;
+  if (error) {
+    if (error.code === "user_banned" || /banned/i.test(error.message)) {
+      const { data: n } = await sb.rpc("trust_login_notice", { p_email: $("aEmail").value.trim() });
+      return authMsg(n || "تم إيقاف هذا الحساب. للاستفسار تواصل مع TRUST على واتساب 0599371188.");
+    }
+    authMsg(/confirm/i.test(error.message) ? "يرجى تأكيد بريدك الإلكتروني أولاً من الرسالة المرسلة إليك." : "البريد أو كلمة المرور غير صحيحة.");
+  }
+};
+$("aPass").addEventListener("keydown", e => { if (e.key === "Enter") $("aLoginBtn").click(); });
+$("aSignupBtn").onclick = async () => {
+  const name = $("sName").value.trim(), email = $("sEmail").value.trim(), pass = $("sPass").value;
+  if (!name || !email || pass.length < 8) return authMsg("أكمل الاسم والبريد، وكلمة مرور من 8 أحرف على الأقل.");
+  const b = $("aSignupBtn"); b.disabled = true;
+  const { data, error } = await sb.auth.signUp({ email, password: pass, options: { data: { full_name: name }, emailRedirectTo: location.origin } });
+  b.disabled = false;
+  if (error) return authMsg(/registered/i.test(error.message) ? "هذا البريد مسجّل مسبقاً؛ سجّل الدخول به." : "تعذّر إنشاء الحساب: " + error.message);
+  if (!data.session) { showAuth("authLogin"); authMsg("أرسلنا رسالة تأكيد إلى بريدك. افتحها ثم سجّل الدخول.", true); }
+};
+$("aResetBtn").onclick = async () => {
+  const { error } = await sb.auth.resetPasswordForEmail($("rEmail").value.trim(), { redirectTo: location.origin });
+  authMsg(error ? "تعذّر الإرسال، تحقق من البريد." : "إن كان البريد مسجّلاً فستصلك رسالة خلال دقائق.", !error);
+};
+$("aNewPassBtn").onclick = async () => {
+  const p = $("nPass").value; if (p.length < 8) return authMsg("8 أحرف على الأقل.");
+  const { error } = await sb.auth.updateUser({ password: p });
+  if (error) authMsg("تعذّر الحفظ: " + error.message); else { authMsg("تم تغيير كلمة المرور.", true); setTimeout(() => enterApp(), 800); }
+};
+$("logoutBtn").onclick = async () => { await sb.auth.signOut(); location.reload(); };
+
+sb.auth.onAuthStateChange((ev, session) => {
+  if (ev === "PASSWORD_RECOVERY") { $("auth").classList.remove("hidden"); showAuth("authNewPass"); return; }
+  if (session?.user && !state.user) { state.user = session.user; enterApp(); }
+  if (!session && ev === "SIGNED_OUT") location.reload();
+});
+sb.auth.getSession().then(({ data }) => { if (!data.session) { $("auth").classList.remove("hidden"); showAuth("authLogin"); } });
+
+async function enterApp(){
+  $("auth").classList.add("hidden"); $("app").classList.remove("hidden");
+  $("whoami").textContent = state.user.email;
+  applyLang();
+  await Promise.all([loadQuota(), loadConvs(), loadPlans()]);
+  const { data: isAdm } = await sb.rpc("analysis_is_admin"); state.isAdmin = isAdm === true;
+  $("adminBtn").classList.toggle("hidden", !state.isAdmin);
+  renderWelcome(); renderModes();
+}
+
+/* ---------- API ---------- */
+async function api(path, opts){
+  const { data } = await sb.auth.getSession();
+  const token = data.session?.access_token;
+  const r = await fetch(API + path, { ...opts, headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY, Authorization: "Bearer " + token, ...(opts?.headers || {}) } });
+  let j = {}; try { j = await r.json(); } catch(e) {}
+  return { ok: r.ok, status: r.status, data: j };
+}
+async function loadQuota(){ const r = await api("/quota", { method: "GET" }); if (r.ok) { state.quota = r.data; renderPlan(); renderModes(); if (r.data.block_reason === "account_suspended" && !state.suspShown) { state.suspShown = true; addMsg("assistant", quotaMessage(r.data), {}); } } }
+async function loadPlans(){ const { data } = await sb.from("trust_plans").select("*").order("sort_order"); state.plans = data || []; }
+
+function fmtReset(t){ if (!t) return ""; const d = new Date(t); return d.toLocaleString(LANG === "en" ? "en-GB" : "ar-EG", { timeZone: "Asia/Jerusalem", weekday: "short", hour: "2-digit", minute: "2-digit" }); }
+function quotaMessage(q){
+  const en = LANG === "en", t = fmtReset(q?.resets_at), r = q?.block_reason;
+  if (r === "account_suspended") return q.restriction?.message || (en ? "Your subscription is suspended. Contact TRUST on WhatsApp 0599371188." : "اشتراكك موقوف حالياً. تواصل مع TRUST على واتساب 0599371188.");
+  if (r === "window_5h") return en ? `You have reached the 5-hour usage window. It resets at ${t}. Your monthly balance is not affected.` : `وصلت إلى حد الاستخدام المؤقت (نافذة 5 ساعات). يتجدد عند ${t}، ولا يؤثر ذلك على رصيدك الشهري.`;
+  if (r === "window_week") return en ? `You have reached the weekly usage window. It resets on ${t}.` : `وصلت إلى حد الاستخدام الأسبوعي. يتجدد ${t}.`;
+  if (r === "analyses_limit") return q.plan === "free" ? (en ? "You have used the free trial analysis. Subscribe to a TRUST plan to continue." : "استخدمت التحليل التجريبي المجاني. اشترك في إحدى باقات TRUST للاستمرار.") : (en ? "You have used this month's analyses. Upgrade, or wait for the next month." : "استخدمت تحليلات هذا الشهر في باقتك. يمكنك الترقية أو انتظار الشهر القادم.");
+  if (r === "messages_limit") return en ? "You have used this month's free questions. Subscribe to continue." : "استخدمت أسئلة هذا الشهر المجانية. اشترك للاستمرار.";
+  return en ? `You have reached your plan's monthly limit, so the service is paused until ${t}. Contact TRUST on WhatsApp to upgrade.` : `وصلت إلى الحد الشهري لباقتك، فتوقفت الخدمة حتى ${t}. تواصل مع TRUST عبر واتساب للترقية.`;
+}
+function renderPlan(){
+  const q = state.quota; if (!q) return;
+  $("planName").textContent = q.plan_name_ar;
+  const mc = Number(q.month_cap_usd ?? q.cost_cap_usd ?? 0), mu = Number(q.month_used_usd ?? q.cost_used_usd ?? 0);
+  const mp = mc > 0 ? Math.min(100, Math.round(mu / mc * 100)) : 100;
+  const w = q.windows || {}, p5 = Number(w.h5?.pct || 0), pw = Number(w.week?.pct || 0);
+  const pct = Math.max(mp, p5, pw);
+  const m = $("meter"); m.querySelector("i").style.width = Math.max(2, pct) + "%"; m.classList.toggle("hot", pct >= 80);
+  const a = q.analyses_limit == null ? (LANG === "en" ? "unlimited analyses" : "تحليلات غير محدودة") :
+    (LANG === "en" ? `${q.analyses_used}/${q.analyses_limit} analyses` : `${q.analyses_used} من ${q.analyses_limit} تحليل`) + (q.analyses_scope === "lifetime" ? (LANG === "en" ? " (trial)" : " (تجربة)") : "");
+  const msgs = q.messages_limit != null ? (LANG === "en" ? ` · ${q.messages_used}/${q.messages_limit} questions` : ` · ${q.messages_used} من ${q.messages_limit} سؤال`) : "";
+  const blocked = !q.can_message ? " · " + (LANG === "en" ? "paused" : "متوقف") + (q.resets_at ? (LANG === "en" ? " until " : " حتى ") + fmtReset(q.resets_at) : "") : (!q.can_analyze ? " · " + (LANG === "en" ? "questions only" : "أسئلة فقط") : "");
+  $("planText").textContent = a + msgs + blocked;
+  const en = LANG === "en", L = [];
+  L.push((en ? "Monthly usage: " : "الاستهلاك الشهري: ") + mp + "%" + (w.month ? (en ? " · resets " : " · يتجدد ") + fmtReset(w.month.resets_at) : ""));
+  if (w.h5) L.push((en ? "5-hour window: " : "نافذة 5 ساعات: ") + p5 + "%" + (w.h5.used > 0 ? (en ? " · resets " : " · تتجدد ") + fmtReset(w.h5.resets_at) : ""));
+  if (w.week) L.push((en ? "Weekly window: " : "النافذة الأسبوعية: ") + pw + "%" + (w.week.used > 0 ? (en ? " · resets " : " · تتجدد ") + fmtReset(w.week.resets_at) : ""));
+  if (q.expires_at) L.push((en ? "Plan expires " : "ينتهي الاشتراك ") + new Date(q.expires_at).toLocaleDateString("en-GB"));
+  $("planBox").title = L.join("\n");
+}
+
+/* ---------- modes ---------- */
+function allowed(k){ return !state.quota || (state.quota.modes || []).includes(k); }
+function renderModes(){
+  $("modes").innerHTML = MODES.map(m => `<button class="mode ${state.mode === m.k ? "on" : ""} ${allowed(m.k) ? "" : "locked"}" data-k="${m.k}" title="${esc(LANG === "en" ? m.d_en : m.d_ar)}">${esc(LANG === "en" ? m.en : m.ar)}${allowed(m.k) ? "" : " 🔒"}</button>`).join("");
+  $("modes").querySelectorAll(".mode").forEach(b => b.onclick = () => {
+    const k = b.dataset.k; if (!allowed(k)) return openPlans(k);
+    state.mode = state.mode === k ? null : k; renderModes();
+  });
+}
+
+/* ---------- welcome ---------- */
+function renderWelcome(){
+  if (state.convId) return;
+  const name = state.user?.user_metadata?.full_name ? "، " + state.user.user_metadata.full_name.split(" ")[0] : "";
+  const ex = LANG === "en" ? EXAMPLES_EN : EXAMPLES_AR;
+  $("thread").innerHTML = `
+    <div class="hero"><h1>${LANG === "en" ? "How can I help with your finances today?" : "أهلاً" + esc(name) + "، بماذا أساعدك مالياً اليوم؟"}</h1>
+    <p>${LANG === "en" ? "Upload financial statements (PDF, Excel, CSV or a photo) or describe your case. Every figure is computed by code, with the formula shown." : "ارفع قوائمك المالية (PDF أو Excel أو CSV أو صورة) أو اكتب حالتك. كل رقم يُحسب برمجياً مع إظهار المعادلة، ولا يُفترض أي رقم لم تقدّمه."}</p></div>
+    <div class="cards">${MODES.map(m => `<button class="svc ${allowed(m.k) ? "" : "locked"}" data-k="${m.k}"><div class="ic">${m.ic}</div><b>${esc(LANG === "en" ? m.en : m.ar)}</b><span>${esc(LANG === "en" ? m.d_en : m.d_ar)}</span>${allowed(m.k) ? "" : `<span class="lk">${LANG === "en" ? "Available on higher plans" : "متاح في باقة أعلى"}</span>`}</button>`).join("")}</div>
+    <div class="examples">${ex.map(e => `<button class="ex">${esc(e)}</button>`).join("")}</div>`;
+  $("thread").querySelectorAll(".svc").forEach(b => b.onclick = () => { const k = b.dataset.k; if (!allowed(k)) return openPlans(k); state.mode = k; renderModes(); $("input").focus(); });
+  $("thread").querySelectorAll(".ex").forEach(b => b.onclick = () => { $("input").value = b.textContent; autosize(); $("input").focus(); });
+}
+
+/* ---------- conversations ---------- */
+async function loadConvs(){
+  const { data } = await sb.from("agent_conversations").select("id,title,updated_at").eq("archived", false).order("updated_at", { ascending: false }).limit(60);
+  $("convList").innerHTML = (data || []).map(c => `<div class="conv ${c.id === state.convId ? "on" : ""}" data-id="${c.id}"><span class="tt">${esc(c.title)}</span><button class="del" data-del="${c.id}" title="حذف">🗑</button></div>`).join("") || `<div class="lbl" style="opacity:.7">${LANG === "en" ? "No conversations yet" : "لا توجد محادثات بعد"}</div>`;
+  $("convList").querySelectorAll(".conv").forEach(el => el.onclick = (e) => { if (e.target.dataset.del) return; openConv(el.dataset.id, el.querySelector(".tt").textContent); });
+  $("convList").querySelectorAll(".del").forEach(b => b.onclick = async (e) => {
+    e.stopPropagation(); if (!confirm(LANG === "en" ? "Delete this conversation and its files?" : "حذف هذه المحادثة وملفاتها نهائياً؟")) return;
+    const id = b.dataset.del;
+    const { data: files } = await sb.from("agent_files").select("storage_path").eq("conversation_id", id);
+    if (files?.length) await sb.storage.from("agent-files").remove(files.map(f => f.storage_path));
+    await sb.from("agent_files").delete().eq("conversation_id", id);
+    await sb.from("agent_conversations").delete().eq("id", id);
+    if (state.convId === id) newConv(); loadConvs();
+  });
+}
+async function openConv(id, title){
+  state.convId = id; $("convTitle").textContent = title; $("side").classList.remove("open");
+  $("thread").innerHTML = ""; loadConvs();
+  const { data } = await sb.from("agent_messages").select("id,role,content,data,created_at").eq("conversation_id", id).order("created_at");
+  (data || []).forEach(m => addMsg(m.role, m.content, m.data));
+  scrollEnd();
+}
+function newConv(){ state.convId = null; state.files = []; renderChips(); $("convTitle").textContent = t("new_analysis", "تحليل جديد"); renderWelcome(); loadConvs(); $("side").classList.remove("open"); }
+$("newBtn").onclick = newConv;
+$("menuBtn").onclick = () => $("side").classList.toggle("open");
+
+/* ---------- rendering messages & blocks ---------- */
+function addMsg(role, content, data){
+  if (!state.convId && $("thread").querySelector(".hero")) $("thread").innerHTML = "";
+  const wrap = document.createElement("div"); wrap.className = "msg " + role;
+  if (role === "user") {
+    const att = data?.attachments?.length ? `<div class="att">📎 ${data.attachments.map(esc).join("، ")}</div>` : "";
+    wrap.innerHTML = `<div class="av">${esc((state.user?.email || "?")[0].toUpperCase())}</div><div class="bubble">${esc(content)}${att}</div>`;
+  } else {
+    const blocks = data?.blocks || [];
+    const steps = blocks.length ? `<div class="steps">${blocks.map(b => `<span>✓ ${esc(b.title)}</span>`).join("")}</div>` : "";
+    wrap.innerHTML = `<div class="av">T</div><div class="bubble"><div class="printhead"><b>Trust Financial AI Agent</b> — ${esc(new Date().toLocaleDateString("en-GB"))}</div>${steps}<div class="md">${md(content || "")}</div>${blocks.map(renderBlock).join("")}
+      <div class="actions"><button data-a="copy">${LANG === "en" ? "Copy" : "نسخ"}</button><button data-a="pdf">${LANG === "en" ? "Export PDF" : "تصدير PDF"}</button><button data-a="xlsx" ${blocks.length ? "" : "disabled"}>${LANG === "en" ? "Export Excel" : "تصدير Excel"}</button></div></div>`;
+    wrap.querySelector('[data-a="copy"]').onclick = () => navigator.clipboard?.writeText(content || "");
+    wrap.querySelector('[data-a="pdf"]').onclick = () => exportPdf(wrap);
+    wrap.querySelector('[data-a="xlsx"]').onclick = () => exportXlsx(blocks);
+  }
+  $("thread").appendChild(wrap); return wrap;
+}
+function kpiCard(m, cur){
+  const v = fmtUnit(m.value, m.unit, cur);
+  const miss = m.missing?.length ? `<div class="miss">${LANG === "en" ? "Missing: " : "ناقص: "}${m.missing.map(x => esc(MISSING_AR[x] || x)).join("، ")}</div>` : "";
+  return `<div class="kpi ${v ? "" : "na"}" title="${esc(m.formula_ar)}${m.note_ar ? " — " + esc(m.note_ar) : ""}"><div class="n">${esc(LANG === "en" ? m.name_en : m.name_ar)}</div><div class="v">${v ?? (LANG === "en" ? "Not computed" : "لم يُحسب")}</div><div class="f">${esc(m.formula_ar)}</div>${miss}</div>`;
+}
+function bars(labels, series, names){
+  // simple grouped bar chart (SVG), series: array of arrays
+  const W = 640, H = 220, P = 34, n = labels.length, k = series.length;
+  const all = series.flat().filter(v => isFinite(v)); if (!all.length) return "";
+  const max = Math.max(0, ...all), min = Math.min(0, ...all), span = (max - min) || 1;
+  const y = v => P + (H - 2 * P) * (1 - (v - min) / span);
+  const gw = (W - 2 * P) / n, bw = Math.min(28, (gw - 10) / k);
+  const colors = ["#0E2238", "#C9A15A", "#5B6878", "#8FA9BF"];
+  let g = `<line x1="${P}" x2="${W - P}" y1="${y(0)}" y2="${y(0)}" stroke="#DCE3EA"/>`;
+  series.forEach((s, si) => s.forEach((v, i) => { if (!isFinite(v)) return; const x = P + i * gw + (gw - k * bw) / 2 + si * bw; const yy = Math.min(y(v), y(0)); g += `<rect x="${x}" y="${yy}" width="${bw - 3}" height="${Math.max(1, Math.abs(y(v) - y(0)))}" rx="3" fill="${colors[si % 4]}"><title>${esc(names[si])}: ${fmtNum(v)}</title></rect>`; }));
+  labels.forEach((l, i) => g += `<text x="${P + i * gw + gw / 2}" y="${H - 10}" font-size="11" text-anchor="middle" fill="#5B6878">${esc(String(l).slice(0, 14))}</text>`);
+  const legend = names.map((nm, i) => `<span style="display:inline-flex;align-items:center;gap:4px;margin-inline-end:10px;font-size:12px"><i style="width:10px;height:10px;border-radius:2px;background:${colors[i % 4]};display:inline-block"></i>${esc(nm)}</span>`).join("");
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" width="100%" role="img" style="direction:ltr">${g}</svg><div>${legend}</div></div>`;
+}
+function renderBlock(b){
+  const cur = b.currency || "";
+  const head = `<h4>${esc(b.title)} ${cur ? `<small>${LANG === "en" ? "Currency" : "العملة"}: ${esc(cur)}</small>` : ""}</h4>`;
+  const checks = (b.checks || []).map(c => `<div class="check">⚠ ${esc(c)}</div>`).join("");
+  if (b.type === "metrics") return `<div class="blk">${head}${checks}<div class="kpis">${(b.items || []).map(m => kpiCard(m, cur)).join("")}</div></div>`;
+  if (b.type === "hv") {
+    const per = b.periods || [];
+    const rows = (b.lines || []).map((l, i) => {
+      const h = b.horizontal?.[i]?.changes || [];
+      const vs = b.vertical?.rows?.[i]?.shares || [];
+      return `<tr><td>${esc(l.name)}</td>${per.map((p, j) => `<td class="num">${fmtNum(l.values[j])}${vs[j]?.share != null ? ` <small style="color:#73879A">(${fmtNum(vs[j].share * 100, 1)}%)</small>` : ""}</td>`).join("")}${h.map(c => `<td class="num ${c.change_pct > 0 ? "pos" : c.change_pct < 0 ? "neg" : ""}">${c.change_pct == null ? "—" : fmtNum(c.change_pct * 100, 1) + "%"}</td>`).join("")}</tr>`;
+    }).join("");
+    const chart = bars((b.lines || []).slice(0, 8).map(l => l.name), per.map((p, j) => (b.lines || []).slice(0, 8).map(l => l.values[j])), per);
+    return `<div class="blk">${head}<div class="tblwrap"><table class="tbl"><tr><th>${LANG === "en" ? "Line" : "البند"}</th>${per.map(p => `<th>${esc(p)}</th>`).join("")}${per.slice(1).map(p => `<th>Δ% ${esc(p)}</th>`).join("")}</tr>${rows}</table></div>${chart}${b.vertical?.base ? `<div class="disc">${LANG === "en" ? "Vertical base" : "أساس التحليل الرأسي"}: ${esc(b.vertical.base)}</div>` : ""}</div>`;
+  }
+  if (b.type === "forecast") {
+    const rows = (b.rows || []).map(r => `<tr><td>${esc(r.label)}</td><td class="num">${fmtNum(r.inflows)}</td><td class="num">${fmtNum(r.outflows)}</td><td class="num ${r.net < 0 ? "neg" : "pos"}">${fmtNum(r.net)}</td><td class="num ${r.closing < 0 ? "neg" : ""}">${fmtNum(r.closing)}</td><td class="num ${r.gap > 0 ? "neg" : ""}">${r.gap > 0 ? fmtNum(r.gap) : "—"}</td></tr>`).join("");
+    return `<div class="blk">${head}<div class="kpis"><div class="kpi"><div class="n">${LANG === "en" ? "Lowest balance" : "أدنى رصيد"}</div><div class="v">${fmtNum(b.lowest_balance)}</div><div class="f">${esc(b.lowest_month)}</div></div><div class="kpi"><div class="n">${LANG === "en" ? "Max funding need" : "أقصى احتياج تمويلي"}</div><div class="v">${fmtNum(b.max_funding_need)}</div><div class="f">${LANG === "en" ? "vs minimum balance" : "مقابل الحد الأدنى للرصيد"} ${fmtNum(b.minimum_balance)}</div></div></div>
+      <div class="tblwrap"><table class="tbl"><tr><th>${LANG === "en" ? "Month" : "الشهر"}</th><th>${LANG === "en" ? "Inflows" : "الداخل"}</th><th>${LANG === "en" ? "Outflows" : "الخارج"}</th><th>${LANG === "en" ? "Net" : "الصافي"}</th><th>${LANG === "en" ? "Closing" : "الرصيد"}</th><th>${LANG === "en" ? "Gap" : "الفجوة"}</th></tr>${rows}</table></div>
+      ${bars((b.rows || []).map(r => r.label), [(b.rows || []).map(r => r.closing)], [LANG === "en" ? "Closing balance" : "الرصيد الختامي"])}</div>`;
+  }
+  if (b.type === "variance") {
+    const rows = (b.rows || []).map(r => `<tr><td>${esc(r.name)}</td><td class="num">${fmtNum(r.budget)}</td><td class="num">${fmtNum(r.actual)}</td><td class="num">${fmtNum(r.variance)}</td><td class="num">${r.variance_pct == null ? "—" : fmtNum(r.variance_pct * 100, 1) + "%"}</td><td>${r.favorable == null ? "—" : `<span class="pill ${r.favorable ? "good" : "bad"}">${r.favorable ? (LANG === "en" ? "Favorable" : "ملائم") : (LANG === "en" ? "Unfavorable" : "غير ملائم")}</span>`}</td></tr>`).join("");
+    return `<div class="blk">${head}<div class="tblwrap"><table class="tbl"><tr><th>${LANG === "en" ? "Line" : "البند"}</th><th>${LANG === "en" ? "Budget" : "الموازنة"}</th><th>${LANG === "en" ? "Actual" : "الفعلي"}</th><th>${LANG === "en" ? "Variance" : "الانحراف"}</th><th>%</th><th></th></tr>${rows}</table></div>
+      ${bars((b.rows || []).slice(0, 8).map(r => r.name), [(b.rows || []).slice(0, 8).map(r => r.budget), (b.rows || []).slice(0, 8).map(r => r.actual)], [LANG === "en" ? "Budget" : "الموازنة", LANG === "en" ? "Actual" : "الفعلي"])}</div>`;
+  }
+  if (b.type === "journal") {
+    const rows = (b.lines || []).map(l => `<tr><td>${esc(l.account)}</td><td class="num">${l.debit ? fmtNum(l.debit) : ""}</td><td class="num">${l.credit ? fmtNum(l.credit) : ""}</td></tr>`).join("");
+    return `<div class="blk">${head}${b.description ? `<div>${esc(b.description)}</div>` : ""}<div class="tblwrap"><table class="tbl"><tr><th>${LANG === "en" ? "Account" : "الحساب"}</th><th>${LANG === "en" ? "Debit" : "مدين"}</th><th>${LANG === "en" ? "Credit" : "دائن"}</th></tr>${rows}<tr><th>${LANG === "en" ? "Total" : "المجموع"}</th><th class="num">${fmtNum(b.total_debit)}</th><th class="num">${fmtNum(b.total_credit)}</th></tr></table></div>
+      ${(b.issues || []).map(i => `<div class="check">⚠ ${esc(i)}</div>`).join("")}<div class="${b.balanced ? "ok" : "err"}">${b.balanced ? (LANG === "en" ? "Balanced" : "القيد متوازن") : (LANG === "en" ? "Not balanced" : "القيد غير متوازن")} — ${esc(b.status)}</div></div>`;
+  }
+  return "";
+}
+
+/* ---------- export ---------- */
+function canExport(kind){ const f = state.quota?.features || {}; return kind === "pdf" ? f.pdf_export : f.excel_export; }
+function exportPdf(msgEl){
+  if (!canExport("pdf")) return openPlans(null, LANG === "en" ? "PDF export is available on paid plans." : "تصدير PDF متاح في الباقات المدفوعة.");
+  msgEl.classList.add("printme"); window.print(); setTimeout(() => msgEl.classList.remove("printme"), 500);
+}
+function exportXlsx(blocks){
+  if (!canExport("xlsx")) return openPlans(null, LANG === "en" ? "Excel export is available on the Professional plan and above." : "تصدير Excel متاح في باقة «مهني» وما فوقها.");
+  const wb = XLSX.utils.book_new();
+  blocks.forEach((b, i) => {
+    let rows = [];
+    if (b.type === "metrics") rows = [["المؤشر", "Indicator", "القيمة", "الوحدة", "المعادلة", "بيانات ناقصة"], ...(b.items || []).map(m => [m.name_ar, m.name_en, m.value, m.unit, m.formula_ar, (m.missing || []).join(", ")])];
+    else if (b.type === "hv") rows = [["البند", ...(b.periods || [])], ...(b.lines || []).map(l => [l.name, ...l.values])];
+    else if (b.type === "forecast") rows = [["الشهر", "الداخل", "الخارج", "الصافي", "الرصيد", "الفجوة"], ...(b.rows || []).map(r => [r.label, r.inflows, r.outflows, r.net, r.closing, r.gap])];
+    else if (b.type === "variance") rows = [["البند", "النوع", "الموازنة", "الفعلي", "الانحراف", "%", "ملائم"], ...(b.rows || []).map(r => [r.name, r.type, r.budget, r.actual, r.variance, r.variance_pct, r.favorable])];
+    else if (b.type === "journal") rows = [["الحساب", "مدين", "دائن"], ...(b.lines || []).map(l => [l.account, l.debit || 0, l.credit || 0])];
+    if (b.currency) rows.unshift(["العملة", b.currency]);
+    const ws = XLSX.utils.aoa_to_sheet(rows); ws["!cols"] = [{ wch: 34 }, { wch: 22 }, { wch: 16 }, { wch: 12 }, { wch: 50 }, { wch: 30 }];
+    XLSX.utils.book_append_sheet(wb, ws, (String(i + 1) + " " + b.title).slice(0, 30).replace(/[\\/?*\[\]:]/g, " "));
+  });
+  XLSX.writeFile(wb, "trust-analysis.xlsx");
+}
+
+/* ---------- files ---------- */
+$("attachBtn").onclick = () => $("fileIn").click();
+$("fileIn").onchange = async (e) => {
+  const list = Array.from(e.target.files || []); e.target.value = "";
+  for (const f of list) {
+    if (state.files.length >= 3) { alert(LANG === "en" ? "Up to 3 files per message." : "حتى 3 ملفات في الرسالة الواحدة."); break; }
+    if (f.size > 20 * 1024 * 1024) { alert((LANG === "en" ? "File too large (20MB max): " : "الملف أكبر من 20MB: ") + f.name); continue; }
+    const item = { name: f.name, status: "uploading" }; state.files.push(item); renderChips();
+    try { item.id = await uploadFile(f); item.status = "ready"; } catch (err) { item.status = "error"; item.err = String(err.message || err); }
+    renderChips();
+  }
+};
+function mimeOf(f){
+  if (f.type) return f.type;
+  const ext = f.name.split(".").pop().toLowerCase();
+  return { pdf: "application/pdf", csv: "text/csv", xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", xls: "application/vnd.ms-excel", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp" }[ext] || "";
+}
+async function uploadFile(f){
+  const mime = mimeOf(f);
+  let extracted_text = null;
+  if (/sheet|excel|csv/.test(mime) || /\.(xlsx|xls|csv)$/i.test(f.name)) {
+    const buf = await f.arrayBuffer();
+    const wb = XLSX.read(buf, { type: "array" });
+    extracted_text = wb.SheetNames.map(n => `### ورقة: ${n}\n` + XLSX.utils.sheet_to_csv(wb.Sheets[n], { blankrows: false })).join("\n\n");
+  }
+  /* storage keys must be ASCII: the original (e.g. Arabic) name is kept in file_name */
+  const ext = ((f.name.match(/\.([A-Za-z0-9]{1,8})$/) || [])[1] || "bin").toLowerCase();
+  const path = `${state.user.id}/${crypto.randomUUID()}.${ext}`;
+  const up = await sb.storage.from("agent-files").upload(path, f, { contentType: mime, upsert: false });
+  if (up.error) throw new Error(up.error.message);
+  const r = await api("/files", { method: "POST", body: JSON.stringify({ storage_path: path, file_name: f.name, mime, size_bytes: f.size, extracted_text, conversation_id: state.convId }) });
+  if (!r.ok) throw new Error(r.data.error || "register_failed");
+  return r.data.id;
+}
+function renderChips(){
+  $("chips").innerHTML = state.files.map((f, i) => `<span class="chip">${f.status === "uploading" ? "⏳" : f.status === "error" ? "⚠" : "📄"} ${esc(f.name)}${f.err ? ` <small style="color:var(--bad)">${esc(f.err)}</small>` : ""}<button data-i="${i}">✕</button></span>`).join("");
+  $("chips").querySelectorAll("button").forEach(b => b.onclick = () => { state.files.splice(Number(b.dataset.i), 1); renderChips(); });
+}
+
+/* ---------- send ---------- */
+const input = $("input");
+function autosize(){ input.style.height = "auto"; input.style.height = Math.min(180, input.scrollHeight) + "px"; }
+input.addEventListener("input", autosize);
+input.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
+$("sendBtn").onclick = send;
+function scrollEnd(){ const s = $("scroll"); s.scrollTop = s.scrollHeight; }
+
+async function send(){
+  if (state.busy) return;
+  const text = input.value.trim();
+  if (!text) return;
+  if (state.files.some(f => f.status === "uploading")) return alert(LANG === "en" ? "Wait for uploads to finish." : "انتظر اكتمال رفع الملفات.");
+  const ready = state.files.filter(f => f.status === "ready");
+  state.busy = true; $("sendBtn").disabled = true;
+  addMsg("user", text, { attachments: ready.map(f => f.name) });
+  input.value = ""; autosize(); state.files = []; renderChips();
+  const wait = document.createElement("div"); wait.className = "msg assistant";
+  const stages = LANG === "en" ? ["Understanding the request", "Reading data & files", "Running calculations", "Writing the interpretation"] : ["فهم الطلب", "قراءة البيانات والملفات", "تنفيذ الحسابات", "إعداد التفسير"];
+  wait.innerHTML = `<div class="av">T</div><div class="bubble"><div class="thinking"><span class="dots"><span></span><span></span><span></span></span><span id="stage">${stages[0]}…</span></div></div>`;
+  $("thread").appendChild(wait); scrollEnd();
+  let si = 0; const timer = setInterval(() => { si = Math.min(si + 1, stages.length - 1); const s = wait.querySelector("#stage"); if (s) s.textContent = stages[si] + "…"; }, 6000);
+  try {
+    const r = await api("/chat", { method: "POST", body: JSON.stringify({ message: text, conversation_id: state.convId, mode: state.mode, file_ids: ready.map(f => f.id) }) });
+    clearInterval(timer); wait.remove();
+    if (!r.ok) {
+      if (r.data.quota) { state.quota = r.data.quota; renderPlan(); }
+      const qm = r.status === 402 && r.data.quota ? quotaMessage(r.data.quota) : null;
+      addMsg("assistant", qm || r.data.message || (LANG === "en" ? "Something went wrong. Please try again." : "حدث خطأ، حاول مرة أخرى."), {});
+      if (r.status === 402 && !["window_5h", "window_week", "account_suspended"].includes(r.data.quota?.block_reason)) openPlans(null, qm || r.data.message);
+    } else {
+      const firstTurn = !state.convId;
+      state.convId = r.data.conversation_id; state.quota = r.data.quota; renderPlan();
+      addMsg("assistant", r.data.reply, { blocks: r.data.blocks });
+      if (firstTurn) { $("convTitle").textContent = text.slice(0, 60); loadConvs(); }
+    }
+  } catch (e) {
+    clearInterval(timer); wait.remove();
+    addMsg("assistant", LANG === "en" ? "Connection problem. Check your internet and try again." : "تعذّر الاتصال. تحقق من الإنترنت وحاول مرة أخرى.", {});
+  }
+  state.busy = false; $("sendBtn").disabled = false; scrollEnd();
+}
+
+/* ---------- plans modal ---------- */
+$("plansBtn").onclick = () => openPlans();
+function closeModal(){ $("modal").classList.add("hidden"); }
+$("modal").onclick = (e) => { if (e.target.id === "modal") closeModal(); };
+function openPlans(lockedMode, note){
+  const cur = state.quota?.plan;
+  const feat = p => {
+    const f = p.features || {}, L = [];
+    L.push(p.lifetime_analyses != null ? `${p.lifetime_analyses} تحليل تجريبي` : `${p.monthly_analyses} تحليل شهرياً`);
+    if (p.monthly_messages != null) L.push(`${p.monthly_messages} سؤال شهرياً`);
+    L.push((p.modes || []).map(k => MODES.find(m => m.k === k)?.ar).filter(Boolean).join("، "));
+    if (f.pdf_export) L.push("تصدير PDF"); if (f.excel_export) L.push("تصدير Excel");
+    if (f.pma_inquiry) L.push("استعلام سلطة النقد (PMA)"); if (f.custom_credit_policy) L.push("سياسة ائتمانية خاصة بالمؤسسة");
+    L.push(`حتى ${p.max_companies} ${p.max_companies > 1 ? "شركات" : "شركة"}`);
+    const T = { smart_cfo: "المدير المالي الذكي", invoice_journal: "محوّل الفواتير إلى قيود", credit_analysis: "التحليل المالي والائتماني (مع استعلام PMA)" };
+    if ((p.services || []).length) L.push("يفعّل أدوات: " + p.services.map(x => T[x] || x).join("، "));
+    else L.push("الأدوات المجانية وتجربة واحدة لكل أداة");
+    return L.map(x => `<li>${esc(x)}</li>`).join("");
+  };
+  const lockMsg = lockedMode ? `<div class="check">«${esc(MODES.find(m => m.k === lockedMode)?.ar || "")}» ${LANG === "en" ? "is not included in your current plan." : "غير متاحة في باقتك الحالية."}</div>` : "";
+  $("pane").innerHTML = `<button class="close" onclick="closeModal()">×</button><h3>${LANG === "en" ? "TRUST plans" : "باقات وكيل Trust"}</h3>${note ? `<div class="check">${esc(note)}</div>` : ""}${lockMsg}
+    <div class="plans">${state.plans.map(p => `<div class="planc ${p.code === cur ? "cur" : ""}"><h4>${esc(p.name_ar)}</h4><div class="aud">${esc(p.audience_ar)}</div><div class="pr">${p.price_usd_month > 0 ? "$" + fmtNum(p.price_usd_month) : (LANG === "en" ? "Free" : "مجاناً")} ${p.price_usd_month > 0 ? `<small>/ شهر · $${fmtNum(p.price_usd_year)} سنوياً</small><div style="font-size:12px;color:var(--gold-ink,#7A5716);margin-top:4px">إطلاق: $${fmtNum(p.price_usd_month / 2)} شهرياً لأول 10 عملاء (3 أشهر)</div>` : ""}</div><ul>${feat(p)}</ul>${p.code === cur ? `<b style="color:var(--navy);font-size:13px">${LANG === "en" ? "Your plan" : "باقتك الحالية"}</b>` : ""}</div>`).join("")}</div>
+    <p style="font-size:13px;color:var(--muted);margin-top:12px">${LANG === "en" ? "Payment by bank transfer or e-wallet in Palestine. Activation within 24 hours of payment." : "الدفع بالتحويل البنكي أو المحافظ الإلكترونية في فلسطين، والتفعيل خلال 24 ساعة من الدفع. الدفع السنوي يوفّر شهرين. الباقة تفعّل الأدوات المشمولة فيها تلقائياً بنفس تاريخ الانتهاء."}</p>
+    <a class="wa" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent("مرحباً Trust، أرغب بالاشتراك في وكيل Trust المالي. بريدي المسجّل: " + (state.user?.email || ""))}">${LANG === "en" ? "Subscribe via WhatsApp" : "اشترك عبر واتساب"}</a>`;
+  $("modal").classList.remove("hidden");
+}
+
+/* ---------- admin ---------- */
+$("adminBtn").onclick = () => { location.href = "/admin"; };
+async function openAdmin(){
+  if (!state.isAdmin) return;
+  $("pane").innerHTML = `<button class="close" onclick="closeModal()">×</button><h3>لوحة الإدارة</h3><div id="admBody">…</div>`;
+  $("modal").classList.remove("hidden");
+  const [{ data: ov, error }, { data: plans }] = await Promise.all([sb.rpc("trust_admin_agent_overview"), sb.from("trust_plans").select("*").order("sort_order")]);
+  if (error) { $("admBody").innerHTML = `<div class="err">${esc(error.message)}</div>`; return; }
+  const totalCost = (ov || []).reduce((s, r) => s + Number(r.cost_month_usd || 0), 0);
+  const planOpts = (plans || []).map(p => `<option value="${p.code}">${esc(p.name_ar)} — $${p.price_usd_month}</option>`).join("");
+  $("admBody").innerHTML = `
+    <div class="kpis" style="margin-bottom:12px"><div class="kpi"><div class="n">المستخدمون</div><div class="v">${(ov || []).length}</div></div><div class="kpi"><div class="n">تكلفة الذكاء الاصطناعي هذا الشهر</div><div class="v">$${fmtNum(totalCost, 2)}</div></div><div class="kpi"><div class="n">مشتركون مدفوعون</div><div class="v">${(ov || []).filter(r => r.plan !== "free").length}</div></div></div>
+    <div class="admgrid">
+      <div class="admbox"><h4>تفعيل أو تغيير باقة عميل</h4>
+        <div class="row"><label class="fld"><span>بريد العميل</span><input id="gEmail" dir="ltr"></label><label class="fld"><span>الباقة</span><select id="gPlan">${planOpts}</select></label></div>
+        <div class="row"><label class="fld"><span>الدفع</span><select id="gBill"><option value="monthly">شهري</option><option value="yearly">سنوي</option><option value="manual">يدوي (حدد تاريخ الانتهاء)</option></select></label><label class="fld"><span>ينتهي في (اختياري)</span><input id="gExp" type="date"></label></div>
+        <div class="row"><label class="fld"><span>الحالة</span><select id="gStatus"><option value="active">فعّال</option><option value="suspended">موقوف</option></select></label><label class="fld"><span>ملاحظة (رقم الحوالة مثلاً)</span><input id="gNote"></label></div>
+        <label style="font-size:13px"><input type="checkbox" id="gDisc"> سعر الإطلاق (خصم أول العملاء)</label>
+        <button class="btn" id="gBtn">حفظ الباقة</button><div id="gMsg"></div></div>
+      <div class="admbox"><h4>تعديل أسعار وحدود الباقات</h4>
+        <div class="row"><label class="fld"><span>الباقة</span><select id="pCode">${planOpts}</select></label></div>
+        <div class="row"><label class="fld"><span>السعر الشهري $</span><input id="pM" type="number" step="0.01"></label><label class="fld"><span>السعر السنوي $</span><input id="pY" type="number" step="0.01"></label></div>
+        <div class="row"><label class="fld"><span>تحليلات شهرياً</span><input id="pA" type="number"></label><label class="fld"><span>حد التكلفة $</span><input id="pC" type="number" step="0.01"></label></div>
+        <button class="btn" id="pBtn">حفظ التعديل</button><div id="pMsg"></div></div>
+    </div>
+    <h4 style="color:var(--navy);margin:16px 0 6px">العملاء والاستهلاك</h4>
+    <div class="tblwrap"><table class="tbl"><tr><th>البريد</th><th>الاسم</th><th>الباقة</th><th>الحالة</th><th>ينتهي</th><th>تكلفة الشهر $</th><th>تحليلات</th></tr>
+    ${(ov || []).map(r => `<tr><td dir="ltr">${esc(r.email)}</td><td>${esc(r.full_name)}</td><td>${esc(r.plan)}</td><td>${esc(r.plan_status || "—")}</td><td>${r.expires_at ? new Date(r.expires_at).toLocaleDateString("en-GB") : "—"}</td><td class="num">${fmtNum(r.cost_month_usd, 3)}</td><td class="num">${r.analyses_total}</td></tr>`).join("")}</table></div>`;
+  const fillPlan = () => { const p = (plans || []).find(x => x.code === $("pCode").value); if (!p) return; $("pM").value = p.price_usd_month; $("pY").value = p.price_usd_year; $("pA").value = p.monthly_analyses ?? ""; $("pC").value = p.cost_cap_usd; };
+  $("pCode").onchange = fillPlan; fillPlan();
+  $("gBtn").onclick = async () => {
+    const msg = $("gMsg"); msg.innerHTML = "";
+    const { data: u, error: fe } = await sb.rpc("trust_admin_find_user", { p_email: $("gEmail").value.trim() });
+    if (fe || !u) { msg.innerHTML = `<div class="err">لم يُعثر على مستخدم بهذا البريد.</div>`; return; }
+    const exp = $("gExp").value ? new Date($("gExp").value + "T23:59:59").toISOString() : null;
+    if ($("gBill").value === "manual" && !exp) { msg.innerHTML = `<div class="err">حدد تاريخ الانتهاء للدفع اليدوي.</div>`; return; }
+    const { error: ge } = await sb.rpc("trust_plan_grant", { p_user_id: u.id, p_plan: $("gPlan").value, p_billing: $("gBill").value, p_starts_at: new Date().toISOString(), p_expires_at: exp, p_launch_discount: $("gDisc").checked, p_note: $("gNote").value || null, p_status: $("gStatus").value });
+    msg.innerHTML = ge ? `<div class="err">${esc(ge.message)}</div>` : `<div class="ok">تم تفعيل الباقة لـ ${esc(u.email)}.</div>`;
+    if (!ge) setTimeout(openAdmin, 900);
+  };
+  $("pBtn").onclick = async () => {
+    const patch = { price_usd_month: Number($("pM").value), price_usd_year: Number($("pY").value), cost_cap_usd: Number($("pC").value) };
+    if ($("pA").value !== "") patch.monthly_analyses = Number($("pA").value);
+    const { error: pe } = await sb.rpc("trust_plan_update", { p_code: $("pCode").value, p_patch: patch });
+    $("pMsg").innerHTML = pe ? `<div class="err">${esc(pe.message)}</div>` : `<div class="ok">تم الحفظ.</div>`;
+    if (!pe) loadPlans();
+  };
+}
+
+$("langBtn").onclick = () => { LANG = LANG === "en" ? "ar" : "en"; localStorageSet("trust_agent_lang", LANG); applyLang(); };
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+# لقطة الإنتاج — 2026-11-25 نحو 23:30 بتوقيت UTC
+
+نسخة قراءة فقط لما يخدمه الإنتاج فعلًا، لتكون مرجعًا قبل أي تطوير. لا تُعدَّل هذه الملفات.
+`MANIFEST.sha256` يحفظ بصمة كل ملف.
+
+## ما نُسخ
+
+| المجلد | المصدر | الطريقة |
+| --- | --- | --- |
+| `site/` | https://trustfins.org (Pages: trustfins-site) | زحف كامل من الصفحة الرئيسية وكل روابط sitemap.xml (28 رابطًا) مع CSS وJS والخطوط والصور |
+| `tools/analysis/` | https://analysis.trustfins.org | الصفحة الرئيسية (تطبيق في ملف واحد) |
+| `tools/cashflow/` | https://cashflow.trustfins.org | index.html وكل ملفات css/js المرتبطة |
+| `tools/invoices/` | https://invoices.trustfins.org | الواجهة كما يخدمها العامل |
+| `workers/trust-financial-agent/` | ai.trustfins.org و /admin | admin.html وindex.html من الموقع، وworker.js من Cloudflare (النسخة 9) |
+| `workers/trust-invoices/index.mjs` | Cloudflare | نقطة الدخول فقط |
+| `workers/trust-nav/worker.js` | Cloudflare (النسخة 33) | كامل |
+
+## ما قد يكون ناقصًا أو مختلفًا عن ملفاتك المحلية
+
+- **صفحات لا يصلها أي رابط:** الزحف يلتقط ما هو مرتبط فقط. صفحة يتيمة أو ملف تنزيل غير مرتبط لن يظهر هنا.
+- **صفحة 404 و `_headers` و `_redirects`:** لا تُقرأ من الخارج. Cloudflare يشير إلى وجود 8 قواعد headers في آخر نشر.
+- **تعديلات Cloudflare على HTML:** إخفاء البريد الإلكتروني (`/cdn-cgi/l/email-protection`) يغيّر روابط البريد ويضيف سكربت. هذه الفروق ليست من كودك.
+- **أسماء الملفات:** حُفظت الصفحات بامتداد `.html` (مثل `smart-cfo.html`)، وهذا ما يفترضه Pages للروابط النظيفة. صفحة `/en` محفوظة باسم `en.html`، وقد تكون عندك `en/index.html`.
+- **ملفات عامل invoices الخلفية** (`backend.js` و `accounting.js` و `assets.js`) و **trust-meta-agent** و **trust-ai** و **trust-login-preview:** لم تُنسخ هنا، وهي محفوظة في سجل نسخ Cloudflare لكل عامل.
+- **المستودع الأصلي `index.ts`** (وكيل Durable Object) لم يعد هو المنشور على ai.trustfins.org. العامل المنشور الآن يخدم صفحتين ثابتتين فقط.

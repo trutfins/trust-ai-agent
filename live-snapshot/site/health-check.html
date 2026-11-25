@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>فحص الصحة المالية لمشروعك — مجاناً | TRUST</title>
+<meta name="description" content="اختبار مجاني من 10 أسئلة يقيس الصحة المالية لمشروعك في دقيقتين، ويعطيك درجة من 100 وأهم 3 توصيات عملية. من TRUST للخدمات المحاسبية والمالية في فلسطين.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0E2238">
+<link rel="canonical" href="https://trustfins.org/health-check">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TRUST">
+<meta property="og:url" content="https://trustfins.org/health-check">
+<meta property="og:title" content="كم درجة الصحة المالية لمشروعك؟ اختبار مجاني في دقيقتين">
+<meta property="og:description" content="10 أسئلة، درجة من 100، وأهم 3 توصيات لمشروعك. مجاناً من TRUST.">
+<meta property="og:image" content="https://trustfins.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+:root{--navy:#0E2238;--navy2:#16324F;--gold:#C9A15A;--gold2:#D9B46E;--goldtx:#7A5716;--ink:#3A4A5C;--mute:#5B6878;--line:#E2E7ED;--bg:#F3F5F8;--good:#1F7A4D;--warn:#9A6200;--bad:#A3261B}
+*{box-sizing:border-box}
+body{margin:0;font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;font-size:17px}
+a{color:var(--navy)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{background:#fff;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1100px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.mark{width:38px;height:38px;border-radius:10px;background:var(--navy);display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:9px 8px}
+.mark i{display:block;width:5px;border-radius:1px}
+.brand b{font-size:19px;letter-spacing:2px;color:var(--navy);direction:ltr}
+.back{font-size:15px;font-weight:600;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.hero{background:var(--navy);color:#fff;padding:48px 0 56px;text-align:center}
+.pill{display:inline-block;font-size:14px;font-weight:600;color:var(--gold2);border:1px solid rgba(217,180,110,.45);padding:4px 14px;border-radius:999px}
+.hero h1{margin:14px 0 10px;font-size:clamp(28px,6vw,40px);line-height:1.35;color:#fff}
+.hero p{margin:0 auto;max-width:560px;color:#C9D3DF}
+.meta{margin-top:14px;font-size:14px;color:#9FB0C3}
+main{padding:28px 0 64px}
+.card{background:#fff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 10px 30px rgba(14,34,56,.07)}
+.progress{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.progress span{display:block;height:100%;width:0;background:var(--gold);transition:width .25s}
+.count{font-size:14px;color:var(--mute);margin-bottom:18px}
+fieldset{border:0;margin:0 0 26px;padding:0}
+legend{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:12px;padding:0}
+.opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;min-height:52px;background:#fff}
+.opt:hover{border-color:#9FB0C3}
+.opt input{width:20px;height:20px;accent-color:var(--navy);flex:none;margin:0}
+.opt:has(input:checked){border-color:var(--navy);background:#F5F7FA}
+.btn{font:inherit;font-size:17px;font-weight:700;border:0;border-radius:12px;padding:14px 24px;min-height:52px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;width:100%}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-wa{background:var(--good);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.err{color:var(--bad);font-weight:600;font-size:15px;margin:8px 0 0;min-height:1em}
+.hidden{display:none !important}
+.score{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.ring{width:132px;height:132px;flex:none}
+.score h2{margin:0;font-size:24px;color:var(--navy)}
+.band{display:inline-block;font-weight:700;font-size:15px;padding:3px 12px;border-radius:999px;margin-top:6px}
+.areas{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.areas li{display:flex;align-items:center;gap:10px;font-size:15px}
+.areas .bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.areas .bar span{display:block;height:100%}
+.areas .lbl{width:150px;flex:none}
+.recs{margin:24px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.recs li{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.recs b{color:var(--navy);display:block;margin-bottom:2px}
+.lead{margin-top:22px;background:var(--navy);color:#C9D3DF;border-radius:18px;padding:clamp(20px,4vw,32px)}
+.lead h3{color:#fff;margin:0 0 6px;font-size:21px}
+.fld{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.fld label{font-size:14px;font-weight:600;color:#fff}
+.fld input,.fld select{font:inherit;font-size:16px;padding:12px 14px;border:1px solid #2C4664;border-radius:10px;background:#fff;color:var(--navy);min-height:48px;width:100%}
+.note{font-size:13px;color:#9FB0C3;margin:12px 0 0}
+.ok{background:#E8F4EE;color:var(--good);border-radius:12px;padding:16px;font-weight:600;margin-top:16px}
+.disc{font-size:13px;color:var(--mute);margin-top:18px;text-align:center}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+footer{text-align:center;font-size:14px;color:var(--mute);padding:0 0 40px}
+
+.hc-nav{display:flex;gap:18px;align-items:center}
+.hc-nav a{font-size:15px;font-weight:600;text-decoration:none;color:var(--navy);min-height:44px;display:flex;align-items:center}
+@media(max-width:480px){.hc-nav{gap:10px}.hc-nav a{font-size:13.5px}.brand b{font-size:17px}}
+.next{border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;background:#fff}
+.next h3{margin:0 0 6px;color:var(--navy);font-size:18px}
+.next p{margin:0 0 12px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="brand" href="/" aria-label="TRUST الصفحة الرئيسية"><span class="mark"><i style="height:9px;background:#D9B46E"></i><i style="height:15px;background:#D9B46E"></i><i style="height:22px;background:#fff"></i></span><b>TRUST</b></a>
+<nav class="hc-nav" aria-label="روابط سريعة"><style>.hc-nav{flex-wrap:wrap;justify-content:flex-end;row-gap:6px}.hc-nav a[aria-current]{color:#7A5716}@media (max-width:900px){.hc-nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;max-width:64vw;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hc-nav::-webkit-scrollbar{display:none}.hc-nav a{white-space:nowrap;font-size:14px}}</style><a href="/">الرئيسية</a><a href="/services">الخدمات</a><a href="/about">عن TRUST</a><a href="/#faq">الأسئلة الشائعة</a><a href="/health-check" aria-current="page">فحص مجاني</a><a href="/financial-hub">أدوات مجانية</a><a href="/digital-services">الخدمات الرقمية</a><a href="/contact">تواصل معنا</a><a href="/login">دخول العملاء</a><a href="/en/health-check" lang="en" hreflang="en">English</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<span class="pill">أداة مجانية</span>
+<h1>كم درجة الصحة المالية لمشروعك؟</h1>
+<p>10 أسئلة سريعة تكشف نقاط القوة والضعف في إدارة أموال مشروعك، وتعطيك درجة من 100 وأهم 3 خطوات لتحسينها.</p>
+<div class="meta">دقيقتان · بدون تسجيل · نتيجة فورية</div>
+</div></section>
+
+<main><div class="wrap">
+
+<div class="card" id="quiz">
+<div class="progress" aria-hidden="true"><span id="pbar"></span></div>
+<div class="count" id="pcount">أجبت على 0 من 10</div>
+<form id="qform" novalidate></form>
+<button class="btn btn-primary" id="calc" type="button" disabled>اعرض نتيجتي</button>
+<p class="err" id="qerr" role="alert"></p>
+</div>
+
+<div class="card hidden" id="result" tabindex="-1">
+<div class="score">
+<svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="#E2E7ED" stroke-width="12"/><circle id="arc" cx="60" cy="60" r="50" fill="none" stroke="#0E2238" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16" transform="rotate(-90 60 60)"/><text id="snum" x="60" y="68" text-anchor="middle" font-size="30" font-weight="700" fill="#0E2238" font-family="IBM Plex Sans Arabic, sans-serif">0</text></svg>
+<div><h2 id="rtitle"></h2><span class="band" id="rband"></span><p id="rtext" style="margin:8px 0 0"></p><p style="font-size:13.5px;margin:6px 0 0;color:#5B6878">تقييم أولي مبني على إجاباتك، وليس تحليلاً لقوائمك المالية.</p></div>
+</div>
+<ul class="areas" id="areas" aria-label="درجتك في كل محور"></ul>
+<h3 id="recsTitle" style="margin:26px 0 0;color:#0E2238;font-size:20px">أهم 3 خطوات لمشروعك الآن</h3>
+<ul class="recs" id="recs"></ul>
+
+<div class="lead" id="leadbox">
+<h3 id="leadTitle">احصل على خطة إصلاح مفصّلة مجاناً</h3>
+<p style="margin:0" id="leadText">نراجع نتيجتك ونرسل لك على واتساب خطة عملية لأضعف محاور مشروعك، مع إمكانية طلب جلسة استشارية أولية مجانية.</p>
+<form name="health-check" id="lform" method="POST" data-netlify="true" netlify-honeypot="company_website">
+<input type="hidden" name="form-name" value="health-check">
+<input type="hidden" name="score" id="h_score">
+<input type="hidden" name="band" id="h_band">
+<input type="hidden" name="weak_areas" id="h_weak">
+<input type="hidden" name="answers" id="h_answers">
+<input type="hidden" name="plan" id="h_plan">
+<p class="hidden"><label>اترك هذا الحقل فارغاً <input name="company_website"></label></p>
+<div class="fld"><label for="l_name">الاسم *</label><input id="l_name" name="name" autocomplete="name" required></div>
+<div class="fld"><label for="l_phone">رقم واتساب *</label><input id="l_phone" name="phone" type="tel" dir="ltr" autocomplete="tel" placeholder="059XXXXXXX" required></div>
+<div class="fld"><label for="l_biz">اسم المشروع</label><input id="l_biz" name="business" autocomplete="organization"></div>
+<div class="fld"><label for="l_type">نوع النشاط</label><select id="l_type" name="activity"><option value="">اختر…</option><option>تجاري / تجزئة</option><option>خدمات</option><option>صناعي / ورشة</option><option>مقاولات</option><option>توزيع</option><option>مطعم / مقهى</option><option>منزلي / أونلاين</option><option>أخرى</option></select></div>
+<button class="btn btn-gold" type="submit" id="lsubmit" style="margin-top:18px">أرسل لي خطة الإصلاح</button>
+<p class="err" id="lerr" role="alert" style="color:#F6C9C4"></p>
+<p class="note">بياناتك سرية، ولن نستخدمها إلا للتواصل معك بخصوص نتيجتك.</p>
+</form>
+<div class="ok hidden" id="lok" role="status">تم استلام طلبك بنجاح ✓ سنرسل لك <span id="lokPlan">خطة الإصلاح</span> على واتساب خلال يوم عمل.</div>
+</div>
+
+<a class="btn btn-wa" id="wa" href="https://wa.me/970599371188" target="_blank" rel="noopener" style="margin-top:14px">أو ناقش نتيجتك معنا مباشرة على واتساب</a>
+<button class="btn" id="again" type="button" style="margin-top:10px;background:transparent;color:#0E2238;border:1px solid #CBD3DD">أعد الاختبار</button>
+<div class="next">
+<h3>الخطوة التالية: تابع أرقامك بنفسك</h3>
+<p>أنشئ حساباً مجانياً في أدوات TRUST المالية، واحسب مؤشرات السيولة والربحية والمديونية لمشروعك، واحفظها لتتابع تحسّنها.</p>
+<a class="btn btn-primary" href="/login?mode=signup&amp;next=%2Ffinancial-assessment.html">أنشئ حساباً مجانياً</a>
+</div>
+<p class="disc">هذا تقييم أولي مبني على إجاباتك الذاتية، ولا يحدد الوضع المالي الفعلي ولا يحل محل تحليل القوائم المالية لمشروعك.</p>
+</div>
+
+</div></main>
+<footer>TRUST للخدمات المحاسبية والمالية · <a href="/">الرئيسية</a> · <a href="/services">الخدمات</a> · <a href="/contact">تواصل معنا</a> · <a href="/privacy">سياسة الخصوصية</a></footer>
+
+<script>
+(function(){
+var Q=[
+{k:"sep",a:"فصل الأموال",q:"هل تفصل أموال المشروع عن أموالك الشخصية؟",o:[["نعم، حساب وصندوق منفصلان تماماً",10],["جزئياً، أخلط أحياناً",5],["لا، كلها مع بعض",0]],r:"افصل أموال المشروع عن مالك الشخصي: حساب أو صندوق مستقل، وراتب ثابت تسحبه لنفسك شهرياً بدل السحب العشوائي."},
+{k:"rec",a:"تسجيل العمليات",q:"كيف تسجّل المبيعات والمصاريف؟",o:[["يومياً على برنامج أو Excel",10],["أسجّل أحياناً أو على دفتر",5],["لا أسجّلها",0]],r:"ابدأ بتسجيل يومي بسيط للمبيعات والمصاريف، ولو على جدول Excel واحد. بدون تسجيل لا يمكن معرفة الربح ولا ضبط التكاليف."},
+{k:"prof",a:"معرفة الربح",q:"هل تعرف صافي ربح مشروعك الشهري؟",o:[["نعم، بدقة من تقرير شهري",10],["أعرفه تقريباً",5],["لا أعرفه",0]],r:"احسب صافي ربحك شهرياً: الإيرادات ناقص كل التكاليف، بما فيها الإيجار والرواتب وقيمة البضاعة المباعة. الربح التقريبي يخفي الخسائر."},
+{k:"price",a:"التسعير",q:"كيف تحدد أسعار منتجاتك أو خدماتك؟",o:[["بناءً على التكلفة الكاملة وهامش ربح محدد",10],["حسب أسعار السوق والمنافسين",5],["بالتقدير أو الخبرة",0]],r:"راجع تسعيرك على أساس التكلفة الكاملة لكل منتج وهامش ربح مستهدف. التسعير بالتقدير أكثر سبب شائع لمبيعات عالية وربح ضعيف."},
+{k:"cash",a:"السيولة",q:"كيف وضع السيولة النقدية في مشروعك؟",o:[["تكفي لالتزامات 3 أشهر أو أكثر",10],["تكفي الشهر الحالي بالكاد",5],["أعاني عجزاً متكرراً",0]],r:"ابنِ توقعاً للتدفق النقدي لـ 12 أسبوعاً قادمة، وكوّن احتياطياً تدريجياً يغطي شهرين على الأقل من المصاريف الثابتة."},
+{k:"ar",a:"الذمم والديون على الزبائن",q:"كيف وضع البيع بالآجل والديون على الزبائن؟",o:[["لا أبيع بالآجل، أو الديون قليلة ومتابَعة",10],["الديون كبيرة لكني أتابعها",5],["الديون كبيرة وغير متابَعة",0]],r:"أنشئ سجلاً لديون الزبائن بأعمارها، وضع سقفاً ومدة لكل زبون. الديون غير المتابعة أرباح على الورق ونقد مفقود في الواقع."},
+{k:"chq",a:"الشيكات المؤجلة",q:"كيف تدير الشيكات المؤجلة (الصادرة والواردة)؟",o:[["سجل منظم بالتواريخ، أو لا أتعامل بها",10],["أتابعها من الذاكرة أو الدفتر",5],["تحدث معي مفاجآت أو ارتدادات",0]],r:"نظّم سجلاً للشيكات الصادرة والواردة بتواريخ الاستحقاق، وراجعه أسبوعياً مع رصيد البنك لتتجنب الارتداد ومفاجآت السيولة."},
+{k:"bud",a:"الموازنة والتخطيط",q:"هل لديك موازنة أو خطة مالية للسنة؟",o:[["نعم، وأراجعها مقابل الفعلي",10],["تقديرات عامة في ذهني",5],["لا يوجد",0]],r:"ضع موازنة سنوية بسيطة للإيرادات والمصاريف، وقارنها شهرياً بالأرقام الفعلية. الانحراف المبكر يُصلح بسهولة، والمتأخر يكلّف كثيراً."},
+{k:"rep",a:"التقارير الدورية",q:"هل تحصل على تقارير مالية دورية عن مشروعك؟",o:[["شهرياً بانتظام",10],["أحياناً أو عند الحاجة",5],["لا",0]],r:"اعتمد تقريراً شهرياً من صفحة واحدة: المبيعات، المصاريف، الربح، السيولة، والديون. هذا وحده يغيّر جودة قراراتك."},
+{k:"debt",a:"القروض والالتزامات",q:"كيف وضع القروض والأقساط على المشروع؟",o:[["لا قروض، أو أقساط مريحة",10],["أقساط مقبولة لكنها تضغط على السيولة",5],["أجد صعوبة في السداد",0]],r:"راجع هيكل ديونك: قارن الأقساط بالتدفق النقدي الفعلي، وفكّر بإعادة جدولة مبكرة قبل التعثر. البنوك تتجاوب أكثر مع من يبادر."}
+];
+var G=[
+{a:"لوحة مؤشرات شهرية",r:"حوّل أرقامك إلى لوحة مؤشرات شهرية من صفحة واحدة: هامش الربح، والسيولة بالأيام، وأعمار الذمم، ونسبة المصاريف إلى المبيعات، مع مقارنة بالشهر السابق."},
+{a:"موازنة مرنة وسيناريوهات",r:"أضف إلى موازنتك سيناريوهين: متحفظ ونمو. قِس أثر انخفاض المبيعات 15% أو ارتفاع التكاليف على الربح والسيولة قبل أن يحدث."},
+{a:"الجاهزية للتمويل والتوسع",r:"جهّز ملفاً مالياً واضحاً قبل التقدم لأي جهة ممولة: قوائم مالية، وتدفقات نقدية متوقعة، وتحليل لقدرتك على السداد. المتطلبات تختلف بحسب طبيعة المشروع وعمره والجهة الممولة نفسها."}
+];
+var f=document.getElementById('qform'),calc=document.getElementById('calc'),pbar=document.getElementById('pbar'),pc=document.getElementById('pcount');
+Q.forEach(function(it,i){
+  var fs=document.createElement('fieldset');var lg=document.createElement('legend');lg.textContent=(i+1)+'. '+it.q;fs.appendChild(lg);
+  it.o.forEach(function(op,j){var lb=document.createElement('label');lb.className='opt';var inp=document.createElement('input');inp.type='radio';inp.name=it.k;inp.value=op[1];lb.appendChild(inp);lb.appendChild(document.createTextNode(op[0]));fs.appendChild(lb);});
+  f.appendChild(fs);
+});
+function answered(){return Q.filter(function(it){return f.querySelector('input[name="'+it.k+'"]:checked');}).length;}
+var started=false;f.addEventListener('change',function(){if(!started){started=true;window.TRUST_TRACK&&TRUST_TRACK('health_check_start');}var n=answered();pbar.style.width=(n*10)+'%';pc.textContent='أجبت على '+n+' من 10';calc.disabled=n<10;document.getElementById('qerr').textContent='';});
+var last=null;
+calc.addEventListener('click',function(){
+  if(answered()<10){document.getElementById('qerr').textContent='الرجاء الإجابة على جميع الأسئلة.';return;}
+  window.TRUST_TRACK&&TRUST_TRACK('health_check_complete');
+  var sc=[],tot=0,ans=[];
+  Q.forEach(function(it,i){var c=f.querySelector('input[name="'+it.k+'"]:checked');var v=+c.value;tot+=v;sc.push({it:it,v:v,i:i});ans.push((i+1)+':'+v);});
+  var band,col,title,text;
+  if(tot===100){band='ممارسات مالية قوية';col='#1F7A4D';title='إجاباتك تشير إلى ممارسات مالية قوية';text='أجبت بأفضل ممارسة في كل المحاور. هذا تقييم أولي مبني على إجاباتك؛ يؤكده تحليل قوائمك الفعلية، ثم يمكن البناء عليه للنمو: مؤشرات أدق، وسيناريوهات، وجاهزية للتمويل.';}
+  else if(tot>=75){band='ممارسات جيدة';col='#1F7A4D';title='إجاباتك تشير إلى أساس مالي جيد';text='لديك أساسيات سليمة. الخطوة التالية هي تحويل الأرقام إلى قرارات نمو: تقارير أدق، وموازنة، ومؤشرات أداء.';}
+  else if(tot>=50){band='يحتاج تنظيماً';col='#9A6200';title='إجاباتك تشير إلى فجوات في ضبط الأرقام';text='هناك فجوات تجعل الربح والسيولة غير واضحين. تنظيمها الآن يمنع مشاكل أكبر عند نمو المشروع.';}
+  else{band='أولوية عالية';col='#A3261B';title='إجاباتك تشير إلى حاجة عاجلة للتنظيم المالي';text='بحسب إجاباتك، غياب التنظيم المالي قد يعرّض المشروع لخسائر غير مرئية وضغط على السيولة. الخبر الجيد: معظم هذه النقاط تُصلح بخطوات بسيطة ومنظمة.';}
+  document.getElementById('snum').textContent=tot;
+  var arc=document.getElementById('arc');arc.setAttribute('stroke',col);arc.style.transition='stroke-dashoffset .8s';setTimeout(function(){arc.setAttribute('stroke-dashoffset',(314.16*(1-tot/100)).toFixed(2));},50);
+  document.getElementById('rtitle').textContent=title;
+  var rb=document.getElementById('rband');rb.textContent=band+' · '+tot+' من 100';rb.style.background=col+'1A';rb.style.color=col;
+  document.getElementById('rtext').textContent=text;
+  var ar=document.getElementById('areas');ar.innerHTML='';
+  sc.forEach(function(s){var li=document.createElement('li');var c=s.v===10?'#1F7A4D':s.v===5?'#C9A15A':'#A3261B';
+    li.innerHTML='<span class="lbl"></span><span class="bar"><span style="width:'+(s.v*10)+'%;background:'+c+'"></span></span><span style="width:44px;text-align:left;direction:ltr">'+s.v+'/10</span>';
+    li.querySelector('.lbl').textContent=s.it.a;ar.appendChild(li);});
+  var weakAll=sc.filter(function(s){return s.v<10;}).sort(function(a,b){return a.v-b.v||a.i-b.i;});
+  var weak=weakAll.slice(0,3);
+  var growth=tot>=75;
+  var plan=growth?'خطة تطوير ونمو':'خطة إصلاح';
+  var picks=weak.map(function(s){return {a:s.it.a,r:s.it.r};});
+  for(var g=0;picks.length<3&&g<G.length;g++) picks.push({a:G[g].a,r:G[g].r,grow:true});
+  document.getElementById('recsTitle').textContent = !weak.length ? 'ثلاث خطوات لتطوير مشروعك ونموه' : (growth ? 'أهم 3 خطوات لتطوير مشروعك الآن' : 'أهم 3 خطوات لمشروعك الآن');
+  var rc=document.getElementById('recs');rc.innerHTML='';
+  picks.forEach(function(p){var li=document.createElement('li');var b=document.createElement('b');b.textContent=p.a;li.appendChild(b);li.appendChild(document.createTextNode(p.r));rc.appendChild(li);});
+  var weakNames=weak.map(function(s){return s.it.a;}).join('، ');
+  document.getElementById('leadTitle').textContent='احصل على '+plan+' مفصّلة مجاناً';
+  document.getElementById('leadText').textContent = !weak.length
+    ? 'نراجع نتيجتك ونرسل لك على واتساب خطة عملية لتطوير أداء مشروعك ونموه، مع إمكانية طلب جلسة استشارية أولية مجانية.'
+    : (growth ? 'نراجع نتيجتك ونرسل لك على واتساب خطة لتطوير مشروعك وتحسين المحاور الأقل درجة، مع إمكانية طلب جلسة استشارية أولية مجانية.'
+              : 'نراجع نتيجتك ونرسل لك على واتساب خطة عملية لأضعف محاور مشروعك، مع إمكانية طلب جلسة استشارية أولية مجانية.');
+  var lbtn=document.getElementById('lsubmit');lbtn.disabled=false;lbtn.textContent='أرسل لي '+plan;
+  document.getElementById('lokPlan').textContent=plan;
+  document.getElementById('h_score').value=tot;document.getElementById('h_band').value=band;document.getElementById('h_weak').value=weakNames||'لا يوجد';document.getElementById('h_answers').value=ans.join(' | ');document.getElementById('h_plan').value=plan;
+  last={tot:tot,band:band,weak:weakNames,plan:plan};
+  document.getElementById('wa').href='https://wa.me/970599371188?text='+encodeURIComponent('مرحباً، أجريت فحص الصحة المالية على موقع TRUST.\nدرجتي: '+tot+' من 100 ('+band+')\n'+(weakNames?('المحاور الأقل درجة: '+weakNames):'كل المحاور في أفضل مستوى')+'\nأريد مناقشة '+plan+'.');
+  document.getElementById('quiz').classList.add('hidden');var r=document.getElementById('result');r.classList.remove('hidden');r.focus();window.scrollTo({top:0,behavior:'smooth'});
+});
+document.getElementById('again').addEventListener('click',function(){f.reset();f.dispatchEvent(new Event('change'));document.getElementById('result').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');document.getElementById('lform').classList.remove('hidden');document.getElementById('lok').classList.add('hidden');document.getElementById('lerr').textContent='';window.scrollTo({top:0});});
+var lf=document.getElementById('lform');
+lf.addEventListener('submit',function(e){
+  e.preventDefault();var err=document.getElementById('lerr');err.textContent='';
+  var nm=document.getElementById('l_name').value.trim(),ph=document.getElementById('l_phone').value.replace(/[^\d+]/g,'');
+  if(!nm||ph.length<9){err.textContent='الرجاء إدخال الاسم ورقم واتساب صحيح.';return;}
+  var btn=document.getElementById('lsubmit');btn.disabled=true;btn.textContent='جارٍ الإرسال…';
+  (window.TRUST_SUBMIT?window.TRUST_SUBMIT(lf):fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(lf)).toString()}).then(function(r){return r.ok;}))
+  .then(function(ok){if(!ok)throw new Error('not sent');lf.classList.add('hidden');document.getElementById('lok').classList.remove('hidden');window.TRUST_TRACK&&TRUST_TRACK('request_success',{form:'health-check'});})
+  .catch(function(){err.textContent='تعذّر الإرسال الآن. أرسل نتيجتك مباشرة عبر زر واتساب بالأسفل.';btn.disabled=false;btn.textContent='أرسل لي '+((last&&last.plan)||'خطة الإصلاح');});
+});
+})();
+</script>
+<script src="/assets/js/trust-config.js" defer></script><script src="/assets/js/crm-capture.js" defer></script>
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

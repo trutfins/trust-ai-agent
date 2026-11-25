@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول — TRUST</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:#0E2238;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Segoe UI',Tahoma,Arial,sans-serif;padding:24px 16px}
+.logo-wrap{text-align:center;margin-bottom:36px}
+.logo-wrap .brand{font-size:28px;font-weight:800;color:#fff;letter-spacing:2px}
+.logo-wrap .tagline{font-size:13px;color:#9ab4cc;margin-top:4px}
+.card{background:#fff;border-radius:16px;padding:32px 28px;width:100%;max-width:460px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.card h2{font-size:18px;font-weight:700;color:#0E2238;text-align:center;margin-bottom:6px}
+.card .sub{font-size:13px;color:#6b7a8d;text-align:center;margin-bottom:28px}
+.services{display:flex;flex-direction:column;gap:12px}
+.svc{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid #e4eaf1;border-radius:10px;text-decoration:none;color:#0E2238;transition:all .18s;cursor:pointer}
+.svc:hover{border-color:#0E2238;background:#f4f7fa;transform:translateX(-2px)}
+.svc-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.svc-icon.analysis{background:#EBF2FF}
+.svc-icon.cashflow{background:#E8F5EE}
+.svc-icon.agent{background:#FFF3E0}
+.svc-icon.invoices{background:#F3EEFF}
+.svc-info{flex:1}
+.svc-name{font-size:14px;font-weight:700;color:#0E2238}
+.svc-desc{font-size:12px;color:#8a9ab0;margin-top:2px}
+.svc-arrow{font-size:16px;color:#b0bcc8;transition:color .18s}
+.svc:hover .svc-arrow{color:#0E2238}
+.divider{border:none;border-top:1px solid #edf1f5;margin:20px 0}
+.foot{font-size:12px;color:#9ab0c4;text-align:center}
+.foot a{color:#0E2238;text-decoration:none;font-weight:600}
+.foot a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="logo-wrap">
+  <div class="brand">TRUST</div>
+  <div class="tagline">الخدمات المالية الرقمية</div>
+</div>
+<div class="card">
+  <h2>اختر الخدمة</h2>
+  <p class="sub">سجّل الدخول بحساب TRUST الموحد في أي خدمة</p>
+  <div class="services">
+    <a class="svc" href="https://analysis.trustfins.org/">
+      <div class="svc-icon analysis">📊</div>
+      <div class="svc-info">
+        <div class="svc-name">المحلل المالي الذكي</div>
+        <div class="svc-desc">تحليل مالي متقدم وتقارير CFO</div>
+      </div>
+      <span class="svc-arrow">←</span>
+    </a>
+    <a class="svc" href="https://cashflow.trustfins.org/">
+      <div class="svc-icon cashflow">💰</div>
+      <div class="svc-info">
+        <div class="svc-name">تدفقات نقدية</div>
+        <div class="svc-desc">إدارة ومتابعة التدفقات النقدية</div>
+      </div>
+      <span class="svc-arrow">←</span>
+    </a>
+    <a class="svc" href="https://ai.trustfins.org/">
+      <div class="svc-icon agent">🤖</div>
+      <div class="svc-info">
+        <div class="svc-name">الوكيل المالي الذكي</div>
+        <div class="svc-desc">مساعد مالي بالذكاء الاصطناعي</div>
+      </div>
+      <span class="svc-arrow">←</span>
+    </a>
+    <a class="svc" href="https://invoices.trustfins.org/">
+      <div class="svc-icon invoices">🧾</div>
+      <div class="svc-info">
+        <div class="svc-name">قيود الفواتير</div>
+        <div class="svc-desc">تحويل الفواتير إلى قيود محاسبية</div>
+      </div>
+      <span class="svc-arrow">←</span>
+    </a>
+  </div>
+  <hr class="divider">
+  <p class="foot">
+    ليس لديك حساب؟; <a href="https://trustfins.org/#contact">تواصل معنا</a>
+    &nbsp;·&nbsp;
+    <a href="https://trustfins.org/">الموقع الرئيسي</a>
+  </p>
+</div>
+</body>
+</html>

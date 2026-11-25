@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-gate="tools">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E2238">
+<title>الحاسبة المالية | TRUST — السيولة والربحية والمديونية</title>
+<meta name="description" content="احسب مؤشرات السيولة والربحية والمديونية لمشروعك واحفظ نتائجك في حسابك المجاني لدى TRUST.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TRUST"><meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="الحاسبة المالية | TRUST — السيولة والربحية والمديونية"><meta property="og:description" content="احسب مؤشرات السيولة والربحية والمديونية لمشروعك واحفظ نتائجك في حسابك المجاني لدى TRUST.">
+<meta property="og:image" content="https://trustfins.org/og-image.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://trustfins.org/financial-assessment"><meta property="og:url" content="https://trustfins.org/financial-assessment">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+<script src="/assets/js/trust-config.js"></script>
+</head>
+<body class="app">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<header class="site-header">
+<div class="wrap hdr">
+<a class="brand" href="/" aria-label="TRUST — الصفحة الرئيسية"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small>للخدمات المحاسبية والمالية</small></span></a>
+<nav class="nav" id="site-nav" aria-label="القائمة الرئيسية">
+<a href="/services">الخدمات</a>
+<a href="/about">عن TRUST</a>
+<a href="/#faq">الأسئلة الشائعة</a>
+<a href="/financial-hub" aria-current="page">أدوات مجانية</a><a href="/digital-services">الخدمات الرقمية</a>
+<a href="/contact">تواصل معنا</a>
+<a class="btn btn-primary nav-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+</nav>
+<div class="hdr-actions">
+<a class="lang" href="/login" data-account>دخول العملاء</a>
+<a class="lang" href="/en" lang="en" hreflang="en">English</a>
+<a class="btn btn-primary btn-sm hdr-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="فتح القائمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+</div>
+</header>
+<section class="page-head"><div class="wrap">
+<div class="crumbs"><a href="/">الرئيسية</a> / <a href="/financial-hub">أدوات مجانية</a></div>
+<h1>الحاسبة المالية</h1><p>أدخل أرقام قوائمك المالية واحصل فوراً على مؤشرات السيولة والربحية والمديونية</p>
+</div></section>
+<main id="main" class="app-main"><div class="wrap"><div class="mid">
+<p class="notice">قراءة أولية وليست تقرير تدقيق أو تصنيفاً ائتمانياً. أدخل كل الأرقام بنفس العملة وعن نفس الفترة. الحساب يتم على جهازك، ولا يُحفظ شيء إلا إذا اخترت "احفظ في حسابي".</p>
+<div class="panel">
+<form id="calcform" novalidate>
+<h2>من الميزانية (المركز المالي)</h2>
+<div class="form-grid">
+<div><label for="currentAssets">الأصول المتداولة <small>(نقد، ذمم، مخزون…)</small></label><input id="currentAssets" name="currentAssets" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="inventory">المخزون</label><input id="inventory" name="inventory" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="currentLiabilities">الالتزامات المتداولة <small>(تستحق خلال سنة)</small></label><input id="currentLiabilities" name="currentLiabilities" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="assets">إجمالي الأصول</label><input id="assets" name="assets" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="liabilities">إجمالي الالتزامات</label><input id="liabilities" name="liabilities" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="equity">حقوق الملكية</label><input id="equity" name="equity" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+</div>
+<h2 style="margin-top:22px">من قائمة الدخل</h2>
+<div class="form-grid">
+<div><label for="revenue">المبيعات / الإيرادات</label><input id="revenue" name="revenue" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="cogs">تكلفة المبيعات</label><input id="cogs" name="cogs" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="operatingProfit">الربح التشغيلي</label><input id="operatingProfit" name="operatingProfit" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+<div><label for="netProfit">صافي الربح</label><input id="netProfit" name="netProfit" type="number" step="any" inputmode="decimal" placeholder="0" required></div>
+</div>
+<p class="err" id="calcErr" role="alert"></p>
+<div class="acts"><button class="btn btn-primary" type="submit">احسب المؤشرات</button><button class="btn btn-outline" type="reset">مسح البيانات</button></div>
+</form>
+<div id="results" class="result hidden" role="status" aria-live="polite"></div>
+
+<div id="saveBox" class="hidden" style="margin-top:20px">
+  <h2>احفظ في حسابي</h2>
+  <div class="form-grid">
+    <div><label for="aTitle">اسم التحليل</label><input id="aTitle" maxlength="200" value="تحليل مالي"></div>
+    <div><label for="aPeriod">الفترة</label><input id="aPeriod" maxlength="60" placeholder="مثال: 2025 أو الربع 3 / 2026"></div>
+  </div>
+  <p class="err" id="saveErr" role="alert"></p><p class="okmsg" id="saveOk" role="status"></p>
+  <div class="acts"><button class="btn btn-gold" type="button" id="saveBtn">احفظ التحليل</button><a class="btn btn-outline hidden" id="toPortal" href="/portal">عرض في حسابي</a></div>
+</div>
+</div>
+
+<div class="tool hidden" id="nextStep" style="margin-top:20px">
+  <div><span class="badge">الخطوة التالية</span><h2>تريد قراءة أعمق لأرقامك؟</h2><p style="margin-top:6px">يراجع فريق TRUST قوائمك كاملة ويعطيك تقريراً بالتوصيات وما يجب تحسينه.</p></div>
+  <div class="row"><a class="btn btn-primary" href="/consultation-request?service=%D8%AA%D9%82%D8%B1%D9%8A%D8%B1%20%D9%85%D8%A7%D9%84%D9%8A">اطلب تحليلاً كاملاً</a><a class="btn btn-outline" href="/reports-upload">ارفع قوائمك</a></div>
+</div>
+</div></div></main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="ft-grid">
+<div class="ft-brand">
+<a class="brand" href="/" aria-label="TRUST"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small style="color:#9FB0C3">للخدمات المحاسبية والمالية</small></span></a>
+<p style="margin-top:14px">وضوح في الأرقام، ثقة في القرارات.<br>خدمات محاسبية ومالية واستشارية للمشاريع الصغيرة والمتوسطة في فلسطين.</p>
+</div>
+<div><h2>خدماتنا</h2><ul>
+<li><a href="/accounting-systems">تأسيس الأنظمة المحاسبية والإدارية</a></li><li><a href="/financial-management">الإدارة المالية والمتابعة الدورية</a></li><li><a href="/feasibility-growth">دراسات الجدوى والنمو والتمويل</a></li><li><a href="/pricing">الباقات والأسعار</a></li><li><a href="/samples">نماذج من مخرجاتنا</a></li></ul></div>
+<div><h2>الأدوات المالية المجانية</h2><ul>
+<li><a href="/health-check">فحص الصحة المالية</a></li><li><a href="/financial-assessment">الحاسبة المالية</a></li><li><a href="/consultation-request">طلب استشارة</a></li><li><a href="/reports-upload">رفع الملفات المالية</a></li><li><a href="/login" data-account>دخول العملاء</a></li></ul></div>
+<div><h2>التواصل</h2><ul>
+<li><a href="https://wa.me/970599371188" target="_blank" rel="noopener">واتساب: <span class="ltr">0599371188</span></a></li>
+<li><a href="tel:+970599371188">هاتف: <span class="ltr">0599371188</span></a></li>
+<li><a href="/cdn-cgi/l/email-protection#4f262129200f3b3d3a3c3b2926213c61203d28"><span class="ltr"><span class="__cf_email__" data-cfemail="dbb2b5bdb49bafa9aea8afbdb2b5a8f5b4a9bc">[email&#160;protected]</span></span></a></li>
+<li>نابلس — دير شرف، شارع طولكرم–نابلس</li>
+<li>نستقبل طلباتك إلكترونياً على مدار الساعة، ونرد خلال يوم عمل</li>
+<li>نخدم المشاريع في جميع أنحاء فلسطين</li></ul></div>
+<div><h2>معلومات</h2><ul>
+<li><a href="/about">عن TRUST</a></li><li><a href="/insights">مقالات مالية</a></li><li><a href="/#faq">الأسئلة الشائعة</a></li><li><a href="/privacy">سياسة الخصوصية</a></li><li><a href="/en" lang="en">English</a></li></ul></div>
+</div>
+<div class="ft-bottom"><span>© <span id="year">2026</span> TRUST — Accounting, Financial &amp; Business Advisory Services</span><span class="ltr">Clarity in Numbers. Confidence in Decisions.</span><a class="tp-adm" href="https://ai.trustfins.org/admin" rel="nofollow noopener" style="font-size:12px;color:#7F92A6;text-decoration:none;margin-inline-start:14px;border-inline-start:1px solid rgba(159,176,195,.35);padding-inline-start:14px">دخول الإدارة</a></div>
+</div>
+</footer>
+<a class="wa-float" href="https://wa.me/970599371188" target="_blank" rel="noopener" aria-label="تواصل معنا على واتساب"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c.3 2 1.8 3.8 4 4.6l1.2-1.1 1.8.7"/></svg></a>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/main.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/assets/js/trust-auth.js"></script>
+<script src="/assets/js/financial-hub.js"></script>
+<script>
+(function(){
+'use strict';
+var A=TRUSTAUTH, sb=A.sb(), $=function(id){ return document.getElementById(id); }, user=null, orgId=null, cur='ILS';
+(async function(){
+  var s=(await sb.auth.getSession()).data.session; if(!s) return;
+  user=s.user;
+  try{ await A.ensureOrg(user); }catch(e){}
+  var m=await sb.from('memberships').select('role, organizations(id,currency)').eq('user_id',user.id).in('role',['owner','analyst']).limit(1);
+  if(m.data && m.data.length && m.data[0].organizations){ orgId=m.data[0].organizations.id; cur=m.data[0].organizations.currency; }
+})();
+document.addEventListener('trust:calc', function(){
+  $('nextStep').classList.remove('hidden');
+  $('saveOk').textContent=''; $('saveErr').textContent=''; $('toPortal').classList.add('hidden'); $('saveBtn').disabled=false;
+  $('saveBox').classList.toggle('hidden', !user);
+});
+document.addEventListener('trust:reset', function(){ $('saveBox').classList.add('hidden'); $('nextStep').classList.add('hidden'); });
+$('saveBtn').addEventListener('click', async function(){
+  $('saveErr').textContent=''; $('saveOk').textContent='';
+  var last=window.TRUST_LAST; if(!last) return;
+  if(!orgId){ $('saveErr').innerHTML=''; var a=document.createElement('a'); a.href='/portal.html'; a.textContent='أكمل بيانات مشروعك أولاً من صفحة حسابك ←'; $('saveErr').append(a); return; }
+  var b=$('saveBtn'); b.disabled=true;
+  var r=await sb.from('financial_assessments').insert({ organization_id:orgId, created_by:user.id, title:($('aTitle').value.trim()||'تحليل مالي').slice(0,200), period_label:$('aPeriod').value.trim()||null, status:'completed', input_data:last.input, result_data:{ metrics:last.metrics, version:1, currency:cur } });
+  if(r.error){ b.disabled=false; $('saveErr').textContent='تعذّر الحفظ. حاول مرة أخرى.'; return; }
+  $('saveOk').textContent='تم حفظ التحليل في حسابك ✓'; $('toPortal').classList.remove('hidden');
+});
+})();
+</script>
+</body>
+</html>

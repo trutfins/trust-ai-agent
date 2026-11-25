@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /portal
+Disallow: /login
+Disallow: /admin.html
+Disallow: /portal.html
+Disallow: /login.html
+Sitemap: https://trustfins.org/sitemap.xml

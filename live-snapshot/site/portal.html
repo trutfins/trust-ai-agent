@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة TRUST | لوحة العميل</title>
+<style>
+:root{--navy:#0E2238;--navy2:#1a3a5c;--gold:#C9A84C;--gold2:#e6c16a;--light:#f4f7fa;--white:#ffffff;--text:#2c3e50;--muted:#6c7a89;--border:#dde3ea;--success:#27ae60;--warning:#e67e22;--danger:#e74c3c;--info:#2980b9;--radius:12px;--shadow:0 2px 12px rgba(14,34,56,0.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--light);color:var(--text);min-height:100vh}
+.topbar{background:var(--navy);color:white;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.topbar-brand{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:700;letter-spacing:1px}
+.topbar-brand span{color:var(--gold)}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.user-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border-radius:24px;padding:6px 14px;font-size:0.9rem}
+.user-badge .avatar{width:30px;height:30px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:bold;font-size:0.85rem}
+.btn-logout{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;border-radius:8px;padding:7px 16px;cursor:pointer;font-size:0.85rem;transition:background 0.2s}
+.btn-logout:hover{background:rgba(255,255,255,0.25)}
+.main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+.welcome-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:white;border-radius:var(--radius);padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+.welcome-text h1{font-size:1.6rem;margin-bottom:6px}
+.welcome-text h1 span{color:var(--gold)}
+.welcome-text p{opacity:0.75;font-size:0.95rem}
+.welcome-meta{text-align:left;display:flex;flex-direction:column;gap:6px;font-size:0.85rem;opacity:0.8}
+.welcome-meta span{background:rgba(255,255,255,0.1);padding:4px 10px;border-radius:6px}
+.section-title{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;border-right:4px solid var(--gold);padding-right:12px}
+.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.action-card{background:white;border-radius:var(--radius);padding:22px 18px;text-align:center;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;box-shadow:var(--shadow);border:2px solid transparent;text-decoration:none;color:var(--text);display:block}
+.action-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(14,34,56,0.15);border-color:var(--gold)}
+.action-card .icon{font-size:2rem;margin-bottom:10px}
+.action-card .label{font-weight:600;font-size:0.95rem;margin-bottom:4px}
+.action-card .sublabel{color:var(--muted);font-size:0.8rem}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:28px}
+.service-card{background:white;border-radius:var(--radius);padding:20px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--text);transition:transform 0.2s,box-shadow 0.2s;border:2px solid transparent}
+.service-card:hover:not(.locked){transform:translateY(-2px);box-shadow:0 6px 20px rgba(14,34,56,0.15);border-color:var(--gold)}
+.service-card.locked{opacity:0.65;cursor:not-allowed}
+.service-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.service-icon.analysis{background:#e8f4fd;color:#2980b9}
+.service-icon.cashflow{background:#e8f8f0;color:#27ae60}
+.service-icon.ai{background:#fdf3e8;color:#e67e22}
+.service-icon.invoices{background:#f3e8fd;color:#8e44ad}
+.service-info{flex:1}
+.service-info h3{font-size:1rem;margin-bottom:4px}
+.service-info p{font-size:0.8rem;color:var(--muted)}
+.service-badge{font-size:0.75rem;padding:3px 10px;border-radius:20px;font-weight:600}
+.badge-active{background:#d5f5e3;color:#1e8449}
+.badge-locked{background:#fde8e8;color:#c0392b}
+.table-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:28px}
+.table-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.table-header h3{font-size:1rem;font-weight:700}
+table{width:100%;border-collapse:collapse}
+th{background:var(--light);padding:12px 16px;text-align:right;font-size:0.85rem;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border)}
+td{padding:13px 16px;border-bottom:1px solid var(--border);font-size:0.9rem}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f9fbfc}
+.status-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.78rem;font-weight:600}
+.status-new{background:#d6eaf8;color:#1a5276}
+.status-review{background:#fef9e7;color:#784212}
+.status-done{background:#d5f5e3;color:#1e8449}
+.status-cancelled{background:#fde8e8;color:#c0392b}
+.empty-state{text-align:center;padding:40px;color:var(--muted)}
+.form-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:28px}
+.form-header{background:var(--navy);color:white;padding:16px 20px;display:flex;align-items:center;gap:10px}
+.form-header h3{font-size:1rem}
+.form-body{padding:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.form-control{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:inherit;transition:border-color 0.2s;background:white;color:var(--text);direction:rtl}
+.form-control:focus{outline:none;border-color:var(--gold)}
+textarea.form-control{resize:vertical;min-height:100px}
+.btn-submit{background:var(--navy);color:white;border:none;border-radius:8px;padding:12px 32px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:background 0.2s;font-family:inherit}
+.btn-submit:hover{background:var(--navy2)}
+.btn-submit:disabled{opacity:0.6;cursor:not-allowed}
+.form-success{background:#d5f5e3;color:#1e8449;border-radius:8px;padding:12px 16px;margin-top:12px;display:none;font-size:0.9rem}
+.account-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:28px}
+.account-header{background:var(--navy);color:white;padding:16px 20px;display:flex;align-items:center;gap:10px}
+.account-header h3{font-size:1rem}
+.account-body{padding:24px}
+.account-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);font-size:0.9rem}
+.account-row:last-child{border-bottom:none}
+.account-label{color:var(--muted);font-size:0.85rem}
+.account-value{font-weight:600}
+.btn-change-pass{background:transparent;border:1.5px solid var(--navy);color:var(--navy);border-radius:8px;padding:8px 20px;cursor:pointer;font-size:0.85rem;font-family:inherit;transition:all 0.2s}
+.btn-change-pass:hover{background:var(--navy);color:white}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:white;border-radius:var(--radius);padding:28px;width:90%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.modal-title{font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--navy)}
+.modal-close-btn{float:left;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted);line-height:1}
+.upload-area{border:2px dashed var(--border);border-radius:10px;padding:32px;text-align:center;cursor:pointer;transition:border-color 0.2s;margin-bottom:16px}
+.upload-area:hover{border-color:var(--gold)}
+.upload-area .upload-icon{font-size:2.5rem;margin-bottom:8px}
+.upload-area p{color:var(--muted);font-size:0.9rem}
+#fileInput{display:none}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:white;padding:12px 24px;border-radius:24px;font-size:0.9rem;z-index:999;transition:transform 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+#loading-screen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;color:white;z-index:999;transition:opacity 0.4s}
+#loading-screen .brand{font-size:2rem;font-weight:700;letter-spacing:2px;margin-bottom:10px}
+#loading-screen .brand span{color:var(--gold)}
+.spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin-top:16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:768px){.quick-actions{grid-template-columns:1fr 1fr}.services-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.welcome-card{flex-direction:column;gap:16px}.welcome-meta{text-align:right;flex-direction:row;flex-wrap:wrap}}
+@media(max-width:480px){.quick-actions{grid-template-columns:1fr}.topbar{padding:0 16px}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
+<div id="loading-screen"><div class="brand">TRUST<span>.</span></div><div class="spinner"></div></div>
+<div class="topbar">
+<div class="topbar-brand">🏢 TRUST<span>.</span></div>
+<div class="topbar-right">
+<div class="user-badge"><div class="avatar" id="user-avatar">؟</div><span id="user-email-short">...</span></div>
+<button class="btn-logout" id="logout-btn">تسجيل الخروج</button>
+</div>
+</div>
+<div class="main" id="main-content" style="display:none">
+<div class="welcome-card">
+<div class="welcome-text"><h1>أهلاً، <span id="welcome-name">...</span> 👋</h1><p id="welcome-desc">مرحباً بك في بوابة TRUST للخدمات المالية</p></div>
+<div class="welcome-meta"><span id="meta-sector">📁 الخدمات: —</span><span id="meta-currency">💱 العملة: ILS</span><span id="meta-date">📅 اليوم: —</span></div>
+</div>
+<div class="section-title">⚡ الإجراءات السريعة</div>
+<div class="quick-actions">
+<a href="#" class="action-card" id="cfo-link"><div class="icon">📊</div><div class="label">الحسابة المالية</div><div class="sublabel">افتح خدمتك الرئيسية</div></a>
+<div class="action-card" onclick="document.getElementById('upload-modal').classList.add('open')"><div class="icon">📁</div><div class="label">رفع ملفاتك المالية</div><div class="sublabel">كشوف، قوائم، فواتير</div></div>
+<a href="https://wa.me/97059900000" target="_blank" class="action-card"><div class="icon">💬</div><div class="label">تحتاج مساعدة؟</div><div class="sublabel">تواصل معنا عبر واتساب</div></a>
+</div>
+<div class="section-title">🛠️ تحليلاتك المالية</div>
+<div class="services-grid" id="services-grid"><div class="service-card locked"><div class="service-icon analysis">📈</div><div class="service-info"><h3>جارٍ التحميل...</h3><p>يرجى الانتظار</p></div></div></div>
+<div class="section-title">📋 طلباتك</div>
+<div class="table-card">
+<div class="table-header"><h3>سجل الطلبات</h3><span style="font-size:0.8rem;color:var(--muted)" id="requests-count">جارٍ التحميل...</span></div>
+<div id="requests-container"><div class="empty-state"><div class="spinner" style="margin:0 auto 16px"></div><p>جارٍ تحميل الطلبات...</p></div></div>
+</div>
+<div class="section-title">➕ طلب جديد</div>
+<div class="form-card">
+<div class="form-header"><span>📝</span><h3>إرسال طلب جديد</h3></div>
+<div class="form-body">
+<div class="form-row">
+<div class="form-group"><label>نوع الخدمة</label><select class="form-control" id="req-service"><option value="">اختر الخدمة...</option><option value="credit_analysis">تحليل ائتماني / دراسة جدوى</option><option value="smart_cfo">المحاسب الذكي - CFO</option><option value="cashflow">تدفق نقدي وتخطيط مالي</option><option value="invoice_journal">قيود فواتير وتسوية حسابات</option><option value="ai_agent">استشارة AI المالية</option><option value="other">طلب آخر</option></select></div>
+<div class="form-group"><label>الموضوع</label><input type="text" class="form-control" id="req-subject" placeholder="عنوان مختصر للطلب"></div>
+</div>
+<div class="form-group"><label>تفاصيل الطلب</label><textarea class="form-control" id="req-details" placeholder="اشرح طلبك بالتفصيل..."></textarea></div>
+<button class="btn-submit" id="req-submit-btn" onclick="submitRequest()">إرسال الطلب ✉️</button>
+<div class="form-success" id="req-success">✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.</div>
+</div>
+</div>
+<div class="section-title">👤 بيانات الحساب</div>
+<div class="account-card">
+<div class="account-header"><span>⚙️</span><h3>إعدادات الحساب</h3></div>
+<div class="account-body">
+<div class="account-row"><span class="account-label">البريد الإلكتروني</span><span class="account-value" id="account-email">—</span></div>
+<div class="account-row"><span class="account-label">تاريخ إنشاء الحساب</span><span class="account-value" id="account-created">—</span></div>
+<div class="account-row"><span class="account-label">الخدمات المفعّلة</span><span class="account-value" id="account-services-count">—</span></div>
+<div class="account-row" style="border-bottom:none;padding-bottom:0"><span class="account-label">تغيير كلمة المرور</span><button class="btn-change-pass" onclick="changePassword()">تغيير كلمة المرور 🔒</button></div>
+</div>
+</div>
+</div>
+<div class="modal-overlay" id="upload-modal">
+<div class="modal">
+<button class="modal-close-btn" onclick="document.getElementById('upload-modal').classList.remove('open')">✕</button>
+<div class="modal-title">📁 رفع الملفات المالية</div>
+<div class="upload-area" onclick="document.getElementById('fileInput').click()"><div class="upload-icon">☁️</div><p>اضغط لاختيار الملفات أو اسحبها هنا</p><p style="margin-top:8px;font-size:0.78rem">PDF, Excel, صور — حتى 20MB</p></div>
+<input type="file" id="fileInput" multiple accept=".pdf,.xlsx,.xls,.csv,.jpg,.jpeg,.png" onchange="handleFileSelect(this)">
+<div id="file-list" style="font-size:0.85rem;color:var(--success);margin-bottom:12px"></div>
+<button class="btn-submit" style="width:100%" onclick="uploadFiles()">رفع الملفات 📤</button>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const SUPABASE_URL='https://jbeiipdxcyzdqarxzbyo.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpiZWlpcGR4Y3l6ZHFhcnh6YnlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI1MjkzMDIsImV4cCI6MjA0ODEwNTMwMn0.kBjENkJIUEjagLuq5_bGBwxL2KNrFfyEBuWh9_BxEA8';
+const SERVICES_CONFIG={
+credit_analysis:{name:'التحليل الائتماني',desc:'تحليل الجدوى والتقييم المالي',icon:'📈',iconClass:'analysis',url:'https://analysis.trustfins.org'},
+smart_cfo:{name:'المحاسب الذكي CFO',desc:'مراقبة التدفق النقدي والميزانية',icon:'💰',iconClass:'cashflow',url:'https://cashflow.trustfins.org'},
+invoice_journal:{name:'قيود الفواتير',desc:'تسجيل وإدارة الفواتير المحاسبية',icon:'🧾',iconClass:'invoices',url:'https://invoices.trustfins.org'},
+ai_agent:{name:'المستشار المالي AI',desc:'استشارات ذكاء اصطناعي مالية',icon:'🤖',iconClass:'ai',url:'https://ai.trustfins.org'}
+};
+const STATUS_MAP={new:{label:'جديد',cls:'status-new'},review:{label:'قيد المراجعة',cls:'status-review'},done:{label:'مكتمل',cls:'status-done'},cancelled:{label:'ملغي',cls:'status-cancelled'}};
+let currentUser=null,accessToken=null;
+async function init(){
+try{
+const raw=localStorage.getItem('sb-jbeiipdxcyzdqarxzbyo-auth-token');
+if(!raw)return redirect();
+const session=JSON.parse(raw);
+if(!session?.access_token)return redirect();
+accessToken=session.access_token;
+currentUser=session.user||session;
+if(!currentUser?.email)return redirect();
+renderUserInfo();
+document.getElementById('loading-screen').style.opacity='0';
+setTimeout(()=>{document.getElementById('loading-screen').style.display='none';document.getElementById('main-content').style.display='block';},400);
+await Promise.all([loadEntitlements(),loadRequests()]);
+}catch(e){redirect();}
+}
+function redirect(){window.location.href='/login';}
+function renderUserInfo(){
+const email=currentUser.email||'';
+const name=currentUser.user_metadata?.full_name||email.split('@')[0]||'العميل';
+document.getElementById('user-avatar').textContent=name[0].toUpperCase();
+document.getElementById('user-email-short').textContent=email.length>22?email.slice(0,20)+'…':email;
+document.getElementById('welcome-name').textContent=name;
+document.getElementById('account-email').textContent=email;
+document.getElementById('meta-date').textContent='📅 '+new Date().toLocaleDateString('ar-SA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+const created=currentUser.created_at||currentUser.user_metadata?.created_at;
+if(created)document.getElementById('account-created').textContent=new Date(created).toLocaleDateString('ar-SA');
+}
+async function loadEntitlements(){
+try{
+const userId=currentUser.id||currentUser.sub;
+const res=await fetch(SUPABASE_URL+'/rest/v1/trust_service_entitlements?user_id=eq.'+userId+'&status=eq.active&select=service_code',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+accessToken}});
+const data=await res.json();
+const activeCodes=(data||[]).map(r=>r.service_code);
+const firstActive=activeCodes[0];
+if(firstActive&&SERVICES_CONFIG[firstActive])document.getElementById('cfo-link').href=SERVICES_CONFIG[firstActive].url;
+document.getElementById('meta-sector').textContent='📁 الخدمات: '+activeCodes.length;
+document.getElementById('account-services-count').textContent=activeCodes.length+' خدمة مفعّلة';
+const grid=document.getElementById('services-grid');
+grid.innerHTML='';
+for(const[code,cfg]of Object.entries(SERVICES_CONFIG)){
+const active=activeCodes.includes(code);
+const card=document.createElement(active?'a':'div');
+if(active)card.href=cfg.url;
+card.className='service-card'+(active?'':' locked');
+card.innerHTML='<div class="service-icon '+cfg.iconClass+'">'+cfg.icon+'</div><div class="service-info"><h3>'+cfg.name+'</h3><p>'+cfg.desc+'</p></div>'+(active?'<span class="service-badge badge-active">✅ مفعّل</span>':'<span class="service-badge badge-locked">🔒 غير مشترك</span>');
+if(!active)card.title='هذه الخدمة غير مشتركة. تواصل معنا لتفعيلها.';
+grid.appendChild(card);
+}
+}catch(e){document.getElementById('services-grid').innerHTML='<div class="empty-state"><p>تعذّر تحميل الخدمات</p></div>';}
+}
+async function loadRequests(){
+try{
+const userId=currentUser.id||currentUser.sub;
+const res=await fetch(SUPABASE_URL+'/rest/v1/trust_client_requests?user_id=eq.'+userId+'&order=created_at.desc&limit=20',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+accessToken}});
+const data=await res.json();
+const container=document.getElementById('requests-container');
+document.getElementById('requests-count').textContent=(data?.length||0)+' طلب';
+if(!data?.length){container.innerHTML='<div class="empty-state"><div style="font-size:2.5rem;margin-bottom:10px">📭</div><p>لا توجد طلبات بعد. ابدأ بإرسال طلبك الأول!</p></div>';return;}
+const rows=data.map(r=>{const st=STATUS_MAP[r.status]||{label:r.status,cls:'status-new'};const date=r.created_at?new Date(r.created_at).toLocaleDateString('ar-SA'):'—';const svc=SERVICES_CONFIG[r.service_code]?.name||r.service_code||'—';return '<tr><td>'+svc+'</td><td>'+(r.subject||'—')+'</td><td>'+date+'</td><td><span class="status-pill '+st.cls+'">'+st.label+'</span></td></tr>';}).join('');
+container.innerHTML='<table><thead><tr><th>الخدمة</th><th>الموضوع</th><th>التاريخ</th><th>الحالة</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}catch(e){document.getElementById('requests-container').innerHTML='<div class="empty-state"><p>تعذّر تحميل الطلبات</p></div>';document.getElementById('requests-count').textContent='';}
+}
+async function submitRequest(){
+const service=document.getElementById('req-service').value;
+const subject=document.getElementById('req-subject').value.trim();
+const details=document.getElementById('req-details').value.trim();
+if(!service||!subject){showToast('⚠️ الرجاء اختيار الخدمة وكتابة الموضوع');return;}
+const btn=document.getElementById('req-submit-btn');
+btn.disabled=true;btn.textContent='جارٍ الإرسال...';
+try{
+const userId=currentUser.id||currentUser.sub;
+const res=await fetch(SUPABASE_URL+'/rest/v1/trust_client_requests',{method:'POST',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+accessToken,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({user_id:userId,service_code:service,subject,details,status:'new'})});
+if(res.ok){document.getElementById('req-success').style.display='block';document.getElementById('req-service').value='';document.getElementById('req-subject').value='';document.getElementById('req-details').value='';showToast('✅ تم إرسال طلبك بنجاح!');setTimeout(()=>loadRequests(),1000);}
+else showToast('❌ حدث خطأ. حاول مرة أخرى.');
+}catch(e){showToast('❌ تعذّر الإرسال. تحقق من الاتصال.');}
+btn.disabled=false;btn.textContent='إرسال الطلب ✉️';
+}
+function handleFileSelect(input){document.getElementById('file-list').textContent=Array.from(input.files).map(f=>'📄 '+f.name).join('\n');}
+function uploadFiles(){showToast('📤 ميزة رفع الملفات قيد التطوير. تواصل معنا عبر واتساب.');document.getElementById('upload-modal').classList.remove('open');}
+async function changePassword(){
+const email=currentUser.email;if(!email)return;
+try{await fetch(SUPABASE_URL+'/auth/v1/recover',{method:'POST',headers:{'apikey':SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({email})});showToast('📧 تم إرسال رابط تغيير كلمة المرور إلى بريدك الإلكتروني');}
+catch(e){showToast('❌ تعذّر إرسال الرابط');}
+}
+document.getElementById('logout-btn').addEventListener('click',()=>{localStorage.removeItem('sb-jbeiipdxcyzdqarxzbyo-auth-token');window.location.href='/login';});
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+document.getElementById('upload-modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+init();
+</script>
+</body>
+</html>

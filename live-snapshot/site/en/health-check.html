@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>Your business's financial health check — free | TRUST</title>
+<meta name="description" content="A free 10-question check that measures your business's financial health in two minutes and gives you a score out of 100 and the top 3 practical recommendations. From TRUST Accounting &amp; Financial Services in Palestine.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0E2238">
+<link rel="canonical" href="https://trustfins.org/en/health-check">
+<link rel="alternate" hreflang="ar" href="https://trustfins.org/health-check">
+<link rel="alternate" hreflang="en" href="https://trustfins.org/en/health-check">
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TRUST">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://trustfins.org/en/health-check">
+<meta property="og:title" content="How healthy are your business finances? A free two-minute check">
+<meta property="og:description" content="10 questions, a score out of 100 and the top 3 recommendations for your business. Free from TRUST.">
+<meta property="og:image" content="https://trustfins.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/assets/fonts/plex-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+:root{--navy:#0E2238;--navy2:#16324F;--gold:#C9A15A;--gold2:#D9B46E;--goldtx:#7A5716;--ink:#3A4A5C;--mute:#5B6878;--line:#E2E7ED;--bg:#F3F5F8;--good:#1F7A4D;--warn:#9A6200;--bad:#A3261B}
+*{box-sizing:border-box}
+body{margin:0;font-family:'IBM Plex Sans','IBM Plex Sans Arabic',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:17px}
+a{color:var(--navy)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{background:#fff;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1100px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.mark{width:38px;height:38px;border-radius:10px;background:var(--navy);display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:9px 8px}
+.mark i{display:block;width:5px;border-radius:1px}
+.brand b{font-size:19px;letter-spacing:2px;color:var(--navy);direction:ltr}
+.hero{background:var(--navy);color:#fff;padding:48px 0 56px;text-align:center}
+.pill{display:inline-block;font-size:14px;font-weight:600;color:var(--gold2);border:1px solid rgba(217,180,110,.45);padding:4px 14px;border-radius:999px}
+.hero h1{margin:14px 0 10px;font-size:clamp(28px,6vw,40px);line-height:1.3;color:#fff}
+.hero p{margin:0 auto;max-width:560px;color:#C9D3DF}
+.meta{margin-top:14px;font-size:14px;color:#9FB0C3}
+main{padding:28px 0 64px}
+.card{background:#fff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 10px 30px rgba(14,34,56,.07)}
+.progress{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.progress span{display:block;height:100%;width:0;background:var(--gold);transition:width .25s}
+.count{font-size:14px;color:var(--mute);margin-bottom:18px}
+fieldset{border:0;margin:0 0 26px;padding:0}
+legend{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:12px;padding:0}
+.opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;min-height:52px;background:#fff}
+.opt:hover{border-color:#9FB0C3}
+.opt input{width:20px;height:20px;accent-color:var(--navy);flex:none;margin:0}
+.opt:has(input:checked){border-color:var(--navy);background:#F5F7FA}
+.btn{font:inherit;font-size:17px;font-weight:700;border:0;border-radius:12px;padding:14px 24px;min-height:52px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;width:100%}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-wa{background:var(--good);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.err{color:var(--bad);font-weight:600;font-size:15px;margin:8px 0 0;min-height:1em}
+.hidden{display:none !important}
+.score{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.ring{width:132px;height:132px;flex:none}
+.score h2{margin:0;font-size:24px;color:var(--navy)}
+.band{display:inline-block;font-weight:700;font-size:15px;padding:3px 12px;border-radius:999px;margin-top:6px}
+.areas{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.areas li{display:flex;align-items:center;gap:10px;font-size:15px}
+.areas .bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.areas .bar span{display:block;height:100%}
+.areas .lbl{width:170px;flex:none}
+.recs{margin:24px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.recs li{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.recs b{color:var(--navy);display:block;margin-bottom:2px}
+.lead{margin-top:22px;background:var(--navy);color:#C9D3DF;border-radius:18px;padding:clamp(20px,4vw,32px)}
+.lead h3{color:#fff;margin:0 0 6px;font-size:21px}
+.fld{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.fld label{font-size:14px;font-weight:600;color:#fff}
+.fld input,.fld select{font:inherit;font-size:16px;padding:12px 14px;border:1px solid #2C4664;border-radius:10px;background:#fff;color:var(--navy);min-height:48px;width:100%}
+.note{font-size:13px;color:#9FB0C3;margin:12px 0 0}
+.ok{background:#E8F4EE;color:var(--good);border-radius:12px;padding:16px;font-weight:600;margin-top:16px}
+.disc{font-size:13px;color:var(--mute);margin-top:18px;text-align:center}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+footer{text-align:center;font-size:14px;color:var(--mute);padding:0 0 40px}
+.hc-nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:flex-end;row-gap:6px}
+.hc-nav a{font-size:15px;font-weight:600;text-decoration:none;color:var(--navy);min-height:44px;display:flex;align-items:center}
+.hc-nav a[aria-current]{color:#7A5716}
+.hc-nav a.ar{font-family:'IBM Plex Sans Arabic',sans-serif}
+@media (max-width:900px){.hc-nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;max-width:64vw;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hc-nav::-webkit-scrollbar{display:none}.hc-nav a{white-space:nowrap;font-size:14px}}
+@media(max-width:480px){.hc-nav{gap:10px}.hc-nav a{font-size:13.5px}.brand b{font-size:17px}.areas .lbl{width:120px}}
+.next{border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;background:#fff}
+.next h3{margin:0 0 6px;color:var(--navy);font-size:18px}
+.next p{margin:0 0 12px}
+.ar-link::after{content:"AR";display:inline-block;font-size:10px;font-weight:700;line-height:1.3;border:1px solid currentColor;border-radius:4px;padding:0 3px;margin-inline-start:6px;opacity:.75;vertical-align:1px;font-family:'IBM Plex Sans',sans-serif}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="brand" href="/en" aria-label="TRUST home"><span class="mark"><i style="height:9px;background:#D9B46E"></i><i style="height:15px;background:#D9B46E"></i><i style="height:22px;background:#fff"></i></span><b>TRUST</b></a>
+<nav class="hc-nav" aria-label="Quick links"><a href="/en">Home</a><a href="/en/services">Services</a><a href="/en/about">About TRUST</a><a href="/en#faq">FAQ</a><a href="/en/health-check" aria-current="page">Free check</a><a href="/en/financial-hub">Free tools</a><a href="/en/digital-services">Digital services</a><a href="/en/contact">Contact us</a><a href="/login" hreflang="ar" title="In Arabic">Client login</a><a class="ar" href="/health-check" lang="ar" hreflang="ar">العربية</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<span class="pill">Free tool</span>
+<h1>How healthy are your business finances?</h1>
+<p>10 quick questions that reveal the strengths and weaknesses in how your business manages its money, and give you a score out of 100 with the 3 most important steps to improve it.</p>
+<div class="meta">Two minutes · No sign-up · Instant result</div>
+</div></section>
+
+<main><div class="wrap">
+
+<div class="card" id="quiz">
+<div class="progress" aria-hidden="true"><span id="pbar"></span></div>
+<div class="count" id="pcount">Answered 0 of 10</div>
+<form id="qform" novalidate></form>
+<button class="btn btn-primary" id="calc" type="button" disabled>Show my result</button>
+<p class="err" id="qerr" role="alert"></p>
+</div>
+
+<div class="card hidden" id="result" tabindex="-1">
+<div class="score">
+<svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="#E2E7ED" stroke-width="12"/><circle id="arc" cx="60" cy="60" r="50" fill="none" stroke="#0E2238" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16" transform="rotate(-90 60 60)"/><text id="snum" x="60" y="68" text-anchor="middle" font-size="30" font-weight="700" fill="#0E2238" font-family="IBM Plex Sans, sans-serif">0</text></svg>
+<div><h2 id="rtitle"></h2><span class="band" id="rband"></span><p id="rtext" style="margin:8px 0 0"></p><p style="font-size:13.5px;margin:6px 0 0;color:#5B6878">A first assessment based on your answers, not an analysis of your financial statements.</p></div>
+</div>
+<ul class="areas" id="areas" aria-label="Your score in each area"></ul>
+<h3 id="recsTitle" style="margin:26px 0 0;color:#0E2238;font-size:20px">The 3 most important steps for your business now</h3>
+<ul class="recs" id="recs"></ul>
+
+<div class="lead" id="leadbox">
+<h3 id="leadTitle">Get a detailed improvement plan for free</h3>
+<p style="margin:0" id="leadText">We review your result and send you, on WhatsApp, a practical plan for your business's weakest areas, with the option of a free initial consultation session.</p>
+<form name="health-check" id="lform" method="POST">
+<input type="hidden" name="form-name" value="health-check">
+<input type="hidden" name="score" id="h_score">
+<input type="hidden" name="band" id="h_band">
+<input type="hidden" name="weak_areas" id="h_weak">
+<input type="hidden" name="answers" id="h_answers">
+<input type="hidden" name="plan" id="h_plan">
+<p class="hidden"><label>Leave this field empty <input name="company_website"></label></p>
+<div class="fld"><label for="l_name">Name *</label><input id="l_name" name="name" autocomplete="name" required></div>
+<div class="fld"><label for="l_phone">WhatsApp number *</label><input id="l_phone" name="phone" type="tel" dir="ltr" autocomplete="tel" placeholder="059XXXXXXX" required></div>
+<div class="fld"><label for="l_biz">Business name</label><input id="l_biz" name="business" autocomplete="organization"></div>
+<div class="fld"><label for="l_type">Type of business</label><select id="l_type" name="activity"><option value="">Choose…</option><option value="تجاري / تجزئة">Trading / retail</option><option value="خدمات">Services</option><option value="صناعي / ورشة">Manufacturing / workshop</option><option value="مقاولات">Contracting</option><option value="توزيع">Distribution</option><option value="مطعم / مقهى">Restaurant / café</option><option value="منزلي / أونلاين">Home-based / online</option><option value="أخرى">Other</option></select></div>
+<button class="btn btn-gold" type="submit" id="lsubmit" style="margin-top:18px">Send me the improvement plan</button>
+<p class="err" id="lerr" role="alert" style="color:#F6C9C4"></p>
+<p class="note">Your details are confidential and will only be used to contact you about your result.</p>
+</form>
+<div class="ok hidden" id="lok" role="status">We have received your request ✓ We'll send you the <span id="lokPlan">improvement plan</span> on WhatsApp within one business day.</div>
+</div>
+
+<a class="btn btn-wa" id="wa" href="https://wa.me/970599371188" target="_blank" rel="noopener" style="margin-top:14px">Or discuss your result with us directly on WhatsApp</a>
+<button class="btn" id="again" type="button" style="margin-top:10px;background:transparent;color:#0E2238;border:1px solid #CBD3DD">Take the check again</button>
+<div class="next">
+<h3>Next step: track your numbers yourself</h3>
+<p>Create a free account on TRUST's free financial tools, calculate your business's liquidity, profitability and leverage indicators, and save them to track your progress.</p>
+<a class="btn btn-primary" href="/login?mode=signup&amp;next=%2Ffinancial-assessment.html" class="ar-link" hreflang="ar" title="In Arabic">Create a free account</a>
+</div>
+<p class="disc">This is a first assessment based on your own answers. It does not establish your actual financial position and does not replace an analysis of your business's financial statements.</p>
+</div>
+
+</div></main>
+<footer>TRUST Accounting &amp; Financial Services · <a href="/en">Home</a> · <a href="/en/services">Services</a> · <a href="/en/contact">Contact us</a> · <a href="/en/privacy" class="ar-link" hreflang="ar" title="In Arabic">Privacy policy</a></footer>
+
+<script>
+(function(){
+var Q=[
+{k:"sep",a:"Separating money",q:"Do you keep the business's money separate from your personal money?",o:[["Yes, a completely separate account and cash box",10],["Partly, I sometimes mix them",5],["No, it's all together",0]],r:"Keep the business's money separate from your own: a separate account or cash box, and a fixed monthly salary for yourself instead of random withdrawals."},
+{k:"rec",a:"Recording transactions",q:"How do you record sales and expenses?",o:[["Daily, in software or Excel",10],["Sometimes, or in a notebook",5],["I don't record them",0]],r:"Start a simple daily record of sales and expenses, even in a single Excel sheet. Without records you can't know your profit or control costs."},
+{k:"prof",a:"Knowing your profit",q:"Do you know your business's monthly net profit?",o:[["Yes, precisely, from a monthly report",10],["Roughly",5],["I don't know it",0]],r:"Work out your net profit every month: revenue minus all costs, including rent, salaries and the cost of goods sold. A rough profit figure hides losses."},
+{k:"price",a:"Pricing",q:"How do you set the prices of your products or services?",o:[["From the full cost plus a set profit margin",10],["Based on market and competitor prices",5],["By estimate or experience",0]],r:"Review your pricing based on the full cost of each product and a target profit margin. Pricing by estimate is the most common reason for high sales with weak profit."},
+{k:"cash",a:"Cash position",q:"What is your business's cash position like?",o:[["Enough to cover 3 months of commitments or more",10],["Barely enough for the current month",5],["I run short again and again",0]],r:"Build a cash flow forecast for the next 12 weeks, and gradually set aside a reserve covering at least two months of fixed expenses."},
+{k:"ar",a:"Customer credit and debts",q:"What is the situation with credit sales and customer debts?",o:[["I don't sell on credit, or debts are small and tracked",10],["Debts are large, but I track them",5],["Debts are large and not tracked",0]],r:"Keep a register of customer debts with their ages, and set a limit and a term for each customer. Untracked debts are profit on paper and cash lost in reality."},
+{k:"chq",a:"Post-dated cheques",q:"How do you manage post-dated cheques (issued and received)?",o:[["An organised register with dates, or I don't use them",10],["I track them from memory or a notebook",5],["I get surprises or bounced cheques",0]],r:"Keep a register of issued and received cheques with their due dates, and review it weekly against your bank balance to avoid bounced cheques and cash surprises."},
+{k:"bud",a:"Budget and planning",q:"Do you have a budget or a financial plan for the year?",o:[["Yes, and I review it against actual results",10],["General estimates in my head",5],["None",0]],r:"Set a simple annual budget for revenue and expenses and compare it with actual figures every month. An early variance is easy to fix; a late one costs a lot."},
+{k:"rep",a:"Regular reports",q:"Do you get regular financial reports on your business?",o:[["Monthly, regularly",10],["Sometimes, or when needed",5],["No",0]],r:"Adopt a one-page monthly report: sales, expenses, profit, cash and debts. That alone changes the quality of your decisions."},
+{k:"debt",a:"Loans and commitments",q:"What is the situation with the business's loans and instalments?",o:[["No loans, or comfortable instalments",10],["Manageable instalments, but they squeeze cash",5],["I find it hard to repay",0]],r:"Review your debt structure: compare instalments with your actual cash flow, and consider rescheduling early, before you fall behind. Banks respond better to those who act first."}
+];
+var G=[
+{a:"A monthly KPI dashboard",r:"Turn your numbers into a one-page monthly dashboard: profit margin, cash in days, debt ages and expenses as a share of sales, compared with the previous month."},
+{a:"A flexible budget and scenarios",r:"Add two scenarios to your budget: cautious and growth. Measure the effect of a 15% fall in sales or higher costs on profit and cash before it happens."},
+{a:"Readiness for financing and expansion",r:"Prepare a clear financial file before approaching any lender: financial statements, projected cash flows and an analysis of your ability to repay. Requirements differ by the type and age of the business and by the lender itself."}
+];
+var f=document.getElementById('qform'),calc=document.getElementById('calc'),pbar=document.getElementById('pbar'),pc=document.getElementById('pcount');
+Q.forEach(function(it,i){
+var fs=document.createElement('fieldset');var lg=document.createElement('legend');lg.textContent=(i+1)+'. '+it.q;fs.appendChild(lg);
+it.o.forEach(function(op,j){var lb=document.createElement('label');lb.className='opt';var inp=document.createElement('input');inp.type='radio';inp.name=it.k;inp.value=op[1];lb.appendChild(inp);lb.appendChild(document.createTextNode(op[0]));fs.appendChild(lb);});
+f.appendChild(fs);
+});
+function answered(){return Q.filter(function(it){return f.querySelector('input[name="'+it.k+'"]:checked');}).length;}
+var started=false;f.addEventListener('change',function(){if(!started){started=true;window.TRUST_TRACK&&TRUST_TRACK('health_check_start',{lang:'en'});}var n=answered();pbar.style.width=(n*10)+'%';pc.textContent='Answered '+n+' of 10';calc.disabled=n<10;document.getElementById('qerr').textContent='';});
+var last=null;
+calc.addEventListener('click',function(){
+if(answered()<10){document.getElementById('qerr').textContent='Please answer all the questions.';return;}
+window.TRUST_TRACK&&TRUST_TRACK('health_check_complete',{lang:'en'});
+var sc=[],tot=0,ans=[];
+Q.forEach(function(it,i){var c=f.querySelector('input[name="'+it.k+'"]:checked');var v=+c.value;tot+=v;sc.push({it:it,v:v,i:i});ans.push((i+1)+':'+v);});
+var band,col,title,text;
+if(tot===100){band='Strong financial practices';col='#1F7A4D';title='Your answers point to strong financial practices';text='You chose the best practice in every area. This is a first assessment based on your answers; an analysis of your actual statements confirms it, and you can then build on it for growth: sharper indicators, scenarios and readiness for financing.';}
+else if(tot>=75){band='Good practices';col='#1F7A4D';title='Your answers point to a good financial foundation';text='You have sound basics. The next step is turning the numbers into growth decisions: sharper reports, a budget and performance indicators.';}
+else if(tot>=50){band='Needs organising';col='#9A6200';title='Your answers point to gaps in controlling the numbers';text='There are gaps that leave profit and cash unclear. Organising them now prevents bigger problems as the business grows.';}
+else{band='High priority';col='#A3261B';title='Your answers point to an urgent need for financial organisation';text='Based on your answers, the lack of financial organisation may expose the business to hidden losses and pressure on cash. The good news: most of these points can be fixed with simple, organised steps.';}
+document.getElementById('snum').textContent=tot;
+var arc=document.getElementById('arc');arc.setAttribute('stroke',col);arc.style.transition='stroke-dashoffset .8s';setTimeout(function(){arc.setAttribute('stroke-dashoffset',(314.16*(1-tot/100)).toFixed(2));},50);
+document.getElementById('rtitle').textContent=title;
+var rb=document.getElementById('rband');rb.textContent=band+' · '+tot+' of 100';rb.style.background=col+'1A';rb.style.color=col;
+document.getElementById('rtext').textContent=text;
+var ar=document.getElementById('areas');ar.innerHTML='';
+sc.forEach(function(s){var li=document.createElement('li');var c=s.v===10?'#1F7A4D':s.v===5?'#C9A15A':'#A3261B';
+li.innerHTML='<span class="lbl"></span><span class="bar"><span style="width:'+(s.v*10)+'%;background:'+c+'"></span></span><span style="width:44px;text-align:right">'+s.v+'/10</span>';
+li.querySelector('.lbl').textContent=s.it.a;ar.appendChild(li);});
+var weakAll=sc.filter(function(s){return s.v<10;}).sort(function(a,b){return a.v-b.v||a.i-b.i;});
+var weak=weakAll.slice(0,3);
+var growth=tot>=75;
+var plan=growth?'development and growth plan':'improvement plan';
+var picks=weak.map(function(s){return {a:s.it.a,r:s.it.r};});
+for(var g=0;picks.length<3&&g<G.length;g++) picks.push({a:G[g].a,r:G[g].r,grow:true});
+document.getElementById('recsTitle').textContent = !weak.length ? 'Three steps to develop and grow your business' : (growth ? 'The 3 most important steps to develop your business now' : 'The 3 most important steps for your business now');
+var rc=document.getElementById('recs');rc.innerHTML='';
+picks.forEach(function(p){var li=document.createElement('li');var b=document.createElement('b');b.textContent=p.a;li.appendChild(b);li.appendChild(document.createTextNode(p.r));rc.appendChild(li);});
+var weakNames=weak.map(function(s){return s.it.a;}).join(', ');
+document.getElementById('leadTitle').textContent='Get a detailed '+plan+' for free';
+document.getElementById('leadText').textContent = !weak.length
+? "We review your result and send you, on WhatsApp, a practical plan to develop your business's performance and growth, with the option of a free initial consultation session."
+: (growth ? 'We review your result and send you, on WhatsApp, a plan to develop your business and improve its lowest-scoring areas, with the option of a free initial consultation session.'
+: "We review your result and send you, on WhatsApp, a practical plan for your business's weakest areas, with the option of a free initial consultation session.");
+var lbtn=document.getElementById('lsubmit');lbtn.disabled=false;lbtn.textContent='Send me the '+plan;
+document.getElementById('lokPlan').textContent=plan;
+document.getElementById('h_score').value=tot;document.getElementById('h_band').value=band;document.getElementById('h_weak').value=weakNames||'None';document.getElementById('h_answers').value=ans.join(' | ');document.getElementById('h_plan').value=plan;
+last={tot:tot,band:band,weak:weakNames,plan:plan};
+document.getElementById('wa').href='https://wa.me/970599371188?text='+encodeURIComponent('Hello, I took the financial health check on the TRUST website.\nMy score: '+tot+' of 100 ('+band+')\n'+(weakNames?('Lowest-scoring areas: '+weakNames):'All areas at the best level')+'\nI would like to discuss the '+plan+'.');
+document.getElementById('quiz').classList.add('hidden');var r=document.getElementById('result');r.classList.remove('hidden');r.focus();window.scrollTo({top:0,behavior:'smooth'});
+});
+document.getElementById('again').addEventListener('click',function(){f.reset();f.dispatchEvent(new Event('change'));document.getElementById('result').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');document.getElementById('lform').classList.remove('hidden');document.getElementById('lok').classList.add('hidden');document.getElementById('lerr').textContent='';window.scrollTo({top:0});});
+var lf=document.getElementById('lform');
+lf.addEventListener('submit',function(e){
+e.preventDefault();var err=document.getElementById('lerr');err.textContent='';
+var nm=document.getElementById('l_name').value.trim(),ph=document.getElementById('l_phone').value.replace(/[^\d+]/g,'');
+if(!nm||ph.length<9){err.textContent='Please enter your name and a valid WhatsApp number.';return;}
+var btn=document.getElementById('lsubmit');btn.disabled=true;btn.textContent='Sending…';
+(window.TRUST_SUBMIT?window.TRUST_SUBMIT(lf):fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(lf)).toString()}).then(function(r){return r.ok;}))
+.then(function(ok){if(!ok)throw new Error('not sent');lf.classList.add('hidden');document.getElementById('lok').classList.remove('hidden');window.TRUST_TRACK&&TRUST_TRACK('request_success',{form:'health-check',lang:'en'});})
+.catch(function(){err.textContent='We could not send it right now. Send your result directly using the WhatsApp button below.';btn.disabled=false;btn.textContent='Send me the '+((last&&last.plan)||'improvement plan');});
+});
+})();
+</script>
+<script src="/assets/js/trust-config.js" defer></script><script src="/assets/js/crm-capture.js" defer></script>
+<script src="/en/assets/en-main.js?v=1" defer></script>
+</body>
+</html>

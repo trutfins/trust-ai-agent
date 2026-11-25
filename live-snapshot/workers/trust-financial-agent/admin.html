@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة إدارة TRUST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0E2238;--navy-2:#16324F;--gold:#C9A15A;--gold-2:#D9B46E;--gold-ink:#7A5716;--line:#E2E7ED;--bg:#F3F5F8;--ink:#14202e;--ink-2:#5B6878;--ok:#1F7A4D;--ok-bg:#E4F3EB;--bad:#b4372f;--bad-bg:#fbeceb;--warn-bg:#F6EBD3}
+*{box-sizing:border-box}
+body{margin:0;font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.7}
+button,input,select,textarea{font:inherit}textarea.inp{resize:vertical}
+.hidden{display:none!important}
+header{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}.brand b{font-size:18px;letter-spacing:.5px}.brand small{color:var(--gold-2);font-size:13px}
+.mark{width:34px;height:34px;border-radius:8px;background:#fff;display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:7px}
+.mark i{width:5px;background:var(--navy);border-radius:2px}.mark i:nth-child(1){height:45%}.mark i:nth-child(2){height:100%;background:var(--gold)}.mark i:nth-child(3){height:70%}
+.hdr-r{display:flex;gap:10px;align-items:center;font-size:13px;color:#C9D3DF}
+.btn{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:10px;padding:7px 14px;cursor:pointer;font-weight:600;font-size:14px}
+.btn:hover{border-color:var(--navy)}.btn-primary{background:var(--navy);color:#fff;border-color:var(--navy)}.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.btn-ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn-bad{background:#fff;border-color:var(--bad);color:var(--bad)}.btn-sm{padding:4px 10px;font-size:13px;border-radius:8px}
+.btn-ghost{background:transparent;border-color:rgba(217,180,110,.6);color:var(--gold-2)}
+main{max-width:1200px;margin:0 auto;padding:22px 20px 60px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 16px;cursor:pointer;font-weight:600;color:var(--ink-2)}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.badge{display:inline-block;min-width:20px;padding:0 7px;border-radius:99px;background:var(--bad);color:#fff;font-size:12px;margin-inline-start:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi span{color:var(--ink-2);font-size:13px}.kpi b{display:block;font-size:26px;color:var(--navy);margin-top:4px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+h2{font-size:19px;margin:0 0 12px;color:var(--navy)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:right;color:var(--ink-2);font-weight:600;border-bottom:1px solid var(--line);padding:8px 6px;white-space:nowrap}
+td{border-bottom:1px solid var(--line);padding:9px 6px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:1px 9px;border-radius:99px;background:var(--bg);color:var(--ink-2);white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}.pill.warn{background:var(--warn-bg);color:var(--gold-ink)}.pill.bad{background:var(--bad-bg);color:var(--bad)}.pill.navy{background:var(--navy);color:#fff}
+.muted{color:var(--ink-2);font-size:13px}
+.meter{height:6px;background:#e8edf3;border-radius:6px;overflow:hidden;width:110px;margin-top:4px}.meter i{display:block;height:100%;background:var(--navy-2)}.meter.hot i{background:var(--bad)}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.search{width:100%;max-width:340px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:12px}
+.empty{color:var(--ink-2);text-align:center;padding:24px}
+.login{max-width:380px;margin:70px auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px}
+.login h1{font-size:20px;color:var(--navy);margin:0 0 4px}
+label{display:block;font-size:13px;color:var(--ink-2);margin:10px 0 4px}
+.inp{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:#fff}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:10px;padding:8px 12px;margin-top:10px;font-size:14px}
+.note{background:var(--warn-bg);color:var(--gold-ink);border-radius:10px;padding:8px 12px;font-size:13px;margin-top:10px}
+.modal{position:fixed;inset:0;background:rgba(14,34,56,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.pane{background:#fff;border-radius:16px;padding:22px;width:100%;max-width:460px;max-height:92vh;overflow:auto}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 18px;border-radius:10px;z-index:30;font-size:14px}
+.scroll{overflow-x:auto}
+@media (max-width:700px){main{padding:16px 10px}.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="mark"><i></i><i></i><i></i></span><div><b>TRUST</b><br><small>لوحة الإدارة: الاشتراكات والموافقات</small></div></div>
+  <div class="hdr-r"><span id="who"></span><a class="btn btn-ghost btn-sm" href="/">الوكيل ←</a><button class="btn btn-ghost btn-sm hidden" id="outBtn">خروج</button></div>
+</header>
+
+<div id="loginBox" class="login hidden">
+  <h1>دخول مدير TRUST</h1>
+  <div class="muted">هذه الصفحة لمدير TRUST فقط.</div>
+  <form id="loginForm">
+    <label>البريد الإلكتروني</label><input class="inp" id="lEmail" type="email" autocomplete="username" required>
+    <label>كلمة المرور</label><input class="inp" id="lPass" type="password" autocomplete="current-password" required>
+    <button class="btn btn-primary" style="width:100%;margin-top:16px" type="submit">دخول</button>
+  </form>
+  <div id="lErr" class="err hidden"></div>
+</div>
+
+<div id="denied" class="login hidden"><h1>غير مخوّل</h1><p class="muted">هذا الحساب ليس حساب مدير TRUST.</p><button class="btn" id="out2">تسجيل الخروج</button></div>
+
+<main id="app" class="hidden">
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-t="sum">الملخص</button>
+    <button class="tab" data-t="pend">طلبات الموافقة<span class="badge hidden" id="pCount"></span></button>
+    <button class="tab" data-t="users">المشتركون</button>
+    <button class="tab" data-t="plans">الباقات والأسعار</button>
+    <button class="tab" data-t="bl">القائمة السوداء</button>
+    <button class="tab" data-t="audit">سجل العمليات</button>
+    <button class="btn btn-sm" id="reload" style="margin-inline-start:auto">↻ تحديث</button>
+  </div>
+  <section id="t-sum"></section>
+  <section id="t-pend" class="hidden"></section>
+  <section id="t-users" class="hidden"></section>
+  <section id="t-plans" class="hidden"></section>
+  <section id="t-bl" class="hidden"></section>
+  <section id="t-audit" class="hidden"></section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="pane" id="pane"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const sb = window.supabase.createClient("https://jbeiipdxcyzdqarxzbyo.supabase.co", "sb_publishable_1-BaxouaNpq6UhJuWoSMBw_6UF-FWQI");
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const d = (t) => t ? new Date(t).toLocaleDateString("en-GB", { timeZone: "Asia/Jerusalem" }) : "—";
+const money = (n) => "$" + (Math.round(Number(n || 0) * 100) / 100).toLocaleString("en-US");
+const PLAN = { free: "مجاني", basic: "أساسي", pro: "مهني", credit: "ائتمان ومؤسسات" };
+const SVC = { smart_cfo: "المدير المالي الذكي", credit_analysis: "التحليل الائتماني", invoice_journal: "محوّل الفواتير", analysis: "أداة التحليل المالي والائتماني" };
+const BILL = { monthly: "شهري", yearly: "سنوي", manual: "يدوي (بدون دفع)", trial: "تجربة" };
+const ACTIONS = { plan_grant: "منح/تعديل باقة", plan_revoke_test: "إلغاء باقة تجريبية", tool_access_approved: "موافقة على وصول أداة", tool_access_rejected: "رفض وصول أداة", entitlement_updated: "تعديل صلاحية أداة", plan_update: "تعديل سعر باقة",
+  account_suspended: "إيقاف مؤقت", account_resumed: "إعادة تفعيل بعد إيقاف مؤقت", account_terminated: "إيقاف نهائي", account_unbanned: "رفع الإيقاف النهائي",
+  blacklist_add: "إضافة إلى القائمة السوداء", blacklist_remove: "إزالة من القائمة السوداء" };
+const MSG_SUSP = "اشتراكك موقوف مؤقتاً. للاستفسار تواصل مع TRUST على واتساب 0599371188.";
+const MSG_TERM = "تم إنهاء اشتراكك في خدمات TRUST. للاستفسار تواصل مع TRUST على واتساب 0599371188.";
+let UF = "all";
+let D = null;
+
+function toast(t) { const el = document.createElement("div"); el.className = "toast"; el.textContent = t; document.body.appendChild(el); setTimeout(() => el.remove(), 2600); }
+function closeModal() { $("modal").classList.add("hidden"); }
+$("modal").onclick = (e) => { if (e.target.id === "modal") closeModal(); };
+function errText(e) { const m = (e && (e.message || e.msg)) || String(e); if (/admin_required/.test(m)) return "غير مخوّل."; if (/invalid_plan/.test(m)) return "باقة غير صحيحة.";
+  const map = { already_restricted: "هذا الحساب موقوف أصلاً.", cannot_restrict_admin: "لا يمكن إيقاف حساب مدير.", invalid_until: "تاريخ العودة يجب أن يكون في المستقبل.",
+    message_required: "اكتب رسالة العميل.", invalid_email: "البريد غير صحيح.", not_suspended: "هذا الحساب غير موقوف مؤقتاً.", user_not_found: "الحساب غير موجود." };
+  for (const k in map) if (m.includes(k)) return map[k];
+  return m; }
+
+async function boot() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { $("loginBox").classList.remove("hidden"); return; }
+  const { data: isAdm } = await sb.rpc("analysis_is_admin");
+  $("who").textContent = session.user.email;
+  $("outBtn").classList.remove("hidden");
+  if (isAdm !== true) { $("denied").classList.remove("hidden"); return; }
+  $("app").classList.remove("hidden");
+  await load();
+}
+$("loginForm").onsubmit = async (e) => {
+  e.preventDefault(); $("lErr").classList.add("hidden");
+  const { error } = await sb.auth.signInWithPassword({ email: $("lEmail").value.trim(), password: $("lPass").value });
+  if (error) { $("lErr").textContent = /Invalid login/i.test(error.message) ? "البريد أو كلمة المرور غير صحيحة." : error.message; $("lErr").classList.remove("hidden"); return; }
+  $("loginBox").classList.add("hidden"); boot();
+};
+const signOut = async () => { await sb.auth.signOut(); location.reload(); };
+$("outBtn").onclick = signOut; $("out2").onclick = signOut;
+$("reload").onclick = () => load(true);
+$("tabs").onclick = (e) => {
+  const b = e.target.closest(".tab"); if (!b) return;
+  document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x === b));
+  ["sum", "pend", "users", "plans", "bl", "audit"].forEach((t) => $("t-" + t).classList.toggle("hidden", t !== b.dataset.t));
+};
+
+async function load(msg) {
+  const { data, error } = await sb.rpc("trust_admin_dashboard");
+  if (error) { $("t-sum").innerHTML = `<div class="err">${esc(errText(error))}</div>`; return; }
+  D = data; renderSum(); renderPend(); renderUsers(); renderPlans(); renderBl(); renderAudit();
+  if (msg) toast("تم التحديث");
+}
+
+function renderSum() {
+  const s = D.summary, pa = s.paid_active || {};
+  const paid = Object.values(pa).reduce((a, b) => a + b, 0);
+  $("pCount").textContent = s.pending; $("pCount").classList.toggle("hidden", !s.pending);
+  $("t-sum").innerHTML = `
+  <div class="grid">
+    <div class="kpi"><span>طلبات بانتظار موافقتك</span><b style="color:${s.pending ? "var(--bad)" : "var(--navy)"}">${s.pending}</b></div>
+    <div class="kpi"><span>المشتركون بباقات مدفوعة</span><b>${paid}</b><div class="muted">${Object.entries(pa).map(([k, v]) => PLAN[k] + ": " + v).join(" · ") || "—"}</div></div>
+    <div class="kpi"><span>الإيراد الشهري المتوقع</span><b>${money(s.mrr_usd)}</b><div class="muted">لا يشمل الباقات اليدوية</div></div>
+    <div class="kpi"><span>تكلفة الذكاء الاصطناعي هذا الشهر</span><b>${money(s.ai_cost_month_usd)}</b></div>
+    <div class="kpi"><span>اشتراكات تنتهي خلال 7 أيام</span><b>${s.expiring_7d}</b></div>
+    <div class="kpi"><span>حسابات موقوفة</span><b>${(s.suspended || 0) + (s.terminated || 0)}</b><div class="muted">مؤقت: ${s.suspended || 0} · نهائي: ${s.terminated || 0}</div></div>
+    <div class="kpi"><span>إجمالي الحسابات</span><b>${s.users_total}</b><div class="muted">جديد هذا الشهر: ${s.users_new_month}</div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h2>كيف يعمل التفعيل</h2>
+  <div class="muted">١) العميل يطلب الاشتراك عبر واتساب ويدفع بتحويل بنكي أو محفظة. ٢) من «المشتركون» ابحث عن بريده واضغط «منح باقة». ٣) الباقة تفعّل الوكيل والأدوات المشمولة فيها تلقائياً بنفس تاريخ الانتهاء. ٤) للتجديد اضغط «تجديد» فيُمدَّد الاشتراك شهراً أو سنة من تاريخ انتهائه.</div></div>`;
+}
+
+function renderPend() {
+  const p = D.pending || [];
+  $("t-pend").innerHTML = `<div class="card"><h2>طلبات بانتظار الموافقة</h2>${!p.length ? `<div class="empty">لا توجد طلبات معلّقة ✓</div>` : `<div class="scroll"><table>
+  <tr><th>العميل</th><th>الطلب</th><th>التاريخ</th><th></th></tr>
+  ${p.map((r, i) => `<tr><td><b>${esc(r.full_name || "—")}</b><div class="muted">${esc(r.email)}</div></td>
+  <td>${r.kind === "tool_access" ? "طلب استخدام" : "طلب تفعيل"}: ${esc(SVC[r.service] || r.service)}</td><td>${d(r.requested_at)}</td>
+  <td><div class="acts"><button class="btn btn-ok btn-sm" data-ap="${i}">موافقة (تجربة)</button><button class="btn btn-sm" data-gp="${esc(r.user_id)}">منح باقة</button><button class="btn btn-bad btn-sm" data-rj="${i}">رفض</button></div></td></tr>`).join("")}
+  </table></div><div class="note">«موافقة (تجربة)» تسمح للعميل بالدخول واستخدام التجربة المجانية للأداة. للاستخدام الكامل امنحه باقة بعد الدفع.</div>`}</div>`;
+  $("t-pend").querySelectorAll("[data-ap],[data-rj]").forEach((b) => b.onclick = async () => {
+    const r = p[Number(b.dataset.ap ?? b.dataset.rj)]; const ok = b.dataset.ap !== undefined;
+    if (!ok && !confirm("رفض طلب " + r.email + "؟")) return;
+    b.disabled = true;
+    const { error } = await sb.rpc("trust_admin_access_decide", { p_user_id: r.user_id, p_service: r.service, p_approve: ok });
+    if (error) { toast(errText(error)); b.disabled = false; return; }
+    toast(ok ? "تمت الموافقة" : "تم الرفض"); load();
+  });
+  $("t-pend").querySelectorAll("[data-gp]").forEach((b) => b.onclick = () => openGrant(b.dataset.gp));
+}
+
+const DAY = 864e5;
+function uStatus(u) {
+  if (u.is_admin) return "admin";
+  if (u.banned || (u.restriction && u.restriction.kind === "terminated")) return "term";
+  if (u.restriction && u.restriction.kind === "suspended") return "susp";
+  const p = u.plan;
+  if (p && p.code !== "free") {
+    const exp = p.expires_at ? new Date(p.expires_at) : null;
+    if (p.status !== "active" || (exp && exp <= new Date())) return "expired";
+    if (exp && exp - new Date() <= 7 * DAY) return "soon";
+    return "active";
+  }
+  return "free";
+}
+const ST = { admin: ["مدير", "navy"], term: ["موقوف نهائياً", "bad"], susp: ["موقوف مؤقتاً", "warn"], expired: ["منتهٍ", "bad"], soon: ["ينتهي قريباً", "warn"], active: ["فعّال", "ok"], free: ["مجاني", ""] };
+const FILTERS = [["all", "الكل"], ["active", "فعّال"], ["soon", "ينتهي قريباً"], ["expired", "منتهٍ"], ["stopped", "موقوف"], ["free", "مجاني"], ["cost", "الأعلى تكلفة"]];
+function inFilter(s) {
+  if (UF === "all" || UF === "cost") return true;
+  if (UF === "active") return s === "active" || s === "soon";
+  if (UF === "stopped") return s === "susp" || s === "term";
+  return s === UF;
+}
+function planCell(u, st) {
+  const p = u.plan;
+  if (st === "admin") return `<span class="pill navy">مدير</span>`;
+  let h = p && p.code !== "free" ? `<b>${esc(PLAN[p.code] || p.code)}</b> <span class="muted">${esc(BILL[p.billing] || p.billing || "")}${p.launch_discount ? " · خصم إطلاق" : ""}</span>` : `<span class="muted">مجاني</span>`;
+  h += `<div><span class="pill ${ST[st][1]}">${ST[st][0]}</span></div>`;
+  const r = u.restriction;
+  if (r) h += `<div class="muted">منذ ${d(r.since)}${r.until ? " · يعود تلقائياً " + d(r.until) : ""}${r.note ? "<br>ملاحظة: " + esc(r.note) : ""}</div>`;
+  else if (u.banned) h += `<div class="muted">الحساب مغلق</div>`;
+  if (u.blacklisted) h += `<div><span class="pill bad">في القائمة السوداء</span></div>`;
+  return h;
+}
+function expCell(u) {
+  const p = u.plan;
+  if (!p || p.code === "free" || !p.expires_at) return `<span class="muted">—</span>`;
+  const days = Math.ceil((new Date(p.expires_at) - new Date()) / DAY);
+  const tag = days > 7 ? `<span class="muted">باقي ${days} يوم</span>` : days > 0 ? `<span class="pill warn">باقي ${days} يوم</span>` : `<span class="pill bad">انتهى منذ ${-days} يوم</span>`;
+  return `<b>${d(p.expires_at)}</b><div>${tag}</div>`;
+}
+const m3 = (n) => { n = Number(n || 0); return n > 0 && n < 1 ? "$" + n.toFixed(3) : money(n); };
+function econCell(u) {
+  const e = u.econ || {}, c = Number(e.cost_period_usd || 0), r = Number(e.revenue_period_usd || 0);
+  let h = `<b>${m3(c)}</b> <span class="muted">تكلفة هذه الفترة</span>`;
+  if (r > 0) {
+    const pc = c / r * 100;
+    h += `<div class="muted">المدفوع ${money(r)} · <span class="pill ${pc > 30 ? "bad" : "ok"}">${pc < 0.1 && c > 0 ? "&lt;0.1" : pc.toFixed(1)}%</span></div><div class="muted">الهامش <b style="color:${r - c < 0 ? "var(--bad)" : "var(--ok)"}">${money(r - c)}</b></div>`;
+  } else if (u.is_admin) h += `<div class="muted">حساب المدير</div>`;
+  else if (e.billing === "manual" && u.effective_plan !== "free") h += `<div class="muted">باقة يدوية بدون دفع</div>`;
+  else h += `<div class="muted">بدون إيراد${c > 0 ? ` <span class="pill warn">يكلّف</span>` : ""}</div>`;
+  h += `<div class="muted">منذ التسجيل: ${m3(e.cost_life_usd)}</div>`;
+  return h;
+}
+function renderUsers(filter) {
+  const q = (filter ?? $("uSearch")?.value ?? "").trim().toLowerCase();
+  const all = (D.users || []).map((u) => ({ u, st: uStatus(u) }));
+  const cnt = (k) => all.filter((x) => { const o = UF; UF = k; const r = inFilter(x.st); UF = o; return r; }).length;
+  const list = all.filter(({ u, st }) => inFilter(st) && (!q || (u.email || "").toLowerCase().includes(q) || (u.full_name || "").toLowerCase().includes(q)));
+  if (UF === "cost") list.sort((a, b) => Number(b.u.econ?.cost_period_usd || 0) - Number(a.u.econ?.cost_period_usd || 0));
+  $("t-users").innerHTML = `<div class="card"><h2>المشتركون (${list.length})</h2>
+  <div class="acts" style="margin-bottom:10px">${FILTERS.map(([k, l]) => `<button class="tab ${UF === k ? "on" : ""}" data-f="${k}">${l} (${cnt(k)})</button>`).join("")}</div>
+  <input class="search" id="uSearch" placeholder="ابحث بالبريد أو الاسم…" value="${esc(q)}">
+  <div class="scroll"><table><tr><th>العميل</th><th>الباقة والحالة</th><th>تاريخ الانتهاء</th><th>استهلاك الوكيل هذا الشهر</th><th>التكلفة والربحية</th><th>الأدوات</th><th></th></tr>
+  ${list.map(({ u, st }) => {
+    const pct = u.month_cap_usd > 0 ? Math.min(100, Math.round(u.month_used_usd / u.month_cap_usd * 100)) : 0;
+    const svcs = (u.services || []).filter((s) => s.status === "active").map((s) => `<span class="pill ${s.tier === "full" ? "ok" : ""}">${esc(SVC[s.service] || s.service)}${s.tier === "full" ? "" : " (تجربة)"}</span>`).join(" ");
+    const id = esc(u.id);
+    let acts = "";
+    if (st === "term") acts = `<button class="btn btn-sm" data-ub="${id}">رفع الإيقاف النهائي</button>`;
+    else if (st === "susp") acts = `<button class="btn btn-ok btn-sm" data-rs="${id}">إعادة تفعيل</button><button class="btn btn-bad btn-sm" data-tm="${id}">إيقاف نهائي</button>`;
+    else if (st !== "admin") acts = `<button class="btn btn-primary btn-sm" data-g="${id}">منح باقة</button>${st === "active" || st === "soon" ? `<button class="btn btn-sm" data-r="${id}">تجديد</button>` : ""}<button class="btn btn-sm" data-sp="${id}">إيقاف مؤقت</button><button class="btn btn-bad btn-sm" data-tm="${id}">إيقاف نهائي</button>`;
+    return `<tr><td><b>${esc(u.full_name || "—")}</b><div class="muted">${esc(u.email)}${u.confirmed ? "" : ` <span class="pill warn">لم يؤكد البريد</span>`}</div><div class="muted">سجّل ${d(u.created_at)} · آخر دخول ${d(u.last_sign_in)}</div></td>
+    <td>${planCell(u, st)}</td><td>${expCell(u)}</td>
+    <td><span class="muted">${u.analyses_month} تحليل · ${u.messages_month} رسالة · ${money(u.month_used_usd)} من ${money(u.month_cap_usd)}</span><div class="meter ${pct >= 80 ? "hot" : ""}"><i style="width:${Math.max(2, pct)}%"></i></div></td>
+    <td>${econCell(u)}</td>
+    <td>${svcs || `<span class="muted">—</span>`}${u.tool_access === "pending" ? ` <span class="pill warn">طلب معلّق</span>` : ""}</td>
+    <td><div class="acts">${acts}</div></td></tr>`;
+  }).join("") || `<tr><td colspan="7" class="empty">لا نتائج</td></tr>`}</table></div></div>`;
+  const s = $("uSearch"); s.oninput = () => { const v = s.value; renderUsers(v); const n = $("uSearch"); n.focus(); n.setSelectionRange(v.length, v.length); };
+  const on = (attr, fn) => $("t-users").querySelectorAll(`[data-${attr}]`).forEach((b) => b.onclick = () => fn(b.dataset[attr]));
+  on("f", (k) => { UF = k; renderUsers(); });
+  on("g", openGrant); on("r", openRenew); on("sp", openSuspend); on("rs", resume); on("tm", openTerminate); on("ub", openUnban);
+}
+const userById = (id) => (D.users || []).find((u) => u.id === id);
+
+function openGrant(id) {
+  const u = userById(id) || { id, email: "" };
+  const plans = (D.plans || []).filter((p) => p.code !== "free" && p.active);
+  const today = new Date().toISOString().slice(0, 10);
+  $("pane").innerHTML = `<h2>منح باقة</h2><div class="muted">${esc(u.full_name || "")} — ${esc(u.email)}</div>
+  <label>الباقة</label><select class="inp" id="gPlan">${plans.map((p) => `<option value="${p.code}">${esc(p.name_ar)} — $${p.price_usd_month} شهرياً / $${p.price_usd_year} سنوياً</option>`).join("")}</select>
+  <div class="row2"><div><label>طريقة الاشتراك</label><select class="inp" id="gBill"><option value="monthly">شهري</option><option value="yearly">سنوي</option><option value="manual">يدوي (هدية/شريك — بدون دفع)</option></select></div>
+  <div><label>تاريخ البدء</label><input class="inp" type="date" id="gStart" value="${today}"></div></div>
+  <div class="chk"><input type="checkbox" id="gLaunch"><label for="gLaunch" style="margin:0">خصم الإطلاق 50% لأول 3 أشهر (لأول 10 عملاء)</label></div>
+  <label>ملاحظة (رقم الحوالة أو طريقة الدفع)</label><input class="inp" id="gNote" placeholder="مثال: حوالة بنك فلسطين 12345">
+  <div class="note" id="gSum"></div>
+  <div class="acts" style="margin-top:14px"><button class="btn btn-primary" id="gOk">تفعيل الاشتراك</button><button class="btn" onclick="closeModal()">إلغاء</button></div>
+  <div id="gErr" class="err hidden"></div>`;
+  const sum = () => {
+    const p = plans.find((x) => x.code === $("gPlan").value), bill = $("gBill").value, l = $("gLaunch").checked;
+    const st = new Date($("gStart").value + "T00:00:00"); const ex = new Date(st); bill === "yearly" ? ex.setFullYear(ex.getFullYear() + 1) : ex.setMonth(ex.getMonth() + 1);
+    const amt = bill === "manual" ? 0 : (bill === "yearly" ? p.price_usd_year : p.price_usd_month) * (l && bill !== "yearly" ? 0.5 : 1);
+    $("gSum").innerHTML = `المبلغ المستحق: <b>${money(amt)}</b>${l && bill === "yearly" ? " (خصم الإطلاق يُطبّق على الاشتراك الشهري فقط)" : ""} · ينتهي في <b>${d(ex)}</b><br>يفعّل تلقائياً: ${(p.services || []).map((s) => SVC[s]).join("، ") || "الوكيل فقط"}`;
+  };
+  ["gPlan", "gBill", "gLaunch", "gStart"].forEach((k) => $(k).onchange = sum); sum();
+  $("gOk").onclick = async () => {
+    $("gOk").disabled = true;
+    const st = new Date($("gStart").value + "T00:00:00");
+    const startIso = $("gStart").value === today ? new Date().toISOString() : st.toISOString();
+    const { error } = await sb.rpc("trust_plan_grant", { p_user_id: id, p_plan: $("gPlan").value, p_billing: $("gBill").value, p_starts_at: startIso,
+      p_expires_at: null, p_launch_discount: $("gLaunch").checked && $("gBill").value === "monthly", p_note: $("gNote").value || null, p_status: "active" });
+    if (error) { $("gErr").textContent = errText(error); $("gErr").classList.remove("hidden"); $("gOk").disabled = false; return; }
+    closeModal(); toast("تم تفعيل الاشتراك"); load();
+  };
+  $("modal").classList.remove("hidden");
+}
+
+function openRenew(id) {
+  const u = userById(id); const p = u.plan;
+  const base = p.expires_at && new Date(p.expires_at) > new Date() ? new Date(p.expires_at) : new Date();
+  const next = (bill) => { const x = new Date(base); bill === "yearly" ? x.setFullYear(x.getFullYear() + 1) : x.setMonth(x.getMonth() + 1); return x; };
+  $("pane").innerHTML = `<h2>تجديد الاشتراك</h2><div class="muted">${esc(u.email)} — ${esc(PLAN[p.code])}، ينتهي حالياً ${d(p.expires_at)}</div>
+  <label>مدة التجديد</label><select class="inp" id="rBill"><option value="monthly">شهر</option><option value="yearly">سنة</option></select>
+  <label>ملاحظة (رقم الحوالة)</label><input class="inp" id="rNote">
+  <div class="note" id="rSum"></div>
+  <div class="acts" style="margin-top:14px"><button class="btn btn-primary" id="rOk">تجديد</button><button class="btn" onclick="closeModal()">إلغاء</button></div><div id="rErr" class="err hidden"></div>`;
+  const sum = () => { $("rSum").innerHTML = `الانتهاء الجديد: <b>${d(next($("rBill").value))}</b>`; }; $("rBill").onchange = sum; sum();
+  $("rOk").onclick = async () => {
+    $("rOk").disabled = true; const bill = $("rBill").value;
+    const { error } = await sb.rpc("trust_plan_grant", { p_user_id: id, p_plan: p.code, p_billing: p.billing === "manual" ? "manual" : bill, p_starts_at: p.starts_at,
+      p_expires_at: next(bill).toISOString(), p_launch_discount: p.launch_discount, p_note: $("rNote").value || p.note, p_status: "active" });
+    if (error) { $("rErr").textContent = errText(error); $("rErr").classList.remove("hidden"); $("rOk").disabled = false; return; }
+    closeModal(); toast("تم التجديد"); load();
+  };
+  $("modal").classList.remove("hidden");
+}
+
+function modalErr(id, e) { $(id).textContent = errText(e); $(id).classList.remove("hidden"); }
+function openSuspend(id) {
+  const u = userById(id);
+  const tmr = new Date(Date.now() + DAY).toISOString().slice(0, 10);
+  $("pane").innerHTML = `<h2>إيقاف مؤقت</h2><div class="muted">${esc(u.full_name || "")} — ${esc(u.email)}</div>
+  <div class="note">يتوقف الوكيل والأدوات. الحساب والبيانات والاشتراك تبقى كما هي، ويعود بزر «إعادة تفعيل» أو تلقائياً في التاريخ الذي تحدده.</div>
+  <label>ملاحظة داخلية (تظهر لك فقط)</label><input class="inp" id="sNote" placeholder="مثال: تأخر بالدفع">
+  <label>رسالة العميل (تظهر له عند الدخول)</label><textarea class="inp" id="sMsg" rows="3">${esc(MSG_SUSP)}</textarea>
+  <label>يعود تلقائياً في (اختياري)</label><input class="inp" type="date" id="sUntil" min="${tmr}">
+  <div class="chk"><input type="checkbox" id="sExt"><label for="sExt" style="margin:0">أضف مدة الإيقاف إلى تاريخ انتهاء الاشتراك (للتجميد بطلب العميل)</label></div>
+  <div class="acts" style="margin-top:14px"><button class="btn btn-primary" id="sOk">إيقاف مؤقت</button><button class="btn" onclick="closeModal()">إلغاء</button></div><div id="sErr" class="err hidden"></div>`;
+  $("sOk").onclick = async () => {
+    $("sOk").disabled = true;
+    const ud = $("sUntil").value;
+    const { error } = await sb.rpc("trust_admin_suspend", { p_user_id: id, p_note: $("sNote").value || null, p_message: $("sMsg").value,
+      p_until: ud ? new Date(ud + "T00:00:00").toISOString() : null, p_extend: $("sExt").checked });
+    if (error) { modalErr("sErr", error); $("sOk").disabled = false; return; }
+    closeModal(); toast("تم الإيقاف المؤقت"); load();
+  };
+  $("modal").classList.remove("hidden");
+}
+async function resume(id) {
+  const u = userById(id), r = u.restriction || {};
+  if (!confirm(`إعادة تفعيل ${u.email}؟${r.extend ? "\nسيُعدَّل تاريخ الانتهاء حسب المدة الفعلية للإيقاف." : ""}`)) return;
+  const { error } = await sb.rpc("trust_admin_resume", { p_user_id: id });
+  if (error) return toast(errText(error));
+  toast("تمت إعادة التفعيل"); load();
+}
+function openTerminate(id) {
+  const u = userById(id);
+  $("pane").innerHTML = `<h2 style="color:var(--bad)">إيقاف نهائي</h2><div class="muted">${esc(u.full_name || "")} — ${esc(u.email)}</div>
+  <div class="err">يُغلق الحساب فوراً: لا دخول إلى الوكيل ولا إلى أدوات trustfins.org، ويُوقف الاشتراك. البيانات لا تُحذف. يمكن التراجع لاحقاً بزر «رفع الإيقاف النهائي».</div>
+  <label>ملاحظة داخلية (تظهر لك فقط)</label><input class="inp" id="tNote">
+  <label>رسالة العميل (تظهر له عند محاولة الدخول)</label><textarea class="inp" id="tMsg" rows="3">${esc(MSG_TERM)}</textarea>
+  <div class="chk"><input type="checkbox" id="tBl" checked><label for="tBl" style="margin:0">أضف بريده إلى القائمة السوداء (يمنع إنشاء حساب جديد بنفس البريد)</label></div>
+  <label>للتأكيد اكتب بريد العميل</label><input class="inp" id="tConf" dir="ltr" autocomplete="off">
+  <div class="acts" style="margin-top:14px"><button class="btn btn-bad" id="tOk" disabled>إيقاف نهائي</button><button class="btn" onclick="closeModal()">إلغاء</button></div><div id="tErr" class="err hidden"></div>`;
+  $("tConf").oninput = () => { $("tOk").disabled = $("tConf").value.trim().toLowerCase() !== (u.email || "").toLowerCase(); };
+  $("tOk").onclick = async () => {
+    $("tOk").disabled = true;
+    const { error } = await sb.rpc("trust_admin_terminate", { p_user_id: id, p_note: $("tNote").value || null, p_message: $("tMsg").value, p_blacklist: $("tBl").checked });
+    if (error) { modalErr("tErr", error); $("tOk").disabled = false; return; }
+    closeModal(); toast("تم الإيقاف النهائي"); load();
+  };
+  $("modal").classList.remove("hidden");
+}
+function openUnban(id) {
+  const u = userById(id);
+  $("pane").innerHTML = `<h2>رفع الإيقاف النهائي</h2><div class="muted">${esc(u.email)}</div>
+  <div class="note">يستطيع العميل الدخول مجدداً، لكن اشتراكه يبقى موقوفاً. لتفعيله امنحه باقة من جديد.</div>
+  <div class="chk"><input type="checkbox" id="uBl" checked><label for="uBl" style="margin:0">أزل بريده من القائمة السوداء أيضاً</label></div>
+  <div class="acts" style="margin-top:14px"><button class="btn btn-primary" id="uOk">رفع الإيقاف</button><button class="btn" onclick="closeModal()">إلغاء</button></div><div id="uErr" class="err hidden"></div>`;
+  $("uOk").onclick = async () => {
+    $("uOk").disabled = true;
+    const { error } = await sb.rpc("trust_admin_unban", { p_user_id: id, p_unblacklist: $("uBl").checked });
+    if (error) { modalErr("uErr", error); $("uOk").disabled = false; return; }
+    closeModal(); toast("تم رفع الإيقاف"); load();
+  };
+  $("modal").classList.remove("hidden");
+}
+function renderBl() {
+  const b = D.blacklist || [];
+  $("t-bl").innerHTML = `<div class="card"><h2>القائمة السوداء</h2>
+  <div class="muted">البريد المدرج هنا لا يستطيع إنشاء حساب جديد في الوكيل ولا في أدوات الموقع. المنع بالبريد فقط: من يسجّل ببريد آخر لا يُمنع.</div>
+  <div class="row2" style="margin-top:12px"><div><label>البريد</label><input class="inp" id="blEmail" dir="ltr" placeholder="name@example.com"></div>
+  <div><label>ملاحظة داخلية</label><input class="inp" id="blNote"></div></div>
+  <button class="btn btn-bad" id="blAdd" style="margin-top:10px">إضافة إلى القائمة السوداء</button></div>
+  <div class="card">${!b.length ? `<div class="empty">القائمة فارغة</div>` : `<div class="scroll"><table><tr><th>البريد</th><th>ملاحظة</th><th>أضيف</th><th></th></tr>
+  ${b.map((x, i) => `<tr><td dir="ltr" style="text-align:right">${esc(x.email)}${x.has_account ? ` <span class="pill">له حساب</span>` : ""}</td><td class="muted">${esc(x.note || "—")}</td><td class="muted">${d(x.at)}</td>
+  <td><button class="btn btn-sm" data-blr="${i}">إزالة</button></td></tr>`).join("")}</table></div>`}</div>`;
+  $("blAdd").onclick = async () => {
+    const em = $("blEmail").value.trim(); if (!em) return toast("اكتب البريد");
+    if (!confirm("إضافة " + em + " إلى القائمة السوداء؟")) return;
+    const { error } = await sb.rpc("trust_admin_blacklist", { p_email: em, p_add: true, p_note: $("blNote").value || null });
+    if (error) return toast(errText(error));
+    toast("أضيف إلى القائمة السوداء"); load();
+  };
+  $("t-bl").querySelectorAll("[data-blr]").forEach((btn) => btn.onclick = async () => {
+    const x = b[Number(btn.dataset.blr)];
+    if (!confirm("إزالة " + x.email + " من القائمة السوداء؟")) return;
+    const { error } = await sb.rpc("trust_admin_blacklist", { p_email: x.email, p_add: false });
+    if (error) return toast(errText(error));
+    toast("تمت الإزالة"); load();
+  });
+}
+
+function renderPlans() {
+  $("t-plans").innerHTML = `<div class="card"><h2>الباقات والأسعار</h2><div class="scroll"><table>
+  <tr><th>الباقة</th><th>شهري $</th><th>سنوي $</th><th>تحليلات شهرياً</th><th>الأدوات المشمولة</th><th></th></tr>
+  ${(D.plans || []).filter((p) => p.code !== "free").map((p) => `<tr><td><b>${esc(p.name_ar)}</b></td>
+  <td><input class="inp" style="width:90px" type="number" step="0.01" id="pm-${p.code}" value="${p.price_usd_month}"></td>
+  <td><input class="inp" style="width:90px" type="number" step="0.01" id="py-${p.code}" value="${p.price_usd_year}"></td>
+  <td><input class="inp" style="width:80px" type="number" id="pa-${p.code}" value="${p.monthly_analyses ?? ""}"></td>
+  <td class="muted">${(p.services || []).map((s) => SVC[s]).join("، ")}</td>
+  <td><button class="btn btn-sm" data-pl="${p.code}">حفظ</button></td></tr>`).join("")}</table></div>
+  <div class="note">تغيير السعر هنا يغيّر ما يظهر في صفحة الوكيل وحد الاستهلاك (30% من السعر) فوراً. أما الأسعار المكتوبة في صفحات الموقع فتحتاج تحديثاً منفصلاً، اطلبه من Claude.</div></div>`;
+  $("t-plans").querySelectorAll("[data-pl]").forEach((b) => b.onclick = async () => {
+    const c = b.dataset.pl, m = Number($("pm-" + c).value), y = Number($("py-" + c).value), a = $("pa-" + c).value;
+    if (!(m > 0 && y > 0)) return toast("أدخل أسعاراً صحيحة");
+    if (!confirm(`حفظ سعر «${PLAN[c]}»: $${m} شهرياً و$${y} سنوياً؟`)) return;
+    const { error } = await sb.rpc("trust_plan_update", { p_code: c, p_patch: { price_usd_month: m, price_usd_year: y, cost_cap_usd: Math.round(m * 0.3 * 100) / 100, monthly_analyses: a === "" ? null : Number(a) } });
+    if (error) return toast(errText(error));
+    toast("تم الحفظ"); load();
+  });
+}
+
+function renderAudit() {
+  const a = D.audit || [];
+  $("t-audit").innerHTML = `<div class="card"><h2>آخر العمليات</h2>${!a.length ? `<div class="empty">لا توجد عمليات</div>` : `<div class="scroll"><table><tr><th>الوقت</th><th>العملية</th><th>العميل</th></tr>
+  ${a.map((x) => `<tr><td class="muted">${new Date(x.at).toLocaleString("en-GB", { timeZone: "Asia/Jerusalem" })}</td><td>${esc(ACTIONS[x.action] || x.action)}${x.service ? " — " + esc(SVC[x.service] || x.service) : ""}</td><td>${esc(x.target || "—")}${x.note ? `<div class="muted">${esc(x.note)}</div>` : ""}</td></tr>`).join("")}</table></div>`}</div>`;
+}
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+/* English (left-to-right) adjustments on top of the shared TRUST styles.
+   The shared styles were written for the Arabic pages; these rules only mirror the few
+   right/left-specific details and switch to the Latin typeface. */
+html[lang="en"] body{font-family:'IBM Plex Sans','IBM Plex Sans Arabic',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.7}
+html[lang="en"] .skip{right:auto;left:16px}
+html[lang="en"] .brand-txt b{text-align:left}
+html[lang="en"] .wa-float{left:auto;right:20px}
+@media (max-width:640px){html[lang="en"] .wa-float{left:auto;right:calc(12px + env(safe-area-inset-right,0px))}}
+html[lang="en"] .app td,html[lang="en"] .app th,
+html[lang="en"] table.data th,html[lang="en"] table.data td,
+html[lang="en"] table.data caption{text-align:left}
+html[lang="en"] .badge-top{left:auto;right:18px}
+html[lang="en"] .lcard.due{border-right:0;border-left:4px solid var(--gold)}
+html[lang="en"] .probs li::before{content:"?"}
+html[lang="en"] [lang="ar"]{font-family:'IBM Plex Sans Arabic',sans-serif}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3{letter-spacing:-.2px}
+
+/* Links to pages that exist in Arabic only carry a small "AR" tag */
+.ar-link::after{content:"AR";display:inline-block;font-size:10px;font-weight:700;line-height:1.3;border:1px solid currentColor;border-radius:4px;padding:0 3px;margin-inline-start:6px;opacity:.75;vertical-align:1px;font-family:'IBM Plex Sans',sans-serif;text-decoration:none}
+.btn.ar-link::after{opacity:.85}
+.ft-bottom + .ar-key, .ar-key{margin:18px 0 0;font-size:12.5px;color:#9FB0C3}
+
+/* Header: English labels are longer than the Arabic ones, so the full menu needs more room.
+   Between 961px and 1199px the menu folds into the menu button, as the Arabic header does below 961px. */
+html[lang="en"] .nav{gap:20px}
+html[lang="en"] .nav a,html[lang="en"] .hdr-cta{white-space:nowrap}
+@media (min-width:961px) and (max-width:1199px){
+  html[lang="en"] .menu-btn{display:inline-flex}
+  html[lang="en"] .nav{display:none;position:absolute;top:72px;right:0;left:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px 20px 16px;box-shadow:var(--shadow)}
+  html[lang="en"] .nav.open{display:flex}
+  html[lang="en"] .nav a{padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
+  html[lang="en"] .nav .nav-cta{display:flex;margin-top:12px;border-bottom:0;color:#fff;padding:12px 22px}
+}
+/* on small phones the Arabic link moves to the footer only (as the English link does on the Arabic pages) */
+@media (max-width:420px){html[lang="en"] .hdr-actions .lang[lang="ar"]{display:none}}

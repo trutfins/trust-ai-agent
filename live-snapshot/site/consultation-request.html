@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-gate="hub">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E2238">
+<title>اطلب استشارة مالية | TRUST</title>
+<meta name="description" content="اطلب استشارة مالية أو محاسبية أو دراسة جدوى أو تقريراً مالياً من TRUST، ونرد خلال يوم عمل.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TRUST"><meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="اطلب استشارة مالية | TRUST"><meta property="og:description" content="اطلب استشارة مالية أو محاسبية أو دراسة جدوى أو تقريراً مالياً من TRUST، ونرد خلال يوم عمل.">
+<meta property="og:image" content="https://trustfins.org/og-image.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://trustfins.org/consultation-request"><meta property="og:url" content="https://trustfins.org/consultation-request">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+<script src="/assets/js/trust-config.js"></script>
+</head>
+<body class="app">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<header class="site-header">
+<div class="wrap hdr">
+<a class="brand" href="/" aria-label="TRUST — الصفحة الرئيسية"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small>للخدمات المحاسبية والمالية</small></span></a>
+<nav class="nav" id="site-nav" aria-label="القائمة الرئيسية">
+<a href="/services">الخدمات</a>
+<a href="/about">عن TRUST</a>
+<a href="/#faq">الأسئلة الشائعة</a>
+<a href="/financial-hub" aria-current="page">أدوات مجانية</a><a href="/digital-services">الخدمات الرقمية</a>
+<a href="/contact">تواصل معنا</a>
+<a class="btn btn-primary nav-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+</nav>
+<div class="hdr-actions">
+<a class="lang" href="/login" data-account>دخول العملاء</a>
+<a class="lang" href="/en" lang="en" hreflang="en">English</a>
+<a class="btn btn-primary btn-sm hdr-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="فتح القائمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+</div>
+</header>
+<section class="page-head"><div class="wrap">
+<div class="crumbs"><a href="/">الرئيسية</a> / <a href="/financial-hub">أدوات مجانية</a></div>
+<h1>اطلب استشارة</h1><p>عندك سؤال أو قرار مالي؟ اكتب لنا ويتواصل معك مستشار من TRUST خلال يوم عمل</p>
+</div></section>
+<main id="main" class="app-main"><div class="wrap"><div class="panel mid">
+<p class="notice">هذا النموذج لسؤال أو قرار مالي يحتاج مراجعة. لطلب خدمة محددة أو استفسار عام استخدم <a href="/contact">نموذج التواصل</a>، ولطلب جلسة أولية <a href="/contact?main=session">من هنا</a>.</p>
+<form name="trust-consultations" method="POST" action="/consultation-success.html" data-netlify="true" netlify-honeypot="bot-field" id="consForm">
+<input type="hidden" name="form-name" value="trust-consultations">
+<p class="hidden"><label>اترك هذا الحقل فارغاً<input name="bot-field"></label></p>
+<div class="form-grid">
+<div><label for="person">الاسم *</label><input id="person" name="person" autocomplete="name" required maxlength="120"></div>
+<div><label for="phone">رقم الهاتف / واتساب *</label><input id="phone" name="phone" type="tel" dir="ltr" autocomplete="tel" placeholder="059XXXXXXX" required maxlength="35"></div>
+<div><label for="email">البريد الإلكتروني <small>(اختياري)</small></label><input id="email" name="email" type="email" dir="ltr" autocomplete="email" maxlength="160"></div>
+<div><label for="business">اسم المشروع <small>(اختياري)</small></label><input id="business" name="business" autocomplete="organization" maxlength="160"></div>
+<div class="full"><label for="service">الخدمة المطلوبة *</label><select id="service" name="service" required><option value="">اختر الخدمة</option><option>استشارة مالية</option><option>استشارة محاسبية</option><option>دراسة جدوى</option><option>تقرير مالي</option><option>تقييم القدرة على التمويل</option></select></div>
+<div class="full"><label for="details">ماذا تحتاج؟ *</label><textarea id="details" name="details" rows="5" required maxlength="3000" placeholder="مثال: أريد معرفة قدرتي على أخذ قرض لتوسيع المحل…"></textarea></div>
+</div>
+<label class="check"><input type="checkbox" name="consent" value="yes" required> <span>أوافق على استخدام بيانات التواصل للرد على طلبي وفق <a href="/privacy" target="_blank" rel="noopener">سياسة الخصوصية</a>.</span></label>
+<p class="err" id="consErr" role="alert"></p>
+<div class="acts"><button class="btn btn-primary" type="submit" id="consBtn">إرسال الطلب</button><a class="btn btn-wa" href="https://wa.me/970599371188" target="_blank" rel="noopener">أو اسألنا على واتساب</a></div>
+<p class="muted" style="margin-top:10px">بياناتك سرية، ونرد عادة خلال يوم عمل.</p>
+</form>
+</div></div></main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="ft-grid">
+<div class="ft-brand">
+<a class="brand" href="/" aria-label="TRUST"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small style="color:#9FB0C3">للخدمات المحاسبية والمالية</small></span></a>
+<p style="margin-top:14px">وضوح في الأرقام، ثقة في القرارات.<br>خدمات محاسبية ومالية واستشارية للمشاريع الصغيرة والمتوسطة في فلسطين.</p>
+</div>
+<div><h2>خدماتنا</h2><ul>
+<li><a href="/accounting-systems">تأسيس الأنظمة المحاسبية والإدارية</a></li><li><a href="/financial-management">الإدارة المالية والمتابعة الدورية</a></li><li><a href="/feasibility-growth">دراسات الجدوى والنمو والتمويل</a></li><li><a href="/pricing">الباقات والأسعار</a></li><li><a href="/samples">نماذج من مخرجاتنا</a></li></ul></div>
+<div><h2>الأدوات المالية المجانية</h2><ul>
+<li><a href="/health-check">فحص الصحة المالية</a></li><li><a href="/financial-assessment">الحاسبة المالية</a></li><li><a href="/consultation-request">طلب استشارة</a></li><li><a href="/reports-upload">رفع الملفات المالية</a></li><li><a href="/login" data-account>دخول العملاء</a></li></ul></div>
+<div><h2>التواصل</h2><ul>
+<li><a href="https://wa.me/970599371188" target="_blank" rel="noopener">واتساب: <span class="ltr">0599371188</span></a></li>
+<li><a href="tel:+970599371188">هاتف: <span class="ltr">0599371188</span></a></li>
+<li><a href="/cdn-cgi/l/email-protection#96fff8f0f9d6e2e4e3e5e2f0fff8e5b8f9e4f1"><span class="ltr"><span class="__cf_email__" data-cfemail="aac3c4ccc5eaded8dfd9deccc3c4d984c5d8cd">[email&#160;protected]</span></span></a></li>
+<li>نابلس — دير شرف، شارع طولكرم–نابلس</li>
+<li>نستقبل طلباتك إلكترونياً على مدار الساعة، ونرد خلال يوم عمل</li>
+<li>نخدم المشاريع في جميع أنحاء فلسطين</li></ul></div>
+<div><h2>معلومات</h2><ul>
+<li><a href="/about">عن TRUST</a></li><li><a href="/insights">مقالات مالية</a></li><li><a href="/#faq">الأسئلة الشائعة</a></li><li><a href="/privacy">سياسة الخصوصية</a></li><li><a href="/en" lang="en">English</a></li></ul></div>
+</div>
+<div class="ft-bottom"><span>© <span id="year">2026</span> TRUST — Accounting, Financial &amp; Business Advisory Services</span><span class="ltr">Clarity in Numbers. Confidence in Decisions.</span><a class="tp-adm" href="https://ai.trustfins.org/admin" rel="nofollow noopener" style="font-size:12px;color:#7F92A6;text-decoration:none;margin-inline-start:14px;border-inline-start:1px solid rgba(159,176,195,.35);padding-inline-start:14px">دخول الإدارة</a></div>
+</div>
+</footer>
+<a class="wa-float" href="https://wa.me/970599371188" target="_blank" rel="noopener" aria-label="تواصل معنا على واتساب"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c.3 2 1.8 3.8 4 4.6l1.2-1.1 1.8.7"/></svg></a>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/main.js" defer></script>
+<script>
+(function(){
+'use strict';
+var f=document.getElementById('consForm'), E=f.elements, err=document.getElementById('consErr');
+var svc=new URLSearchParams(location.search).get('service'), sel=E.namedItem('service');
+if(svc){ var ok=Array.prototype.some.call(sel.options,function(o){ return o.value===svc; }); if(ok) sel.value=svc; }
+f.addEventListener('submit', function(e){
+  err.textContent='';
+  var nm=E.namedItem('person').value.trim(), ph=E.namedItem('phone').value.replace(/\D/g,''), em=E.namedItem('email').value.trim(), msg='';
+  if(nm.length<2) msg='الرجاء كتابة الاسم.';
+  else if(ph.length<9||ph.length>15) msg='الرجاء إدخال رقم هاتف صحيح، مثل 0599123456.';
+  else if(em && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) msg='صيغة البريد الإلكتروني غير صحيحة.';
+  else if(!sel.value) msg='الرجاء اختيار الخدمة.';
+  else if(E.namedItem('details').value.trim().length<5) msg='الرجاء كتابة ما تحتاجه باختصار.';
+  else if(!E.namedItem('consent').checked) msg='يجب الموافقة على سياسة الخصوصية.';
+  if(msg){ e.preventDefault(); e.stopImmediatePropagation(); err.textContent=msg; return; }
+  var b=document.getElementById('consBtn'); b.disabled=true; b.textContent='جارٍ الإرسال…';
+}, true);
+})();
+</script>
+<script src="/assets/js/crm-capture.js" defer></script>
+</body>
+</html>

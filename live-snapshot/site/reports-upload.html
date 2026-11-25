@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-gate="hub">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E2238">
+<title>ارفع ملفاتك المالية | TRUST — تقرير مالي لمشروعك</title>
+<meta name="description" content="ارفع قوائمك المالية أو ميزان المراجعة (Excel أو PDF) ليعد لك فريق TRUST تقريراً مالياً واضحاً.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TRUST"><meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="ارفع ملفاتك المالية | TRUST — تقرير مالي لمشروعك"><meta property="og:description" content="ارفع قوائمك المالية أو ميزان المراجعة (Excel أو PDF) ليعد لك فريق TRUST تقريراً مالياً واضحاً.">
+<meta property="og:image" content="https://trustfins.org/og-image.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://trustfins.org/reports-upload"><meta property="og:url" content="https://trustfins.org/reports-upload">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+<script src="/assets/js/trust-config.js"></script>
+</head>
+<body class="app">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<header class="site-header">
+<div class="wrap hdr">
+<a class="brand" href="/" aria-label="TRUST — الصفحة الرئيسية"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small>للخدمات المحاسبية والمالية</small></span></a>
+<nav class="nav" id="site-nav" aria-label="القائمة الرئيسية">
+<a href="/services">الخدمات</a>
+<a href="/about">عن TRUST</a>
+<a href="/#faq">الأسئلة الشائعة</a>
+<a href="/financial-hub" aria-current="page">أدوات مجانية</a><a href="/digital-services">الخدمات الرقمية</a>
+<a href="/contact">تواصل معنا</a>
+<a class="btn btn-primary nav-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+</nav>
+<div class="hdr-actions">
+<a class="lang" href="/login" data-account>دخول العملاء</a>
+<a class="lang" href="/en" lang="en" hreflang="en">English</a>
+<a class="btn btn-primary btn-sm hdr-cta" href="/contact?main=session">اطلب جلسة أولية</a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="فتح القائمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+</div>
+</header>
+<section class="page-head"><div class="wrap">
+<div class="crumbs"><a href="/">الرئيسية</a> / <a href="/financial-hub">أدوات مجانية</a></div>
+<h1>ارفع ملفاتك المالية</h1><p>أرسل قوائمك المالية أو ميزان المراجعة، ويعد لك فريق TRUST تقريراً واضحاً بالتوصيات</p>
+</div></section>
+<main id="main" class="app-main"><div class="wrap"><div class="mid">
+
+<div class="panel" aria-labelledby="howUp">
+<h2 id="howUp">ماذا يحدث بعد الإرسال؟</h2>
+<ol class="steps-list">
+<li><b>نستلم ملفك فوراً</b> ونرسل لك تأكيداً على هذه الصفحة.</li>
+<li><b>نراجع الملفات</b> ونتواصل معك <b>خلال يوم عمل</b> كرد أولي.</li>
+<li><b>نتفق معك على نطاق التقرير ومدة إعداده وأتعابه</b> قبل بدء أي عمل. لا نبدأ ولا تُستحق أي أتعاب قبل موافقتك.</li>
+</ol>
+<p class="muted">مدة إعداد التقرير تختلف حسب حجم البيانات ونوع التحليل، وتُحدَّد بعد مراجعة الملفات.</p>
+</div>
+
+<div class="panel" id="upPanel">
+<div class="notice" style="margin-bottom:14px"><b>الملفات المقبولة:</b> Excel (‎.xlsx أو ‎.xls) أو CSV أو PDF، بحد أقصى <b>8 ميغابايت</b> للملف. <b>ملف واحد لكل طلب</b>؛ لأكثر من ملف اجمعها في ملف Excel واحد بأوراق متعددة، أو أرسل طلباً منفصلاً لكل ملف.</div>
+<form name="report-upload" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="upForm" novalidate>
+<input type="hidden" name="form-name" value="report-upload">
+<input type="hidden" name="file_ref" id="u_ref">
+<p class="hidden"><label>اترك هذا الحقل فارغاً<input name="bot-field"></label></p>
+<div class="form-grid">
+<div><label for="u_name">الاسم *</label><input id="u_name" name="name" autocomplete="name" required maxlength="120"></div>
+<div><label for="u_phone">رقم الهاتف / واتساب *</label><input id="u_phone" name="phone" type="tel" dir="ltr" autocomplete="tel" placeholder="059XXXXXXX" required maxlength="40"></div>
+<div><label for="u_email">البريد الإلكتروني <small>(اختياري)</small></label><input id="u_email" name="email" type="email" dir="ltr" autocomplete="email" maxlength="200"></div>
+<div><label for="u_biz">اسم المشروع / الشركة *</label><input id="u_biz" name="business" autocomplete="organization" required maxlength="160"></div>
+<div><label for="u_type">نوع الملف *</label><select id="u_type" name="report_type" required><option value="">اختر…</option><option>قوائم مالية (دخل، مركز مالي، تدفقات)</option><option>ميزان مراجعة</option><option>كشف حساب بنكي</option><option>موازنة مقابل الفعلي</option><option>أعمار الذمم (مدينون / دائنون)</option><option>أخرى</option></select></div>
+<div><label for="u_period">الفترة المالية</label><input id="u_period" name="period" placeholder="مثال: سنة 2025" maxlength="60"></div>
+<div class="full"><label for="u_file">الملف *</label><input id="u_file" name="file" type="file" accept=".xlsx,.xls,.csv,.pdf" required aria-describedby="u_fileinfo"><small id="u_fileinfo">لم يتم اختيار ملف.</small></div>
+<div class="full"><label for="u_notes">ماذا تريد من التقرير؟</label><textarea id="u_notes" name="notes" rows="4" maxlength="3000" placeholder="مثال: تحليل السيولة والربحية، أو تجهيز ملف لطلب تمويل من البنك…"></textarea></div>
+</div>
+<label class="check"><input type="checkbox" name="consent" value="yes" id="u_consent"> <span>أوافق على استخدام بياناتي وملفاتي لإعداد التقرير والتواصل معي وفق <a href="/privacy" target="_blank" rel="noopener">سياسة الخصوصية</a>.</span></label>
+<p class="err" id="u_err" role="alert"></p>
+<div class="acts"><button class="btn btn-primary" type="submit" id="u_btn">إرسال الملف</button></div>
+<p class="muted" style="margin-top:10px">🔒 تُحفظ ملفاتك في تخزين خاص غير متاح للعامة، ولا يطّلع عليها إلا فريق TRUST.</p>
+</form>
+</div>
+
+<div class="panel hidden" id="upDone" role="status" tabindex="-1">
+<h2>تم استلام ملفك ✓</h2>
+<p>وصلنا ملف <b id="doneFile"></b>. سيتواصل معك فريق TRUST <b>خلال يوم عمل</b> لتأكيد المطلوب، والاتفاق على نطاق التقرير ومدته وأتعابه قبل بدء العمل.</p>
+<div class="acts"><a class="btn btn-primary" href="/financial-hub">العودة إلى المنصة</a><a class="btn btn-wa" href="https://wa.me/970599371188" target="_blank" rel="noopener">تواصل على واتساب</a><button class="btn btn-outline" type="button" id="upAnother">إرسال ملف آخر</button></div>
+</div>
+</div></div></main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="ft-grid">
+<div class="ft-brand">
+<a class="brand" href="/" aria-label="TRUST"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-txt"><b>TRUST</b><small style="color:#9FB0C3">للخدمات المحاسبية والمالية</small></span></a>
+<p style="margin-top:14px">وضوح في الأرقام، ثقة في القرارات.<br>خدمات محاسبية ومالية واستشارية للمشاريع الصغيرة والمتوسطة في فلسطين.</p>
+</div>
+<div><h2>خدماتنا</h2><ul>
+<li><a href="/accounting-systems">تأسيس الأنظمة المحاسبية والإدارية</a></li><li><a href="/financial-management">الإدارة المالية والمتابعة الدورية</a></li><li><a href="/feasibility-growth">دراسات الجدوى والنمو والتمويل</a></li><li><a href="/pricing">الباقات والأسعار</a></li><li><a href="/samples">نماذج من مخرجاتنا</a></li></ul></div>
+<div><h2>الأدوات المالية المجانية</h2><ul>
+<li><a href="/health-check">فحص الصحة المالية</a></li><li><a href="/financial-assessment">الحاسبة المالية</a></li><li><a href="/consultation-request">طلب استشارة</a></li><li><a href="/reports-upload">رفع الملفات المالية</a></li><li><a href="/login" data-account>دخول العملاء</a></li></ul></div>
+<div><h2>التواصل</h2><ul>
+<li><a href="https://wa.me/970599371188" target="_blank" rel="noopener">واتساب: <span class="ltr">0599371188</span></a></li>
+<li><a href="tel:+970599371188">هاتف: <span class="ltr">0599371188</span></a></li>
+<li><a href="/cdn-cgi/l/email-protection#97fef9f1f8d7e3e5e2e4e3f1fef9e4b9f8e5f0"><span class="ltr"><span class="__cf_email__" data-cfemail="d2bbbcb4bd92a6a0a7a1a6b4bbbca1fcbda0b5">[email&#160;protected]</span></span></a></li>
+<li>نابلس — دير شرف، شارع طولكرم–نابلس</li>
+<li>نستقبل طلباتك إلكترونياً على مدار الساعة، ونرد خلال يوم عمل</li>
+<li>نخدم المشاريع في جميع أنحاء فلسطين</li></ul></div>
+<div><h2>معلومات</h2><ul>
+<li><a href="/about">عن TRUST</a></li><li><a href="/insights">مقالات مالية</a></li><li><a href="/#faq">الأسئلة الشائعة</a></li><li><a href="/privacy">سياسة الخصوصية</a></li><li><a href="/en" lang="en">English</a></li></ul></div>
+</div>
+<div class="ft-bottom"><span>© <span id="year">2026</span> TRUST — Accounting, Financial &amp; Business Advisory Services</span><span class="ltr">Clarity in Numbers. Confidence in Decisions.</span><a class="tp-adm" href="https://ai.trustfins.org/admin" rel="nofollow noopener" style="font-size:12px;color:#7F92A6;text-decoration:none;margin-inline-start:14px;border-inline-start:1px solid rgba(159,176,195,.35);padding-inline-start:14px">دخول الإدارة</a></div>
+</div>
+</footer>
+<a class="wa-float" href="https://wa.me/970599371188" target="_blank" rel="noopener" aria-label="تواصل معنا على واتساب"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c.3 2 1.8 3.8 4 4.6l1.2-1.1 1.8.7"/></svg></a>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/main.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/assets/js/trust-auth.js"></script>
+<script>
+(function(){
+'use strict';
+var sb=TRUSTAUTH.sb(), f=document.getElementById('upForm'), E=f.elements, err=document.getElementById('u_err'), btn=document.getElementById('u_btn');
+var MAX=8*1024*1024, TYPES={xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',xls:'application/vnd.ms-excel',csv:'text/csv',pdf:'application/pdf'};
+var q=new URLSearchParams(location.search); if(q.get('business')) E.namedItem('business').value=q.get('business');
+function ext(n){ var m=/\.([A-Za-z0-9]+)$/.exec(n||''); return m?m[1].toLowerCase():''; }
+function kb(b){ return b>=1048576 ? (b/1048576).toFixed(1)+' ميغابايت' : Math.max(1,Math.round(b/1024))+' كيلوبايت'; }
+function uid(){ try{ return crypto.randomUUID(); }catch(e){ return Date.now().toString(36)+Math.random().toString(36).slice(2,10); } }
+E.namedItem('file').addEventListener('change', function(){
+  var file=this.files[0], info=document.getElementById('u_fileinfo'); err.textContent='';
+  if(!file){ info.textContent='لم يتم اختيار ملف.'; return; }
+  info.textContent=file.name+' — '+kb(file.size);
+  if(!TYPES[ext(file.name)]) err.textContent='نوع الملف غير مدعوم. المسموح: Excel أو CSV أو PDF.';
+  else if(file.size>MAX) err.textContent='حجم الملف '+kb(file.size)+'، والحد الأقصى 8 ميغابايت.';
+});
+function problem(){
+  var nm=E.namedItem('name').value.trim(), ph=E.namedItem('phone').value.replace(/\D/g,''), em=E.namedItem('email').value.trim(), file=E.namedItem('file').files[0];
+  if(nm.length<2) return ['name','الرجاء كتابة الاسم.'];
+  if(ph.length<9||ph.length>15) return ['phone','الرجاء إدخال رقم هاتف صحيح، مثل 0599123456.'];
+  if(em && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return ['email','صيغة البريد الإلكتروني غير صحيحة.'];
+  if(!E.namedItem('business').value.trim()) return ['business','الرجاء كتابة اسم المشروع.'];
+  if(!E.namedItem('report_type').value) return ['report_type','الرجاء اختيار نوع الملف.'];
+  if(!file) return ['file','الرجاء اختيار الملف.'];
+  if(!TYPES[ext(file.name)]) return ['file','نوع الملف غير مدعوم. المسموح: Excel أو CSV أو PDF.'];
+  if(file.size>MAX) return ['file','حجم الملف أكبر من 8 ميغابايت.'];
+  if(file.size===0) return ['file','الملف فارغ.'];
+  if(!E.namedItem('consent').checked) return ['consent','يجب الموافقة على سياسة الخصوصية.'];
+  return null;
+}
+function busy(on,label){ btn.disabled=on; btn.textContent=label||'إرسال الملف'; }
+f.addEventListener('submit', async function(e){
+  e.preventDefault(); err.textContent='';
+  if(E.namedItem('bot-field').value) return;
+  var p=problem(); if(p){ err.textContent=p[1]; var el=E.namedItem(p[0]); if(el&&el.focus) el.focus(); return; }
+  var file=E.namedItem('file').files[0], x=ext(file.name), d=new Date();
+  var path='incoming/'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'/'+uid()+'.'+x;
+  busy(true,'جارٍ رفع الملف…');
+  var up = await sb.storage.from('client-reports').upload(path, file, { contentType: TYPES[x], upsert: false });
+  if(up.error){
+    busy(false);
+    var m=up.error.message||'';
+    err.textContent = /size|large|exceed/i.test(m) ? 'رفض الخادم الملف لأن حجمه أكبر من المسموح (8 ميغابايت).'
+      : /mime|type/i.test(m) ? 'رفض الخادم نوع الملف. المسموح: Excel أو CSV أو PDF.'
+      : 'تعذّر رفع الملف الآن. بياناتك ما زالت في النموذج، اضغط "إرسال الملف" لإعادة المحاولة.';
+    return;
+  }
+  E.namedItem('file_ref').value=path;
+  busy(true,'جارٍ تسجيل الطلب…');
+  var v=function(n){ return (E.namedItem(n).value||'').trim(); };
+  var lead = await sb.from('leads').insert({ source:'report_upload', full_name:v('name').slice(0,120), phone:v('phone').slice(0,40), email:v('email')||null, business:v('business').slice(0,160), service:v('report_type').slice(0,120), message:v('notes').slice(0,3000)||null, details:{ period:v('period'), file_name:file.name.slice(0,200), file_size_kb:Math.round(file.size/1024), file_path:path } });
+  var fd=new FormData(f); fd.delete('file');
+  var notified=false;
+  if((TRUST_SB.forms||'netlify')==='netlify'){ try{ var r=await fetch('/',{ method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(fd).toString() }); notified=r.ok; }catch(x2){} }
+  if(lead.error && !notified){
+    busy(false);
+    err.textContent='رُفع الملف لكن تعذّر تسجيل الطلب. اضغط "إرسال الملف" لإعادة المحاولة، أو راسلنا على واتساب.';
+    return;
+  }
+  document.getElementById('doneFile').textContent=file.name;
+  document.getElementById('upPanel').classList.add('hidden');
+  var done=document.getElementById('upDone'); done.classList.remove('hidden'); done.focus();
+  busy(false);
+});
+document.getElementById('upAnother').addEventListener('click', function(){
+  var keep={name:E.namedItem('name').value,phone:E.namedItem('phone').value,email:E.namedItem('email').value,business:E.namedItem('business').value};
+  f.reset(); for(var k in keep) E.namedItem(k).value=keep[k];
+  document.getElementById('u_fileinfo').textContent='لم يتم اختيار ملف.';
+  document.getElementById('upDone').classList.add('hidden'); document.getElementById('upPanel').classList.remove('hidden');
+});
+})();
+</script>
+</body>
+</html>
