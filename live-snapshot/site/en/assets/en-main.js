@@ -118,7 +118,7 @@ if (pSub && !pMain) { var ps = SV.subs.filter(function (x) { return x.id === pSu
 if (pMain && sel && Array.prototype.some.call(sel.options, function (o) { return o.value === pMain; })) sel.value = pMain;
 fillSubs(sel ? sel.value : '', pSub);
 if (pSector && secSel && (SV.sectors[pSector] || EN.sectors[pSector])) secSel.value = pSector;
-var PLANS = { start: 'Start plan ($200 a month)', growth: 'Growth plan ($450 a month)', enterprise: 'Enterprise plan (custom price)' };
+var PLANS = { start: 'Start plan ($250 a month)', growth: 'Growth plan ($650 a month)', enterprise: 'Enterprise plan (custom price)' };
 var pPlan = params.get('plan'), planField = form.querySelector('#f-plan'), planNote = document.getElementById('f-plan-note');
 if (pPlan && PLANS[pPlan] && planField) {
   planField.value = pPlan;

@@ -118,7 +118,7 @@
   if (pMain && sel && Array.prototype.some.call(sel.options, function (o) { return o.value === pMain; })) sel.value = pMain;
   fillSubs(sel ? sel.value : '', pSub);
   if (pSector && secSel && SV.sectors[pSector]) secSel.value = pSector;
-  var PLANS = { start: 'الباقة الأساسية ($200 شهرياً)', growth: 'الباقة المتقدمة ($450 شهرياً)', enterprise: 'الباقة الشاملة (سعر مخصص)' };
+  var PLANS = { start: 'الباقة الأساسية ($250 شهرياً)', growth: 'الباقة المتقدمة ($650 شهرياً)', enterprise: 'الباقة الشاملة (سعر مخصص)' };
   var pPlan = params.get('plan'), planField = form.querySelector('#f-plan'), planNote = document.getElementById('f-plan-note');
   if (pPlan && PLANS[pPlan] && planField) {
     planField.value = pPlan;
