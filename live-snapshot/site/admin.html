@@ -122,7 +122,7 @@ function dval(k,v){var S=window.TRUST_SERVICES||{mains:[],subs:[],sectors:{}};
   if(k==='main_service'){var m=S.mains.filter(function(x){return x.id===v;})[0];return m?m.name:({session:'جلسة استشارية أولية',unsure:'غير متأكد، يحتاج توجيهاً'}[v]||v);}
   if(k==='sub_service'){var u=S.subs.filter(function(x){return x.id===v;})[0];return u?u.name:v;}
   if(k==='sector') return S.sectors[v]||v;
-  if(k==='plan') return ({start:'الأساسية ($200)',growth:'المتقدمة ($450)',enterprise:'الشاملة (مخصص)'}[v]||v);
+  if(k==='plan') return ({start:'الأساسية ($250)',growth:'المتقدمة ($650)',enterprise:'الشاملة (مخصص)'}[v]||v);
   if(k==='marketing_ok') return v?'نعم':'لا';
   if(v&&typeof v==='object') return Object.keys(v).map(function(x){return x+': '+v[x];}).join(' · ');
   return String(v);}
