@@ -2,6 +2,8 @@
 
 **منشور 2026-11-27** بموافقة المستخدم: trustfins-site 00a0f38c، trust-en 38b435ca. التراجع: إعادة نشر c47c6022 / d7b526c2.
 
+**الإصدار 2 (غير منشور):** شبكة ثابتة 3 أعمدة على الكمبيوتر وعرض شرائح على الجوال فقط، زر «اطلب عرضاً لنشاطك»، وحذف «تجريبية» من النص وبدائل الصور وداخل صورتي الإنتاج والخدمات (tools/retext.py).
+
 ## الملفات الجاهزة للنشر
 - `deploy/trustfins-site/index.html` → يحل محل `index.html` في مشروع Pages `trustfins-site`.
 - `deploy/trustfins-site/assets/img/portfolio/pf-{1..6}-{d,m}.webp` → ملفات جديدة في `trustfins-site` (الصفحة الإنجليزية تستخدمها أيضاً عبر `/assets/...`).

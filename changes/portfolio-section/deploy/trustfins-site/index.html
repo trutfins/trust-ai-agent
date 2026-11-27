@@ -95,64 +95,75 @@
 </section><section class="sec pf" id="portfolio" aria-labelledby="pf-h"><style>
 .pf{padding:72px 0}
 .pf .sec-head{margin-bottom:28px}
-.pf-slides{display:grid}
-.pf-slide{margin:0;min-width:0}
-.pf-slide[hidden]{display:none}
-.pf-media{position:relative;border-radius:var(--r-lg,20px);overflow:hidden;background:var(--navy,#0E2238);box-shadow:var(--shadow,0 10px 30px rgba(14,34,56,.07))}
+.pf-slides{display:grid;gap:28px 24px}
+.pf-slide{margin:0;min-width:0;display:flex;flex-direction:column}
+.pf-media{position:relative;border-radius:var(--r,14px);overflow:hidden;background:var(--navy,#0E2238);box-shadow:var(--shadow,0 10px 30px rgba(14,34,56,.07))}
 .pf-media img{display:block;width:100%;height:auto;aspect-ratio:1600/820}
-.pf-soon{position:absolute;right:7%;bottom:16%;display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:99px;background:var(--gold,#C9A15A);color:var(--navy,#0E2238);font-weight:700;font-size:clamp(16px,2vw,24px);line-height:1.4;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-.pf-soon::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--navy,#0E2238)}
-.pf-cap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 20px;margin-top:14px}
-.pf-cap h3{font-size:20px}
-.pf-cap p{color:var(--ink-2,#5B6878);font-size:16px;flex-basis:100%;order:3}
-.pf-cap a{font-weight:700;text-underline-offset:5px;white-space:nowrap}
+.pf-soon{position:absolute;right:7%;bottom:14%;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;background:var(--gold,#C9A15A);color:var(--navy,#0E2238);font-weight:700;font-size:14px;line-height:1.4;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.pf-soon::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--navy,#0E2238)}
+.pf-cap{margin-top:14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pf-cap h3{font-size:18px}
+.pf-cap p{color:var(--ink-2,#5B6878);font-size:15.5px}
+.pf-cap a{font-weight:700;font-size:15.5px;text-underline-offset:5px;margin-top:auto;padding-top:6px}
 .pf-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
 .pf-ctl[hidden]{display:none}
 .pf-ctl button{appearance:none;font:inherit;font-size:15px;cursor:pointer;background:var(--white,#fff);color:var(--navy,#0E2238);padding:6px 16px;min-height:44px;border:1px solid #8BA0B2;border-radius:10px}
 .pf-ctl button:hover{border-color:var(--navy,#0E2238)}
 .pf-count{margin-inline-start:auto;color:var(--ink-2,#5B6878);font-size:15px}
-@media (prefers-reduced-motion:no-preference){.pf-slide.pf-in{animation:pf-fade .45s ease}@keyframes pf-fade{from{opacity:.25}to{opacity:1}}}
-@media (max-width:680px){.pf{padding:48px 0}.pf-media{border-radius:14px}.pf-media img{aspect-ratio:760/890}.pf-soon{right:auto;left:50%;transform:translateX(-50%);bottom:2.5%;top:auto;font-size:15px;padding:5px 14px}.pf-cap h3{font-size:18px}.pf-cap p{font-size:15px}.pf-cap a{white-space:normal}}
-</style><div class="wrap"><div class="sec-head"><span class="kicker">نماذج من أعمالنا</span><h2 id="pf-h">نماذج من أعمال ترست</h2><p>شاهد كيف تبدو أنظمة المحاسبة ونقاط البيع وإدارة الإنتاج والمتاجر الإلكترونية التي نجهّزها. الشاشات معروضة ببيانات تجريبية.</p></div><div class="pf-stage" role="region" aria-roledescription="carousel" aria-label="نماذج من أعمال ترست، عرض شرائح"><div class="pf-slides"><figure class="pf-slide" role="group" aria-roledescription="slide" aria-label="شريحة 1 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-1-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-1-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="لوحة تحكم محاسبية تعرض مبيعات اليوم، والنقد في الصندوق، والبنك، وذمم العملاء والموردين، والأصناف التي وصلت حد إعادة الطلب."></picture></div><figcaption class="pf-cap"><h3>نظام محاسبة للمحلات التجارية</h3><a href="/retail-shops" data-ev="portfolio_click" data-main="portfolio-1">استعرض خدمات المحلات ←</a><p>تابع مبيعات اليوم وأرصدة الصندوق والمخزون والذمم من لوحة واحدة.</p></figcaption></figure><figure class="pf-slide" role="group" aria-roledescription="slide" aria-label="شريحة 2 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-2-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-2-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="شاشة نقطة بيع فيها بحث بالاسم أو الباركود، وتصنيفات للمنتجات، وفاتورة حالية بخيارات الدفع نقداً أو بالبطاقة أو بالآجل."></picture></div><figcaption class="pf-cap"><h3>نقطة بيع لمحل جوالات</h3><a href="/accounting-systems" data-ev="portfolio_click" data-main="portfolio-2">تعرّف على الأنظمة المحاسبية ←</a><p>ابحث عن المنتج بالاسم أو الباركود، وأصدر الفاتورة بطريقة الدفع المناسبة.</p></figcaption></figure><figure class="pf-slide" role="group" aria-roledescription="slide" aria-label="شريحة 3 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-3-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-3-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="شاشة أوامر الإنتاج لشركة تجريبية، فيها نموذج أمر إنتاج جديد بخط الإنتاج والوحدات والتاريخ، مع شاشة إعدادات الضرائب."></picture></div><figcaption class="pf-cap"><h3>إدارة الإنتاج والتكاليف</h3><a href="/small-factories" data-ev="portfolio_click" data-main="portfolio-3">استعرض خدمات المصانع ←</a><p>تابع أوامر الإنتاج، ونظّم المواد الخام وتكاليف التصنيع.</p></figcaption></figure><figure class="pf-slide" role="group" aria-roledescription="slide" aria-label="شريحة 4 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-4-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-4-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="شاشة الأصناف والخدمات لمكتب خدمات تجريبي، فيها نموذج صنف جديد وقائمة خدمات مثل الاستشارة بالساعة والتدقيق ومسك الدفاتر."></picture></div><figcaption class="pf-cap"><h3>إدارة الخدمات والفوترة</h3><a href="/accounting-systems" data-ev="portfolio_click" data-main="portfolio-4">تعرّف على الأنظمة المحاسبية ←</a><p>نظّم دليل الخدمات ووحدات تسعيرها، وتابع المبيعات والتحصيل.</p></figcaption></figure><figure class="pf-slide" role="group" aria-roledescription="slide" aria-label="شريحة 5 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-5-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-5-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="واجهتا متجرين تجريبيين: متجر أدوات منزلية بفئات أواني الطهي وأدوات التحضير والتقديم، ومتجر أزياء وإكسسوارات."></picture></div><figcaption class="pf-cap"><h3>متاجر إلكترونية للجملة والمفرق</h3><a href="/contact?main=session" data-ev="portfolio_click" data-main="portfolio-5">ناقش مشروع متجرك ←</a><p>نماذج تعرض المنتجات حسب الفئة، مع واجهات للبيع بالتجزئة وطلبات الجملة.</p></figcaption></figure><figure class="pf-slide" role="group" aria-roledescription="slide" aria-label="شريحة 6 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-6-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-6-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="لقطتان من منصة متاجر قيد التطوير: الصفحة الرئيسية بعنوان «افتح متجرك الإلكتروني وابدأ البيع في فلسطين»، وقوالب متاجر لأنشطة مختلفة."></picture><span class="pf-soon">قريباً</span></div><figcaption class="pf-cap"><h3>منصة متاجر إلكترونية للتجار في فلسطين <span class="sr-only">(قريباً)</span></h3><p>اختر قالباً يناسب نشاطك، وأضف منتجاتك، واستلم الدفع عند الاستلام بالشيكل.</p></figcaption></figure></div><div class="pf-ctl" hidden><button type="button" data-step="-1">السابق</button><button type="button" data-step="1">التالي</button><button type="button" class="pf-toggle" data-play="تشغيل العرض" data-pause="إيقاف العرض">إيقاف العرض</button><span class="pf-count"></span></div></div></div><script>
+.pf-cta{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.pf-cta small{color:var(--ink-2,#5B6878);font-size:14px}
+@media (min-width:681px){.pf-slides{grid-template-columns:repeat(2,minmax(0,1fr))}.pf-slide[hidden]{display:flex}.pf-ctl{display:none}}
+@media (min-width:981px){.pf-slides{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:680px){.pf{padding:48px 0}.pf-slide[hidden]{display:none}.pf-media img{aspect-ratio:760/890}.pf-soon{right:auto;left:50%;transform:translateX(-50%);bottom:2.5%;font-size:15px;padding:5px 14px}.pf-cap a{margin-top:2px}.pf-cta .btn{width:100%}}
+@media (max-width:680px) and (prefers-reduced-motion:no-preference){.pf-slide.pf-in{animation:pf-fade .45s ease}@keyframes pf-fade{from{opacity:.25}to{opacity:1}}}
+</style><div class="wrap"><div class="sec-head"><span class="kicker">نماذج من أعمالنا</span><h2 id="pf-h">نماذج من أعمال ترست</h2><p>شاهد كيف تبدو أنظمة المحاسبة ونقاط البيع وإدارة الإنتاج والمتاجر الإلكترونية التي نجهّزها.</p></div><div class="pf-stage" role="region" aria-label="نماذج من أعمال ترست"><div class="pf-slides"><figure class="pf-slide" role="group" aria-label="شريحة 1 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-1-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-1-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="لوحة تحكم محاسبية تعرض مبيعات اليوم، والنقد في الصندوق، والبنك، وذمم العملاء والموردين، والأصناف التي وصلت حد إعادة الطلب."></picture></div><figcaption class="pf-cap"><h3>نظام محاسبة للمحلات التجارية</h3><p>تابع مبيعات اليوم وأرصدة الصندوق والمخزون والذمم من لوحة واحدة.</p><a href="/retail-shops" data-ev="portfolio_click" data-main="portfolio-1">استعرض خدمات المحلات ←</a></figcaption></figure><figure class="pf-slide" role="group" aria-label="شريحة 2 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-2-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-2-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="شاشة نقطة بيع فيها بحث بالاسم أو الباركود، وتصنيفات للمنتجات، وفاتورة حالية بخيارات الدفع نقداً أو بالبطاقة أو بالآجل."></picture></div><figcaption class="pf-cap"><h3>نقطة بيع لمحل جوالات</h3><p>ابحث عن المنتج بالاسم أو الباركود، وأصدر الفاتورة بطريقة الدفع المناسبة.</p><a href="/accounting-systems" data-ev="portfolio_click" data-main="portfolio-2">تعرّف على الأنظمة المحاسبية ←</a></figcaption></figure><figure class="pf-slide" role="group" aria-label="شريحة 3 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-3-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-3-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="شاشة أوامر الإنتاج لمصنع، فيها نموذج أمر إنتاج جديد بخط الإنتاج والوحدات والتاريخ، مع شاشة إعدادات الضرائب."></picture></div><figcaption class="pf-cap"><h3>إدارة الإنتاج والتكاليف</h3><p>تابع أوامر الإنتاج، ونظّم المواد الخام وتكاليف التصنيع.</p><a href="/small-factories" data-ev="portfolio_click" data-main="portfolio-3">استعرض خدمات المصانع ←</a></figcaption></figure><figure class="pf-slide" role="group" aria-label="شريحة 4 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-4-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-4-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="شاشة الأصناف والخدمات لمكتب خدمات مهنية، فيها نموذج صنف جديد وقائمة خدمات مثل الاستشارة بالساعة والتدقيق ومسك الدفاتر."></picture></div><figcaption class="pf-cap"><h3>إدارة الخدمات والفوترة</h3><p>نظّم دليل الخدمات ووحدات تسعيرها، وتابع المبيعات والتحصيل.</p><a href="/accounting-systems" data-ev="portfolio_click" data-main="portfolio-4">تعرّف على الأنظمة المحاسبية ←</a></figcaption></figure><figure class="pf-slide" role="group" aria-label="شريحة 5 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-5-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-5-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="واجهتا متجرين إلكترونيين: متجر أدوات منزلية بفئات أواني الطهي وأدوات التحضير والتقديم، ومتجر أزياء وإكسسوارات."></picture></div><figcaption class="pf-cap"><h3>متاجر إلكترونية للجملة والمفرق</h3><p>نماذج تعرض المنتجات حسب الفئة، مع واجهات للبيع بالتجزئة وطلبات الجملة.</p><a href="/contact?main=session" data-ev="portfolio_click" data-main="portfolio-5">ناقش مشروع متجرك ←</a></figcaption></figure><figure class="pf-slide" role="group" aria-label="شريحة 6 من 6"><div class="pf-media"><picture><source media="(max-width:680px)" srcset="/assets/img/portfolio/pf-6-m.webp" width="760" height="890"><img src="/assets/img/portfolio/pf-6-d.webp" width="1600" height="820" loading="lazy" decoding="async" alt="لقطتان من منصة متاجر قيد التطوير: الصفحة الرئيسية بعنوان «افتح متجرك الإلكتروني وابدأ البيع في فلسطين»، وقوالب متاجر لأنشطة مختلفة."></picture><span class="pf-soon">قريباً</span></div><figcaption class="pf-cap"><h3>منصة متاجر إلكترونية للتجار في فلسطين <span class="sr-only">(قريباً)</span></h3><p>اختر قالباً يناسب نشاطك، وأضف منتجاتك، واستلم الدفع عند الاستلام بالشيكل.</p></figcaption></figure></div><div class="pf-ctl" hidden><button type="button" data-step="-1">السابق</button><button type="button" data-step="1">التالي</button><button type="button" class="pf-toggle" data-play="تشغيل العرض" data-pause="إيقاف العرض">إيقاف العرض</button><span class="pf-count"></span></div></div><div class="pf-cta"><a class="btn btn-gold" href="/contact?main=session" data-ev="portfolio_cta" data-main="portfolio">اطلب عرضاً لنشاطك</a></div></div><script>
 (function () {
   var root = document.getElementById('portfolio');
-  if (!root) return;
+  if (!root || !window.matchMedia) return;
   var slides = [].slice.call(root.querySelectorAll('.pf-slide'));
   var ctl = root.querySelector('.pf-ctl');
   var count = ctl.querySelector('.pf-count');
   var toggle = ctl.querySelector('.pf-toggle');
+  var stage = root.querySelector('.pf-stage');
   var T = { play: toggle.getAttribute('data-play'), pause: toggle.getAttribute('data-pause') };
-  var mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  var small = matchMedia('(max-width: 680px)');
+  var mq = matchMedia('(prefers-reduced-motion: reduce)');
   var i = 0, playing = !mq.matches, timer = null, hovered = false, focused = false, inView = false;
   function warm(n) { var im = slides[n].querySelector('img'); if (im) im.loading = 'eager'; }
+  function stop() { clearInterval(timer); timer = null; }
   function render(animate) {
-    slides.forEach(function (s, n) { s.hidden = n !== i; s.classList.toggle('pf-in', animate && n === i); });
+    if (!small.matches) {
+      slides.forEach(function (s) { s.hidden = false; s.classList.remove('pf-in'); s.removeAttribute('aria-roledescription'); });
+      stage.removeAttribute('aria-roledescription'); ctl.hidden = true; stop(); return;
+    }
+    stage.setAttribute('aria-roledescription', 'carousel'); ctl.hidden = false;
+    slides.forEach(function (s, n) { s.hidden = n !== i; s.setAttribute('aria-roledescription', 'slide'); s.classList.toggle('pf-in', animate && n === i); });
     count.textContent = (i + 1) + ' / ' + slides.length;
     count.setAttribute('aria-live', playing ? 'off' : 'polite');
     toggle.textContent = playing ? T.pause : T.play;
     toggle.setAttribute('aria-pressed', playing ? 'false' : 'true');
     if (inView) warm((i + 1) % slides.length);
   }
-  function stop() { clearInterval(timer); timer = null; }
   function restart() {
     stop();
-    if (playing && inView && !hovered && !focused && !document.hidden) timer = setInterval(function () { move(1); }, 6500);
+    if (small.matches && playing && inView && !hovered && !focused && !document.hidden) timer = setInterval(function () { move(1); }, 6500);
   }
   function move(step) { i = (i + step + slides.length) % slides.length; render(true); }
   [].forEach.call(ctl.querySelectorAll('[data-step]'), function (b) {
     b.addEventListener('click', function () { playing = false; move(Number(b.getAttribute('data-step'))); restart(); });
   });
   toggle.addEventListener('click', function () { playing = !playing; render(false); restart(); });
-  root.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'touch') { hovered = true; restart(); } });
-  root.addEventListener('pointerleave', function () { hovered = false; restart(); });
-  root.addEventListener('focusin', function () { focused = true; restart(); });
-  root.addEventListener('focusout', function (e) { focused = root.contains(e.relatedTarget); restart(); });
-  if (mq.addEventListener) mq.addEventListener('change', function (e) { if (e.matches) { playing = false; render(false); restart(); } });
+  stage.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'touch') { hovered = true; restart(); } });
+  stage.addEventListener('pointerleave', function () { hovered = false; restart(); });
+  stage.addEventListener('focusin', function () { focused = true; restart(); });
+  stage.addEventListener('focusout', function (e) { focused = stage.contains(e.relatedTarget); restart(); });
+  function onChange(e, fn) { if (e.addEventListener) e.addEventListener('change', fn); else if (e.addListener) e.addListener(fn); }
+  onChange(mq, function (e) { if (e.matches) { playing = false; render(false); restart(); } });
+  onChange(small, function () { render(false); restart(); });
   document.addEventListener('visibilitychange', restart);
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) { inView = es[0].isIntersecting; if (inView) warm((i + 1) % slides.length); restart(); }, { rootMargin: '200px 0px' }).observe(root);
+    new IntersectionObserver(function (es) { inView = es[0].isIntersecting; if (inView && small.matches) warm((i + 1) % slides.length); restart(); }, { rootMargin: '200px 0px' }).observe(stage);
   } else { inView = true; }
-  ctl.hidden = false;
   render(false);
   restart();
 })();
