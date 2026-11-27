@@ -96,7 +96,7 @@ CSS = """<style>
 .pf-ctl button:hover{border-color:var(--navy,#0E2238)}
 .pf-count{margin-inline-start:auto;color:var(--ink-2,#5B6878);font-size:15px}
 @media (prefers-reduced-motion:no-preference){.pf-slide.pf-in{animation:pf-fade .45s ease}@keyframes pf-fade{from{opacity:.25}to{opacity:1}}}
-@media (max-width:680px){.pf{padding:48px 0}.pf-media{border-radius:14px}.pf-media img{aspect-ratio:760/890}.pf-soon{right:auto;left:50%;transform:translateX(-50%);bottom:2.5%;top:auto;font-size:15px;padding:5px 14px}.pf-cap h3{font-size:18px}.pf-cap p{font-size:15px}}
+@media (max-width:680px){.pf{padding:48px 0}.pf-media{border-radius:14px}.pf-media img{aspect-ratio:760/890}.pf-soon{right:auto;left:50%;transform:translateX(-50%);bottom:2.5%;top:auto;font-size:15px;padding:5px 14px}.pf-cap h3{font-size:18px}.pf-cap p{font-size:15px}.pf-cap a{white-space:normal}}
 </style>"""
 
 JS = """<script>
