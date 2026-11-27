@@ -187,13 +187,15 @@ MERGED = dict(
         ("target", "تركيز على قرار الإدارة", "كل تقرير نعدّه يجيب عن سؤال عملي: ماذا نفعل الآن؟"),
         ("case", "نفهم نشاطك قبل أرقامه", "نقرأ الأرقام في سياق قطاعك والسوق الفلسطيني وتعدد العملات، بحلول على قدر مشروعك وميزانيته."),
         ("tool", "حلول قابلة للتطبيق", "أدوات وأنظمة يستخدمها فريقك يومياً، لا تقارير تبقى على الرف."),
-        ],
+        ("eye", "وضوح وشفافية", "نطاق عمل مكتوب، ومخرجات محددة، وأتعاب متفق عليها مسبقاً."),
+        ("lock", "سرية البيانات", "بياناتك المالية لا تُستخدم خارج إطار العمل المتفق عليه.")],
         sectors="صفحات مخصصة بأمثلة ومشكلات كل قطاع:"),
     en=dict(kicker="Why TRUST, and who we serve", h="A way of working that fits your business", cards=[
         ("target", "A focus on management decisions", "Every report we prepare answers a practical question: what should we do now?"),
         ("case", "We understand your business before its numbers", "We read the numbers in the context of your sector, the Palestinian market and multiple currencies, with solutions sized to your business and budget."),
         ("tool", "Solutions you can put to work", "Tools and systems your team uses every day, not reports that sit on a shelf."),
-        ],
+        ("eye", "Clarity and transparency", "A written scope, defined deliverables and fees agreed in advance."),
+        ("lock", "Data confidentiality", "Your financial data is never used outside the agreed scope of work.")],
         sectors="Dedicated pages with examples and the typical problems of each sector:"),
 )
 
@@ -205,7 +207,7 @@ def merge_why_who(s, lang):
     why, who = s[a:w], s[w:b]
     import re
     svgs = re.findall(r'<span class="ic">.*?</svg></span>', why)
-    icon = dict(target=svgs[0], case=svgs[1], tool=svgs[2], lock=svgs[4])
+    icon = dict(target=svgs[0], case=svgs[1], tool=svgs[2], eye=svgs[3], lock=svgs[4])
     m = MERGED[lang]
     choose = who[who.index('<div class="choose"'):who.index('</ul>') + 5]
     cards = "".join(f'<article class="card">{icon[k]}<h3>{e(t)}</h3><p>{e(d)}</p></article>\n' for k, t, d in m["cards"])
