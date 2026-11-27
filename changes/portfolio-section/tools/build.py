@@ -63,7 +63,9 @@ SLIDES = [
                 d="Choose a template that fits your business, add your products, and collect cash on delivery in shekels.",
                 alt="Two screenshots of a store platform in development: its home page, headed “Open your online store and start selling in Palestine”, and store templates for different kinds of business.",
                 soon="Coming soon")),
-    dict(
+]
+
+REPORT = dict(
         wide=True, full="/assets/img/portfolio/pf-7-full.webp",
         ar=dict(t="تقرير التحليل المالي والائتماني",
                 d="تحليل لثلاث سنوات لشركة صناعية: المبيعات وصافي الربح، وتطور الهوامش، وهيكل الأصول والالتزامات، مع ملاحظات المحلل. أخفينا بيانات الشركة وعدّلنا المبالغ بنسبة ثابتة حفاظاً على سرية العميل، والنسب كما هي.",
@@ -72,8 +74,7 @@ SLIDES = [
         en=dict(t="Financial and credit analysis report",
                 d="A three-year analysis for a manufacturing company: sales and net profit, margin trends, and the structure of assets and liabilities, with analyst notes. Company details are hidden and amounts are scaled by a fixed factor to protect client confidentiality; ratios are unchanged.",
                 alt="Pages from a financial and credit analysis report for a manufacturing company: 2025 total assets, sales and net profit cards, charts of sales and profit margins from 2023 to 2025, and tables of asset and liability structure. The company name and address are hidden.",
-                a="Financial and credit analysis service", href="/en/credit-analysis", fa="View the full report")),
-]
+                a="Financial and credit analysis service", href="/en/credit-analysis", fa="View the full report"))
 
 UI = dict(
     ar=dict(kicker="نماذج من أعمالنا", h="نماذج من أعمال ترست",
@@ -136,6 +137,85 @@ def section(lang):
     return "".join(out)
 
 
+e = html.escape
+
+RPT_CSS = ('<style>.rpt{margin:0 0 28px;display:grid;gap:18px 28px;align-items:center}'
+  '.rpt-media{display:block;border-radius:var(--r,14px);overflow:hidden;background:var(--navy,#0E2238);box-shadow:var(--shadow,0 10px 30px rgba(14,34,56,.07))}'
+  '.rpt-media img{display:block;width:100%;height:auto;aspect-ratio:1600/820}'
+  '.rpt-cap{display:flex;flex-direction:column;gap:6px}.rpt-cap h3{font-size:20px}.rpt-cap p{color:var(--ink-2,#5B6878);font-size:15.5px}'
+  '.rpt-cap a{font-weight:700;font-size:15.5px;text-underline-offset:5px;padding-top:4px}'
+  '.rpt-tag{align-self:flex-start;font-size:13px;font-weight:700;color:var(--navy,#0E2238);background:var(--gold,#C9A15A);border-radius:99px;padding:2px 12px}'
+  '@media (min-width:981px){.rpt{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}}'
+  '@media (max-width:680px){.rpt-media img{aspect-ratio:760/890}}</style>')
+
+RPT_UI = dict(
+    ar=dict(tag="من عمل حقيقي", arrow="←",
+            sub="أولاً تقرير من عمل حقيقي أعددناه لعميل، ثم نماذج توضيحية ببيانات افتراضية.",
+            old="نماذج توضيحية ببيانات افتراضية، ليست أعمالاً لعملاء حقيقيين."),
+    en=dict(tag="Real client work", arrow="→",
+            sub="First, a report from real client work. Below it, illustrative samples using fictional data.",
+            old="Illustrative samples using fictional data, not work for real clients."),
+)
+
+
+def report_block(lang):
+    c, u, full = REPORT[lang], RPT_UI[lang], REPORT["full"]
+    return (RPT_CSS + '<figure class="rpt">'
+            f'<a class="rpt-media" href="{full}" target="_blank" rel="noopener" tabindex="-1"><picture>'
+            f'<source media="(max-width:680px)" srcset="{IMG.format(n=7, k="m")}" width="760" height="890">'
+            f'<img src="{IMG.format(n=7, k="d")}" width="1600" height="820" loading="lazy" decoding="async" alt="{e(c["alt"])}">'
+            '</picture></a>'
+            f'<figcaption class="rpt-cap"><span class="rpt-tag">{e(u["tag"])}</span><h3>{e(c["t"])}</h3><p>{e(c["d"])}</p>'
+            f'<a href="{full}" target="_blank" rel="noopener" data-ev="samples_click" data-main="real-report-full">{e(c["fa"])} {u["arrow"]}</a>'
+            f'<a href="{e(c["href"])}" data-ev="samples_click" data-main="real-report-service">{e(c["a"])} {u["arrow"]}</a>'
+            '</figcaption></figure>')
+
+
+def move_report(s, lang):
+    u = RPT_UI[lang]
+    a = s.index('aria-labelledby="samples-h"')
+    assert s.count(u["old"]) == 1
+    s = s.replace(u["old"], u["sub"], 1)
+    g = s.index('<div class="grid g3">', a)
+    return s[:g] + report_block(lang) + s[g:]
+
+
+ICON = {}
+
+MERGED = dict(
+    ar=dict(kicker="لماذا TRUST ومن نخدم", h="طريقة عمل تناسب طبيعة نشاطك", cards=[
+        ("target", "تركيز على قرار الإدارة", "كل تقرير نعدّه يجيب عن سؤال عملي: ماذا نفعل الآن؟"),
+        ("case", "نفهم نشاطك قبل أرقامه", "نقرأ الأرقام في سياق قطاعك والسوق الفلسطيني وتعدد العملات، بحلول على قدر مشروعك وميزانيته."),
+        ("tool", "حلول قابلة للتطبيق", "أدوات وأنظمة يستخدمها فريقك يومياً، لا تقارير تبقى على الرف."),
+        ("lock", "وضوح وسرية", "نطاق عمل مكتوب، ومخرجات وأتعاب متفق عليها مسبقاً، وبياناتك لا تُستخدم خارج هذا الإطار.")],
+        sectors="صفحات مخصصة بأمثلة ومشكلات كل قطاع:"),
+    en=dict(kicker="Why TRUST, and who we serve", h="A way of working that fits your business", cards=[
+        ("target", "A focus on management decisions", "Every report we prepare answers a practical question: what should we do now?"),
+        ("case", "We understand your business before its numbers", "We read the numbers in the context of your sector, the Palestinian market and multiple currencies, with solutions sized to your business and budget."),
+        ("tool", "Solutions you can put to work", "Tools and systems your team uses every day, not reports that sit on a shelf."),
+        ("lock", "Clarity and confidentiality", "A written scope, with deliverables and fees agreed in advance, and your data is never used outside that scope.")],
+        sectors="Dedicated pages with examples and the typical problems of each sector:"),
+)
+
+
+def merge_why_who(s, lang):
+    a = s.index('<section class="sec" aria-labelledby="why-h">')
+    w = s.index('<section class="sec sec-alt" aria-labelledby="who-h">')
+    b = s.index('</section>', w) + len('</section>')
+    why, who = s[a:w], s[w:b]
+    import re
+    svgs = re.findall(r'<span class="ic">.*?</svg></span>', why)
+    icon = dict(target=svgs[0], case=svgs[1], tool=svgs[2], lock=svgs[4])
+    m = MERGED[lang]
+    choose = who[who.index('<div class="choose"'):who.index('</ul>') + 5]
+    cards = "".join(f'<article class="card">{icon[k]}<h3>{e(t)}</h3><p>{e(d)}</p></article>\n' for k, t, d in m["cards"])
+    out = ('<section class="sec sec-alt" aria-labelledby="why-h">\n<div class="wrap">\n'
+           f'<div class="sec-head"><span class="kicker">{e(m["kicker"])}</span><h2 id="why-h">{e(m["h"])}</h2></div>\n'
+           f'<div class="grid g4">\n{cards}</div>\n'
+           f'<p class="muted" style="margin:28px 0 10px">{e(m["sectors"])}</p>\n{choose}\n</div>\n</section>')
+    return s[:a] + out + s[b:]
+
+
 ANCHOR = '<section class="sec scfo" id="smart-cfo"'
 
 
@@ -144,6 +224,8 @@ def inject(src, dst, lang):
     assert s.count(ANCHOR) == 1, (src, s.count(ANCHOR))
     assert 'id="portfolio"' not in s
     s = s.replace(ANCHOR, section(lang) + ANCHOR, 1)
+    s = move_report(s, lang)
+    s = merge_why_who(s, lang)
     open(dst, "w", encoding="utf-8").write(s)
 
 
