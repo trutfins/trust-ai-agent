@@ -68,11 +68,11 @@ SLIDES = [
 REPORT = dict(
         wide=True, full="/assets/img/portfolio/pf-7-full.webp",
         ar=dict(t="تقرير التحليل المالي والائتماني",
-                d="تحليل لثلاث سنوات لشركة صناعية: المبيعات وصافي الربح، وتطور الهوامش، وهيكل الأصول والالتزامات، مع ملاحظات المحلل. أخفينا بيانات الشركة وعدّلنا المبالغ بنسبة ثابتة حفاظاً على سرية العميل، والنسب كما هي.",
+                d="تحليل لثلاث سنوات لشركة صناعية: المبيعات وصافي الربح، وتطور الهوامش، وهيكل الأصول والالتزامات، مع ملاحظات المحلل. أخفينا بيانات الشركة وعدّلنا المبالغ بنسبة ثابتة حفاظاً على خصوصية أصحابها، والنسب كما هي.",
                 alt="صفحات من تقرير تحليل مالي وائتماني لشركة صناعية: بطاقات إجمالي الأصول والمبيعات وصافي الربح لعام 2025، ورسمان لتطور المبيعات وهوامش الربحية من 2023 إلى 2025، وجدولان لهيكل الأصول والالتزامات. اسم الشركة وعنوانها مخفيان.",
                 a="تعرّف على خدمة التحليل المالي والائتماني", href="/credit-analysis", fa="شاهد التقرير كاملاً"),
         en=dict(t="Financial and credit analysis report",
-                d="A three-year analysis for a manufacturing company: sales and net profit, margin trends, and the structure of assets and liabilities, with analyst notes. Company details are hidden and amounts are scaled by a fixed factor to protect client confidentiality; ratios are unchanged.",
+                d="A three-year analysis for a manufacturing company: sales and net profit, margin trends, and the structure of assets and liabilities, with analyst notes. Company details are hidden and amounts are scaled by a fixed factor to protect the owners' privacy; ratios are unchanged.",
                 alt="Pages from a financial and credit analysis report for a manufacturing company: 2025 total assets, sales and net profit cards, charts of sales and profit margins from 2023 to 2025, and tables of asset and liability structure. The company name and address are hidden.",
                 a="Financial and credit analysis service", href="/en/credit-analysis", fa="View the full report"))
 
@@ -149,11 +149,11 @@ RPT_CSS = ('<style>.rpt{margin:0 0 28px;display:grid;gap:18px 28px;align-items:c
   '@media (max-width:680px){.rpt-media img{aspect-ratio:760/890}}</style>')
 
 RPT_UI = dict(
-    ar=dict(tag="من عمل حقيقي", arrow="←",
-            sub="أولاً تقرير من عمل حقيقي أعددناه لعميل، ثم نماذج توضيحية ببيانات افتراضية.",
+    ar=dict(tag="من أعمالنا", arrow="←",
+            sub="أولاً تقرير من أحد أعمالنا، بأرقام معدّلة لحماية أصحابه، ثم نماذج توضيحية ببيانات افتراضية.",
             old="نماذج توضيحية ببيانات افتراضية، ليست أعمالاً لعملاء حقيقيين."),
-    en=dict(tag="Real client work", arrow="→",
-            sub="First, a report from real client work. Below it, illustrative samples using fictional data.",
+    en=dict(tag="From our work", arrow="→",
+            sub="First, a report from one of our projects, with figures altered to protect its owners. Below it, illustrative samples using fictional data.",
             old="Illustrative samples using fictional data, not work for real clients."),
 )
 
@@ -187,13 +187,13 @@ MERGED = dict(
         ("target", "تركيز على قرار الإدارة", "كل تقرير نعدّه يجيب عن سؤال عملي: ماذا نفعل الآن؟"),
         ("case", "نفهم نشاطك قبل أرقامه", "نقرأ الأرقام في سياق قطاعك والسوق الفلسطيني وتعدد العملات، بحلول على قدر مشروعك وميزانيته."),
         ("tool", "حلول قابلة للتطبيق", "أدوات وأنظمة يستخدمها فريقك يومياً، لا تقارير تبقى على الرف."),
-        ("lock", "وضوح وسرية", "نطاق عمل مكتوب، ومخرجات وأتعاب متفق عليها مسبقاً، وبياناتك لا تُستخدم خارج هذا الإطار.")],
+        ],
         sectors="صفحات مخصصة بأمثلة ومشكلات كل قطاع:"),
     en=dict(kicker="Why TRUST, and who we serve", h="A way of working that fits your business", cards=[
         ("target", "A focus on management decisions", "Every report we prepare answers a practical question: what should we do now?"),
         ("case", "We understand your business before its numbers", "We read the numbers in the context of your sector, the Palestinian market and multiple currencies, with solutions sized to your business and budget."),
         ("tool", "Solutions you can put to work", "Tools and systems your team uses every day, not reports that sit on a shelf."),
-        ("lock", "Clarity and confidentiality", "A written scope, with deliverables and fees agreed in advance, and your data is never used outside that scope.")],
+        ],
         sectors="Dedicated pages with examples and the typical problems of each sector:"),
 )
 
@@ -211,7 +211,7 @@ def merge_why_who(s, lang):
     cards = "".join(f'<article class="card">{icon[k]}<h3>{e(t)}</h3><p>{e(d)}</p></article>\n' for k, t, d in m["cards"])
     out = ('<section class="sec sec-alt" aria-labelledby="why-h">\n<div class="wrap">\n'
            f'<div class="sec-head"><span class="kicker">{e(m["kicker"])}</span><h2 id="why-h">{e(m["h"])}</h2></div>\n'
-           f'<div class="grid g4">\n{cards}</div>\n'
+           f'<div class="grid g3">\n{cards}</div>\n'
            f'<p class="muted" style="margin:28px 0 10px">{e(m["sectors"])}</p>\n{choose}\n</div>\n</section>')
     return s[:a] + out + s[b:]
 
